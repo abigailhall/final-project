@@ -9,19 +9,22 @@ The second game we plan on implementing would be a clone of the classic Microsof
 
 Below is a rough schedule in order to complete this final project on time:
 
-               Thursday April 16th: 4:00 - 6:00: Start Fuit Ninja. Get "fruit" (may just use balls as a place holder for now) 
-               to fall properly on screen, with the three different game levels. Get sword functionality working as well.
+               Thursday April 16th: 4:00 - 6:00: Start Fuit Ninja. Get "fruit" (may just use balls as a place holder 
+               for now) to fall properly on screen, with the three different game levels. Get sword functionality 
+               working as well.
                
                Tuesday April 20th: 4:00-6:00:  Add bombs, a counter for score, and the 3 different strikes on screen.
                
                Wednesday April 15th: 3:30-5:30: Clean up anything. Hopefully by now the game should 
                have full functionality. Fix what isn't workly properly.
                
-               Thursday April 16th: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and swords. 
+               Thursday April 16th: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and 
+               swords. 
                
                Tuesday April 21st: 4:00- 6:00: Add sound effects to the game.
                
-               Wednesday April 22nd: 3:30-5:30: Clean up the game and completely finish it. Possible start Minesweeper.
+               Wednesday April 22nd: 3:30-5:30: Clean up the game and completely finish it. Possibly start 
+               Minesweeper.
                
                Thursday April 23rd: 4:00-6:00: 
                
