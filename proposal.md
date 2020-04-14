@@ -7,7 +7,7 @@ Starting with Fruit Ninja, we would use the mouse as the sword that when the pla
 
 The second game we plan on implementing would be a clone of the classic Microsoft game Minesweeper. At the start of a game, the program would generate a random array of tiles, each designated as either a bomb or a free space. The size of the array and the amount of bombs could be specified by the player, and the game would be controlled entirely through mouse clicks. Each tile would contain hidden information about itself and the area around it, containing a number indicating the amount of bombs in the 8 surrounding tiles, a bomb, or nothing if the space is not adjacent to any bombs. The goal for the player is to click on/reveal all non-bomb tiles on the board, while not triggering any bombs themselves...........
 
-Below is a rough schedule in order to complete this final project on time:
+Below is a rough schedule with some major milestones in order to complete this final project on time:
 
                Thursday April 16th: 4:00 - 6:00: Start Fuit Ninja. Get "fruit" (may just use balls as a place holder 
                for now) to fall properly on screen, with the three different game levels. Get sword functionality 
