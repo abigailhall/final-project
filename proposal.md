@@ -36,4 +36,9 @@ Below is a rough schedule with some major milestones in order to complete this f
                
                **Sundays are also open to work on any unfinished tasks**
                
+               
+**300 Point Breakdown:**
+
+            
+               
                        
