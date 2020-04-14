@@ -59,7 +59,7 @@ Below is a rough schedule with some major milestones in order to complete this f
  | High Scores List                        | 10            |
  | 3 Fruit slice bonus                     | 10            |
  | Sound Effects                           | 20            |
- | Total for Fruit Ninja                   | 150           |
+ | **Total for Fruit Ninja**               | **150**       |
            
 
                        
