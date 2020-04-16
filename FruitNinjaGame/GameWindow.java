@@ -19,7 +19,7 @@ import java.awt.Font;
 import java.awt.Component;
 
 /**
- * Write a description of class GameWindow here.
+ * NEED TO EDIT THIS!! Write a description of class GameWindow here.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
  * @version 4/16/2020
@@ -33,6 +33,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JFrame gameFrame;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
+    private JButton startButton;
+    private FruitThrower newFT;
 
     /**
      * The run method which establishes the graphical interface.
@@ -46,26 +48,49 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame = new JFrame("Fuit Ninja");
         gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel() {
             @Override
             public void paintComponent(Graphics g)
             {
-
                 super.paintComponent(g);
 
                 //Divides up the JFrame
                 g.drawLine(0, LINE_POS, WINDOW_WIDTH, LINE_POS);
+
+                newFT.paint(g);
+
             }
         };
+
+        newFT = new FruitThrower(fruitPanel);
+        newFT.start();
 
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.add(fruitPanel,BorderLayout.WEST);
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
-        
+
+        new Thread(){
+            @Override
+            public void run(){
+                while (true){
+                    try{
+                        sleep(33);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        System.out.print(e);
+                    }
+
+                    fruitPanel.repaint();
+                }
+            }
+        }.start();
 
         //display the frame we made
         gameFrame.pack();
@@ -81,7 +106,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
 
     }
-    
+
     /**
      * Mouse dragged event handler, tracks when user is dragging the ball before firing
      * 

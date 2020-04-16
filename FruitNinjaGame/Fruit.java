@@ -28,7 +28,7 @@ public class Fruit extends Thread
     // what to add to ySpeed to simulate gravity?
     private static final double GRAVITY = 0.3;
 
-    private Component panel;
+    private JComponent panel;
 
     // pixels to move each iteration
     private double xSpeed, ySpeed;
@@ -48,15 +48,16 @@ public class Fruit extends Thread
     @param panel the Component in which this FallingSnow will live
     objects
      */
-    public Fruit(Component panel) {
+    public Fruit(JComponent panel) {
         this.panel = panel;
 
         bottom = panel.getHeight();
 
         upperLeftX = 100;
-        upperLeftY = bottom;
+        upperLeftY = bottom - 1;
 
-        xSpeed = 5;
+        xSpeed = 10;
+       
 
     }
 
@@ -76,7 +77,7 @@ public class Fruit extends Thread
     @Override
     public void run() {
 
-        ySpeed = -6;
+        ySpeed = -20;
 
         while (upperLeftY < bottom) 
         {
@@ -93,6 +94,8 @@ public class Fruit extends Thread
 
             // gravity factor also
             ySpeed += GRAVITY;
+            
+            panel.repaint();
 
         }
         
