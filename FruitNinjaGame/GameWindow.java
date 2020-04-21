@@ -73,6 +73,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
+                g.setColor(Color.BLACK);
 
                 //Divides up the JFrame
                 g.drawLine(0, 0, WINDOW_WIDTH, 0);
