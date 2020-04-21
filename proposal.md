@@ -13,12 +13,12 @@ Below is a rough schedule with some major milestones in order to complete this f
                for now) to fall properly on screen, with the three different game levels. Get sword functionality 
                working as well.
                
-               Tuesday April 21th: 4:00-6:00:  Add bombs, a counter for score, and the 3 different strikes on screen.
+               Tuesday April 21st: 4:00-6:00:  Add bombs, a counter for score, and the 3 different strikes on screen.
                
-               Wednesday April 22th: 3:30-5:30: Clean up anything. Hopefully by now the game should 
+               Wednesday April 22nd: 3:30-5:30: Clean up anything. Hopefully by now the game should 
                have full functionality. Fix what isn't workly properly.
                
-               Thursday April 23th: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and 
+               Thursday April 23rd: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and 
                swords. 
                
                Tuesday April 28th: 4:00- 6:00: Add sound effects to the game. Add any enhacements we think of.
@@ -39,7 +39,7 @@ Below is a rough schedule with some major milestones in order to complete this f
                Implement a game over/game won scenario, including revealing all bombs on the board. Add functionality to the 
                bomb counter and timers, and smiley face reset button.
                
-               Thursday May 4th: 4:00-6:00: Add final touches, including graphics for the bombs, flags, and smiley face.
+               Thursday May 3rd: 4:00-6:00: Add final touches, including graphics for the bombs, flags, and smiley face.
                
                **Sundays are also open to work on any unfinished tasks**
                
