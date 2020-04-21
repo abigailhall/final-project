@@ -13,33 +13,33 @@ Below is a rough schedule with some major milestones in order to complete this f
                for now) to fall properly on screen, with the three different game levels. Get sword functionality 
                working as well.
                
-               Tuesday April 20th: 4:00-6:00:  Add bombs, a counter for score, and the 3 different strikes on screen.
+               Tuesday April 21th: 4:00-6:00:  Add bombs, a counter for score, and the 3 different strikes on screen.
                
-               Wednesday April 15th: 3:30-5:30: Clean up anything. Hopefully by now the game should 
+               Wednesday April 22th: 3:30-5:30: Clean up anything. Hopefully by now the game should 
                have full functionality. Fix what isn't workly properly.
                
-               Thursday April 16th: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and 
+               Thursday April 23th: 4:00-6:00: Make the game look pretty. Add option for different backgrounds and 
                swords. 
                
-               Tuesday April 21st: 4:00- 6:00: Add sound effects to the game. Add any enhacements we think of.
+               Tuesday April 28th: 4:00- 6:00: Add sound effects to the game. Add any enhacements we think of.
                
-               Wednesday April 22nd: 3:30-5:30: Clean up the game and completely finish it. Possibly start 
+               Wednesday April 29th: 3:30-5:30: Clean up the game and completely finish it. Possibly start 
                Minesweeper.
                
-               Thursday April 23rd: 4:00-6:00: Begin Minesweeper. Create a display with placeholders for each 
+               Thursday April 30th: 4:00-6:00: Begin Minesweeper. Create a display with placeholders for each 
                of the fourscreen elements: the bombs remaining, the smiley face, the timer, and the minefield. 
                Create the abstract tile class and begin creating its subclasses.
                
-               Tuesday April 28th: 4:00-6:00: Implement code that tells non bomb tiles to count the amount of adjacent bombs,
+               Tuesday May 1st: 4:00-6:00: Implement code that tells non bomb tiles to count the amount of adjacent bombs,
                so that they can display the correct numbers. Add ability for a left click to reveal what is underneath a 
                tile, and right click to flag a tile. 
                
-               Wednesday April 29th: 3:30-5:30: Make left clicking a blank tile reveal each of its adjacent tiles (This 
+               Wednesday May 2nd: 3:30-5:30: Make left clicking a blank tile reveal each of its adjacent tiles (This 
                should be easy recursively, since all tiles adjacent to a blank tile must be safe numbers or another blank).
                Implement a game over/game won scenario, including revealing all bombs on the board. Add functionality to the 
                bomb counter and timers, and smiley face reset button.
                
-               Thursday April 30th: 4:00-6:00: Add final touches, including graphics for the bombs, flags, and smiley face.
+               Thursday May 4th: 4:00-6:00: Add final touches, including graphics for the bombs, flags, and smiley face.
                
                **Sundays are also open to work on any unfinished tasks**
                
