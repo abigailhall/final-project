@@ -153,7 +153,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseReleased(MouseEvent e)
     {
-
+        newFT.setMousePos(null);
     }
 
     /**
