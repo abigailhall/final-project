@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Random;
 
 /**
  * Write a description of class Fruit here.
@@ -21,6 +22,12 @@ public class Fruit extends Thread
     // its height should really be queried, but we will ignore that
     // complication for now
     private static final int fruitPicHeight = 24; 
+    
+    //max xSpeed
+    private static final int MAX_X_SPEED = 10;
+    
+    //max ySpeed
+    private static final int MAX_Y_SPEED = 5;
 
     // delay between snow motions
     private static final int DELAY_TIME = 33;
@@ -41,6 +48,9 @@ public class Fruit extends Thread
 
     //is the fuit done?
     private boolean done;
+    
+    // which side is fruit coming from: left = false, right = true
+    private boolean isRight; 
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -52,13 +62,24 @@ public class Fruit extends Thread
         this.panel = panel;
 
         bottom = panel.getHeight();
-
-        upperLeftX = 100;
         upperLeftY = bottom - 1;
-
-        xSpeed = 10;
-       
-
+        
+        Random rand = new Random();
+        
+        ySpeed = rand.nextInt(MAX_Y_SPEED) - 15;
+        
+        isRight = rand.nextBoolean();
+        if (isRight)
+        {
+            upperLeftX = rand.nextInt(350) + 700;
+            xSpeed = rand.nextInt(MAX_X_SPEED) - MAX_X_SPEED;
+        }
+        else
+        {
+            upperLeftX = rand.nextInt(350);
+            xSpeed = rand.nextInt(MAX_X_SPEED);
+        }
+        
     }
 
     /**
@@ -76,8 +97,6 @@ public class Fruit extends Thread
      */
     @Override
     public void run() {
-
-        ySpeed = -10;
 
         while (upperLeftY < bottom) 
         {
