@@ -30,7 +30,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private final int WINDOW_WIDTH = 1050;
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
-    
+
     private final int LINE_POS = 20;
 
     private JFrame gameFrame;
@@ -52,15 +52,13 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setLayout(new BorderLayout());
-        
-        
+
         menuPanel = new JPanel();
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
         menuPanel.add(startButton);
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         gameFrame.add(menuPanel, BorderLayout.NORTH);
-        
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel() {
@@ -78,17 +76,14 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         };
 
         newFT = new FruitThrower(fruitPanel);
-        newFT.start();
 
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
-        
-        
-        
 
+        
         new Thread(){
             @Override
             public void run(){
@@ -118,7 +113,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
      */
     public void actionPerformed(ActionEvent e)
     {
-
+        if (e.getSource() == startButton)
+        {
+            newFT.start();
+        }
     }
 
     /**
