@@ -77,7 +77,7 @@ public class Fruit extends Thread
     @Override
     public void run() {
 
-        ySpeed = -20;
+        ySpeed = -10;
 
         while (upperLeftY < bottom) 
         {

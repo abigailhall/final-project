@@ -28,7 +28,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 {
     private final int WINDOW_HEIGHT = 600;
     private final int WINDOW_WIDTH = 1050;
-    private final int LINE_POS = 100;
+    private final int GAME_HEIGHT = 500;
+    private final int MENU_HEIGHT = 100;
+    
+    private final int LINE_POS = 20;
 
     private JFrame gameFrame;
     private JPanel fruitPanel;
@@ -48,7 +51,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame = new JFrame("Fuit Ninja");
         gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setLayout(new BorderLayout());
         
+        
+        menuPanel = new JPanel();
+        startButton = new JButton("Start Game");
+        startButton.addActionListener(this);
+        menuPanel.add(startButton);
+        menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
+        gameFrame.add(menuPanel, BorderLayout.NORTH);
         
 
         // Creates and adds fruitPanel to Jframe
@@ -59,7 +70,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 super.paintComponent(g);
 
                 //Divides up the JFrame
-                g.drawLine(0, LINE_POS, WINDOW_WIDTH, LINE_POS);
+                g.drawLine(0, 0, WINDOW_WIDTH, 0);
 
                 newFT.paint(g);
 
@@ -69,11 +80,14 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         newFT = new FruitThrower(fruitPanel);
         newFT.start();
 
-        fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        gameFrame.add(fruitPanel,BorderLayout.WEST);
+        fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
+        gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
+        
+        
+        
 
         new Thread(){
             @Override
