@@ -21,7 +21,7 @@ public class Fruit extends Thread
 
     // its height should really be queried, but we will ignore that
     // complication for now
-    private static final int fruitPicHeight = 24; 
+    private static final int fruitPicHeight = 100; 
     
     //max xSpeed
     private static final int MAX_X_SPEED = 10;
@@ -66,7 +66,7 @@ public class Fruit extends Thread
         
         Random rand = new Random();
         
-        ySpeed = rand.nextInt(MAX_Y_SPEED) - 15;
+        ySpeed = rand.nextInt(MAX_Y_SPEED) - 17;
         
         isRight = rand.nextBoolean();
         if (isRight)

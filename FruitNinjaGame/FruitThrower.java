@@ -48,9 +48,20 @@ public class FruitThrower extends Thread
 
         if (done) return;
 
-        for (Fruit fruit : fruits) {
-            fruit.paint(g);
+        int i = 0; 
+        while (i < fruits.size())
+        {
+            if (fruits.get(i).done())
+            {
+                fruits.remove(i);
+            }
+            else
+            {
+                fruits.get(i).paint(g);
+                i++;
+            }
         }
+
     }
 
     /**
@@ -77,9 +88,7 @@ public class FruitThrower extends Thread
             newFruit.start();
         }
 
-
     }
-
 
     /**
     Check if this FruitThrower's work is done.
