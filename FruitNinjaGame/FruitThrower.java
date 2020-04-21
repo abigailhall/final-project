@@ -21,6 +21,9 @@ public class FruitThrower extends Thread
     // list of Fruit objects that are the responsibility
     // of this class
     private java.util.List<Fruit> fruits;
+    
+    // mouse Position
+    private Point mousePos;
 
     // check if done
     private boolean done;
@@ -51,13 +54,19 @@ public class FruitThrower extends Thread
         int i = 0; 
         while (i < fruits.size())
         {
-            if (fruits.get(i).done())
+            Fruit fruit = fruits.get(i);
+            if (fruit.done())
             {
                 fruits.remove(i);
             }
             else
             {
-                fruits.get(i).paint(g);
+                if (fruit.mouseOverlapsFruit(mousePos))
+                {
+                    g.setColor(Color.RED);
+                }
+                fruit.paint(g);
+                g.setColor(Color.BLACK);
                 i++;
             }
         }
@@ -97,5 +106,10 @@ public class FruitThrower extends Thread
      */
     public void done() {
         done = true;
+    }
+    
+    public void setMousePos(Point mousePos)
+    {
+        this.mousePos = mousePos;
     }
 }

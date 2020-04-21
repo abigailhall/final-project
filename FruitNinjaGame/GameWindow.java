@@ -37,6 +37,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
+    private JButton resetButton;
     private FruitThrower newFT;
 
     /**
@@ -54,11 +55,17 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame.setLayout(new BorderLayout());
 
         menuPanel = new JPanel();
+        menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
+        gameFrame.add(menuPanel, BorderLayout.NORTH);
+        
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
         menuPanel.add(startButton);
-        menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
-        gameFrame.add(menuPanel, BorderLayout.NORTH);
+        
+        resetButton = new JButton("Reset Game");
+        resetButton.addActionListener(this);
+        resetButton.setVisible(false);
+        menuPanel.add(resetButton);
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel() {
@@ -83,7 +90,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
 
-        
         new Thread(){
             @Override
             public void run(){
@@ -116,6 +122,14 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         if (e.getSource() == startButton)
         {
             newFT.start();
+            startButton.setVisible(false);
+            resetButton.setVisible(true);
+        }
+        
+        if (e.getSource() == resetButton)
+        {
+            newFT = new FruitThrower(fruitPanel);
+            newFT.start();
         }
     }
 
@@ -127,7 +141,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
-
+        newFT.setMousePos(e.getPoint());
     }
 
     /**

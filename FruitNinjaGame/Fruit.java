@@ -88,7 +88,7 @@ public class Fruit extends Thread
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
-
+        
         g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
     }
 
@@ -130,9 +130,26 @@ public class Fruit extends Thread
     public boolean done() 
     {
         return done;
-
     }
 
+    /**
+     * Check if the mouse overlaps the fruit.
+     */
+    public boolean mouseOverlapsFruit(Point mousePos)
+    {
+        if (mousePos == null) return false;
+        int radius = fruitPicHeight / 2;
+        
+        if (mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
+    
     // /**
     // Set the Image to be used by all FallingSnow objects, to be 
     // called by the main method before the GUI gets set up
