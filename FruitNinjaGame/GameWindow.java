@@ -45,6 +45,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private ArrayList<AnimatedLine> swordList;
     private Point lastMouse;
     private int lineNum;
+    private JLabel gameOverLabel;
 
     /**
      * The run method which establishes the graphical interface.
@@ -110,6 +111,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 newFT.paint(g);
 
             }
+            
         };
 
         newFT = new FruitThrower(fruitPanel);
@@ -119,11 +121,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
+        
+        gameOverLabel = new JLabel("GAME OVER!! PRESS RESTART TO PLAY AGAIN!");
+        gameOverLabel.setVisible(false);
+        menuPanel.add(gameOverLabel);
 
         new Thread(){
             @Override
             public void run(){
-                while (true){
+                while (!newFT.done()){
                     try{
                         sleep(33);
                     }
@@ -134,6 +140,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                     fruitPanel.repaint();
                 }
+                
+                gameOverLabel.setVisible(true);
             }
         }.start();
         
@@ -162,6 +170,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         if (e.getSource() == resetButton)
         {
             newFT = new FruitThrower(fruitPanel);
+            gameOverLabel.setVisible(false);
             newFT.start();
         }
     }
@@ -203,6 +212,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         newFT.setMousePos(null);
     }
+    
+   
 
     /**
      * Main method to run the program, allows user to select the color of their ball.

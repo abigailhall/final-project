@@ -27,8 +27,9 @@ public class FruitThrower extends Thread
 
     // check if done
     private boolean done;
-    
+
     private int score;
+    
 
     /**
     Construct a new FruitThrower, using the given component to pass along
@@ -63,7 +64,17 @@ public class FruitThrower extends Thread
             }
             else
             {
-                score += fruit.mouseOverlapsFruit(mousePos);
+
+                int scoreVal = fruit.mouseOverlapsFruit(mousePos);
+
+                if(scoreVal == -1)
+                {
+                    done = true;
+                }
+                else
+                {
+                    score += scoreVal;
+                }
 
                 fruit.paint(g);
                 g.setColor(Color.BLACK);
@@ -81,6 +92,7 @@ public class FruitThrower extends Thread
     public void run() 
     {
         Random r = new Random();
+        
 
         while(!done)
 
@@ -91,11 +103,22 @@ public class FruitThrower extends Thread
             }
             catch (InterruptedException e) {
             }
+            
+            Fruit newFruit;
+            switch (r.nextInt(2))
+            {
+                case 0: newFruit = new Bomb(panel);
+                break;
+                default: newFruit = new Orange(panel);
+                break;
+            }
 
-            Fruit newFruit = new Fruit(panel);
+            
             fruits.add(newFruit);
             newFruit.start();
         }
+        
+        
 
     }
 
@@ -104,17 +127,19 @@ public class FruitThrower extends Thread
 
     @return true if this FruitThrower's work is done
      */
-    public void done() {
-        done = true;
+    public boolean done() {
+        return done;
     }
 
     public void setMousePos(Point mousePos)
     {
         this.mousePos = mousePos;
     }
-    
+
     public int getScore()
     {
         return score;
     }
+
+
 }

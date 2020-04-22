@@ -28,8 +28,9 @@ public class Bomb extends Fruit
      */
     @Override
     public void paint(Graphics g) {
-
         g.setColor(Color.GREEN);
+        
+        
 
         g.fillOval((int)upperLeftX, (int)upperLeftY, 15, 15);
        

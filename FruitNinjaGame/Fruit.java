@@ -12,56 +12,54 @@ import java.util.Random;
  * @author Kate Frisch, Van Griffith, & Abby Hall
  * @version 4/16/2020
  */
-public class Fruit extends Thread
+public abstract  class Fruit extends Thread
 {
-    //private static Image fruitPic;
+    //protected static Image fruitPic;
 
     // the filename that will be loaded into snowPic
-    //private static final String snowPicFilename = "snow.gif";
+    //protected static final String snowPicFilename = "snow.gif";
 
     // its height should really be queried, but we will ignore that
     // complication for now
-    private static final int fruitPicHeight = 100; 
+    protected static final int fruitPicHeight = 100; 
 
     //max xSpeed
-    private static final int MAX_X_SPEED = 10;
+    protected static final int MAX_X_SPEED = 10;
 
     //max ySpeed
-    private static final int MAX_Y_SPEED = 5;
+    protected static final int MAX_Y_SPEED = 5;
 
     // delay between snow motions
-    private static final int DELAY_TIME = 33;
+    protected static final int DELAY_TIME = 33;
 
     // what to add to ySpeed to simulate gravity?
-    private static final double GRAVITY = 0.3;
-    
-    private static final int POINT_VALUE = 1;
+    protected static final double GRAVITY = 0.3;
 
-    private JComponent panel;
+    protected static final int POINT_VALUE = 1;
+
+    protected JComponent panel;
 
     // pixels to move each iteration
-    private double xSpeed, ySpeed;
+    protected double xSpeed, ySpeed;
 
     //bottom of panel
-    private int bottom;
+    protected int bottom;
 
     // latest location of the ball
-    private double upperLeftX, upperLeftY;
+    protected double upperLeftX, upperLeftY;
 
     //is the fuit done?
-    private boolean done;
+    protected boolean done;
 
     // which side is fruit coming from: left = false, right = true
-    private boolean isRight; 
+    protected boolean isRight; 
 
     // has the fruit been sliced?
-    private boolean isSliced;
-    
-   
+    protected boolean isSliced;
+
 
     /**
     Construct a new Fruitobject at the given position and speed.
-
     @param panel the Component in which this FallingSnow will live
     objects
      */
@@ -92,7 +90,6 @@ public class Fruit extends Thread
 
     /**
     Draw the ball at its current location.
-
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
@@ -100,7 +97,7 @@ public class Fruit extends Thread
             g.setColor(Color.GRAY);
         else
             g.setColor(Color.BLACK);
-            
+
         g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
     }
 
@@ -139,7 +136,6 @@ public class Fruit extends Thread
 
     /**
     Check if this Fruits work is done.
-
     @return true if this Fruit work is done
      */
     public boolean done() 
