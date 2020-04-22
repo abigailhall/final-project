@@ -152,7 +152,7 @@ public class Fruit extends Thread
         if (!isSliced && mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
         {
             isSliced = true;
-            ySpeed = 5;
+            ySpeed = 10;
             return true;
         }
 

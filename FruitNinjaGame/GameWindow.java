@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * NEED TO EDIT THIS!! Write a description of class GameWindow here.
@@ -39,6 +41,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JButton startButton;
     private JButton resetButton;
     private FruitThrower newFT;
+    private ArrayList<AnimatedLine> swordList;
+    private Point lastMouse;
+    private int lineNum;
 
     /**
      * The run method which establishes the graphical interface.
@@ -78,6 +83,23 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 //Divides up the JFrame
                 g.drawLine(0, 0, WINDOW_WIDTH, 0);
 
+                
+                
+                int i = swordList.size() - 1;
+                while(i >= 0 && !swordList.isEmpty())
+                {
+                    AnimatedLine line = swordList.get(i);
+                    if(line.done())
+                    {
+                        swordList.remove(i);
+                    }
+                    else 
+                    {
+                        line.paint(g);
+                        i--;
+                    }
+                }
+                
                 newFT.paint(g);
 
             }
@@ -107,6 +129,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
             }
         }.start();
+        
+        swordList = new ArrayList<AnimatedLine>();
 
         //display the frame we made
         gameFrame.pack();
@@ -134,6 +158,14 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
     }
 
+    @Override
+    public void mousePressed(MouseEvent e) 
+    {
+        Random rand = new Random();
+        lastMouse = e.getPoint();
+        //lineNum = rand.nextInt(6);
+    }
+    
     /**
      * Mouse dragged event handler, tracks when user is dragging the ball before firing
      * 
@@ -142,7 +174,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
+        AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+          
+        lastMouse = e.getPoint();
+        swordList.add(newLine);
+
+        newLine.start(); 
+        
         newFT.setMousePos(e.getPoint());
+        fruitPanel.repaint();
     }
 
     /**
