@@ -21,12 +21,14 @@ public class FruitThrower extends Thread
     // list of Fruit objects that are the responsibility
     // of this class
     private java.util.List<Fruit> fruits;
-    
+
     // mouse Position
     private Point mousePos;
 
     // check if done
     private boolean done;
+    
+    private int score;
 
     /**
     Construct a new FruitThrower, using the given component to pass along
@@ -61,10 +63,8 @@ public class FruitThrower extends Thread
             }
             else
             {
-                if (fruit.mouseOverlapsFruit(mousePos))
-                {
-                    g.setColor(Color.RED);
-                }
+                score += fruit.mouseOverlapsFruit(mousePos);
+
                 fruit.paint(g);
                 g.setColor(Color.BLACK);
                 i++;
@@ -107,9 +107,14 @@ public class FruitThrower extends Thread
     public void done() {
         done = true;
     }
-    
+
     public void setMousePos(Point mousePos)
     {
         this.mousePos = mousePos;
+    }
+    
+    public int getScore()
+    {
+        return score;
     }
 }

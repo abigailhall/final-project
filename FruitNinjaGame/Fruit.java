@@ -34,6 +34,8 @@ public class Fruit extends Thread
 
     // what to add to ySpeed to simulate gravity?
     private static final double GRAVITY = 0.3;
+    
+    private static final int POINT_VALUE = 1;
 
     private JComponent panel;
 
@@ -54,6 +56,8 @@ public class Fruit extends Thread
 
     // has the fruit been sliced?
     private boolean isSliced;
+    
+   
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -92,7 +96,11 @@ public class Fruit extends Thread
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
-
+        if(isSliced)
+            g.setColor(Color.GRAY);
+        else
+            g.setColor(Color.BLACK);
+            
         g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
     }
 
@@ -114,12 +122,10 @@ public class Fruit extends Thread
                 // every iteration, update the coordinates
                 // by a pixel
                 upperLeftX += xSpeed;
-                
-            }
-            
-            
-            upperLeftY += ySpeed;
 
+            }
+
+            upperLeftY += ySpeed;
             // gravity factor also
             ySpeed += GRAVITY;
 
@@ -144,19 +150,19 @@ public class Fruit extends Thread
     /**
      * Check if the mouse overlaps the fruit.
      */
-    public boolean mouseOverlapsFruit(Point mousePos)
+    public int mouseOverlapsFruit(Point mousePos)
     {
-        if (mousePos == null) return false;
+        if (mousePos == null) return 0;
         int radius = fruitPicHeight / 2;
 
         if (!isSliced && mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
         {
             isSliced = true;
             ySpeed = 10;
-            return true;
+            return POINT_VALUE;
         }
 
-        return false;
+        return 0;
     }
 
     // /**

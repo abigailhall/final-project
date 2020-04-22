@@ -40,6 +40,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JPanel menuPanel; 
     private JButton startButton;
     private JButton resetButton;
+    private JLabel scoreLabel;
     private FruitThrower newFT;
     private ArrayList<AnimatedLine> swordList;
     private Point lastMouse;
@@ -71,6 +72,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         resetButton.addActionListener(this);
         resetButton.setVisible(false);
         menuPanel.add(resetButton);
+        
+        scoreLabel = new JLabel("Score: 0");
+        scoreLabel.setVisible(false);
+        menuPanel.add(scoreLabel);
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel() {
@@ -99,6 +104,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                         i--;
                     }
                 }
+                
+                scoreLabel.setText("Score: " + newFT.getScore());
                 
                 newFT.paint(g);
 
@@ -149,6 +156,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             newFT.start();
             startButton.setVisible(false);
             resetButton.setVisible(true);
+            scoreLabel.setVisible(true);
         }
         
         if (e.getSource() == resetButton)
