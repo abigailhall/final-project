@@ -28,11 +28,7 @@ public class VanishingLine extends AnimatedLine
 
     @Override
     public void run() {
-        try {
-            sleep(100);
-        }
-        catch (InterruptedException e) {
-        }
+        
         while (colorNum < 245) {
 
             try {

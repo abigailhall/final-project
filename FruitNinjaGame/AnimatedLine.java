@@ -9,7 +9,7 @@ import java.awt.Graphics;
  */
 public abstract class AnimatedLine extends Thread
 {
-    public static final int DELAY_TIME = 33;
+    public static final int DELAY_TIME = 11;
 
     protected Point start;
     protected Point end;
