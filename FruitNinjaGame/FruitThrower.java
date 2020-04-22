@@ -30,6 +30,8 @@ public class FruitThrower extends Thread
 
     private int score;
     
+    private int strikeCount;
+    
 
     /**
     Construct a new FruitThrower, using the given component to pass along
@@ -60,7 +62,18 @@ public class FruitThrower extends Thread
             Fruit fruit = fruits.get(i);
             if (fruit.done())
             {
+                
+                if(!fruit.isSliced() && !fruit.isBomb())
+                {
+                    strikeCount++;
+                    
+                    if(strikeCount == 3)
+                    {
+                        done = true;
+                    }
+                }
                 fruits.remove(i);
+                
             }
             else
             {
@@ -140,6 +153,10 @@ public class FruitThrower extends Thread
     {
         return score;
     }
-
-
+    
+    public int getStrikeCount()
+    {
+        return strikeCount;
+    }
+    
 }

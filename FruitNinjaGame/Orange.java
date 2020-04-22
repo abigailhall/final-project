@@ -20,6 +20,7 @@ public class Orange extends Fruit
     public Orange(JComponent panel)
     {
         super(panel);
+        isBomb = false;
     }
 
 

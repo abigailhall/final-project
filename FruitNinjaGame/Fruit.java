@@ -56,6 +56,8 @@ public abstract  class Fruit extends Thread
 
     // has the fruit been sliced?
     protected boolean isSliced;
+    
+    protected boolean isBomb;
 
 
     /**
@@ -129,6 +131,10 @@ public abstract  class Fruit extends Thread
             panel.repaint();
 
         }
+        
+        
+        
+        
 
         done = true;
 
@@ -141,6 +147,16 @@ public abstract  class Fruit extends Thread
     public boolean done() 
     {
         return done;
+    }
+    
+    public boolean isSliced()
+    {
+        return isSliced;
+    }
+    
+    public boolean isBomb()
+    {
+        return isBomb;
     }
 
     /**

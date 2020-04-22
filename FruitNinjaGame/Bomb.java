@@ -20,6 +20,7 @@ public class Bomb extends Fruit
     public Bomb(JComponent panel)
     {
         super(panel);
+        isBomb = true;
     }
 
     /**
@@ -30,9 +31,7 @@ public class Bomb extends Fruit
     public void paint(Graphics g) {
         g.setColor(Color.GREEN);
 
-
         g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
-
     }
 
     /**

@@ -46,6 +46,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private Point lastMouse;
     private int lineNum;
     private JLabel gameOverLabel;
+    private JLabel strikeLabel;
 
     /**
      * The run method which establishes the graphical interface.
@@ -64,19 +65,23 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         gameFrame.add(menuPanel, BorderLayout.NORTH);
-        
+
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
         menuPanel.add(startButton);
-        
+
         resetButton = new JButton("Reset Game");
         resetButton.addActionListener(this);
         resetButton.setVisible(false);
         menuPanel.add(resetButton);
-        
+
         scoreLabel = new JLabel("Score: 0");
         scoreLabel.setVisible(false);
         menuPanel.add(scoreLabel);
+
+        strikeLabel = new JLabel();
+        strikeLabel.setVisible(true);
+        menuPanel.add(strikeLabel);
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel() {
@@ -89,8 +94,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 //Divides up the JFrame
                 g.drawLine(0, 0, WINDOW_WIDTH, 0);
 
-                
-                
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -105,13 +108,32 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                         i--;
                     }
                 }
-                
+
                 scoreLabel.setText("Score: " + newFT.getScore());
+
+                switch (newFT.getStrikeCount())
+                {
+                    case 1: strikeLabel.setText("X");
+                    break;
+                    case 2: strikeLabel.setText("X X");
+                    break;
+                    case 3: strikeLabel.setText("X X X");
+                    break;
+                    default: strikeLabel.setText("");
+                    break;
+                }
                 
+                if(newFT.done())
+                {
+                    gameOverLabel.setVisible(true);
+                }
+                
+                
+
                 newFT.paint(g);
 
             }
-            
+
         };
 
         newFT = new FruitThrower(fruitPanel);
@@ -121,7 +143,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
-        
+
         gameOverLabel = new JLabel("GAME OVER!! PRESS RESTART TO PLAY AGAIN!");
         gameOverLabel.setVisible(false);
         menuPanel.add(gameOverLabel);
@@ -140,11 +162,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                     fruitPanel.repaint();
                 }
+
                 
-                gameOverLabel.setVisible(true);
             }
         }.start();
-        
+
         swordList = new ArrayList<AnimatedLine>();
 
         //display the frame we made
@@ -166,11 +188,12 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             resetButton.setVisible(true);
             scoreLabel.setVisible(true);
         }
-        
+
         if (e.getSource() == resetButton)
         {
             newFT = new FruitThrower(fruitPanel);
             gameOverLabel.setVisible(false);
+            strikeLabel.setText("");
             newFT.start();
         }
     }
@@ -182,7 +205,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         lastMouse = e.getPoint();
         //lineNum = rand.nextInt(6);
     }
-    
+
     /**
      * Mouse dragged event handler, tracks when user is dragging the ball before firing
      * 
@@ -192,12 +215,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     public void mouseDragged(MouseEvent e)
     {
         AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
-          
+
         lastMouse = e.getPoint();
         swordList.add(newLine);
 
-        newLine.start(); 
-        
+        newLine.start();
         newFT.setMousePos(e.getPoint());
         fruitPanel.repaint();
     }
@@ -212,8 +234,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         newFT.setMousePos(null);
     }
-    
-   
 
     /**
      * Main method to run the program, allows user to select the color of their ball.
