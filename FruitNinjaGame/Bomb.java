@@ -29,11 +29,10 @@ public class Bomb extends Fruit
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.GREEN);
-        
-        
 
-        g.fillOval((int)upperLeftX, (int)upperLeftY, 15, 15);
-       
+
+        g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+
     }
 
     /**
@@ -49,10 +48,13 @@ public class Bomb extends Fruit
         {
             isSliced = true;
             ySpeed = 10;
-            return POINT_VALUE;
+            return -1;
         }
+        else
+        {
 
-        return -1;
+            return 0;
+        }
     }
 
 }
