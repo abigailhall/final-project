@@ -22,10 +22,10 @@ public class Fruit extends Thread
     // its height should really be queried, but we will ignore that
     // complication for now
     private static final int fruitPicHeight = 100; 
-    
+
     //max xSpeed
     private static final int MAX_X_SPEED = 10;
-    
+
     //max ySpeed
     private static final int MAX_Y_SPEED = 5;
 
@@ -48,9 +48,12 @@ public class Fruit extends Thread
 
     //is the fuit done?
     private boolean done;
-    
+
     // which side is fruit coming from: left = false, right = true
     private boolean isRight; 
+
+    // has the fruit been sliced?
+    private boolean isSliced;
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -63,11 +66,12 @@ public class Fruit extends Thread
 
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;
-        
+        isSliced = false;
+
         Random rand = new Random();
-        
+
         ySpeed = rand.nextInt(MAX_Y_SPEED) - 17;
-        
+
         isRight = rand.nextBoolean();
         if (isRight)
         {
@@ -79,7 +83,7 @@ public class Fruit extends Thread
             upperLeftX = rand.nextInt(350);
             xSpeed = rand.nextInt(MAX_X_SPEED);
         }
-        
+
     }
 
     /**
@@ -88,7 +92,7 @@ public class Fruit extends Thread
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
-        
+
         g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
     }
 
@@ -105,19 +109,24 @@ public class Fruit extends Thread
             }
             catch (InterruptedException e) {
             }
-
-            // every iteration, update the coordinates
-            // by a pixel
-            upperLeftX += xSpeed;
+            if(!isSliced)
+            {
+                // every iteration, update the coordinates
+                // by a pixel
+                upperLeftX += xSpeed;
+                
+            }
+            
+            
             upperLeftY += ySpeed;
 
             // gravity factor also
             ySpeed += GRAVITY;
-            
+
             panel.repaint();
 
         }
-        
+
         done = true;
 
     }
@@ -139,17 +148,17 @@ public class Fruit extends Thread
     {
         if (mousePos == null) return false;
         int radius = fruitPicHeight / 2;
-        
-        if (mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
+
+        if (!isSliced && mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
         {
+            isSliced = true;
+            ySpeed = 5;
             return true;
         }
-        
+
         return false;
     }
-    
-    
-    
+
     // /**
     // Set the Image to be used by all FallingSnow objects, to be 
     // called by the main method before the GUI gets set up
