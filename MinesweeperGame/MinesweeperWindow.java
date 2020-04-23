@@ -29,7 +29,7 @@ import java.util.Random;
 public class MinesweeperWindow implements Runnable, ActionListener
 {
     private final int WINDOW_HEIGHT = 600;
-    private final int WINDOW_WIDTH = 1050;
+    private final int WINDOW_WIDTH = 500;
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
 
@@ -71,7 +71,7 @@ public class MinesweeperWindow implements Runnable, ActionListener
         bombLabel = new JLabel("0");
         menuPanel.add(bombLabel);
         
-        mineField = new JPanel() {
+        mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
          @Override
          public void paintComponent(Graphics g)
          {
@@ -87,18 +87,20 @@ public class MinesweeperWindow implements Runnable, ActionListener
         
         newGame();
         
-        
+        gameFrame.pack();
+        gameFrame.setVisible(true);
     }
     
     public void newGame()
     {
         Random rand = new Random();
         
-        for (int i = 0; i < arrayWidth; i++)
+        for (int row = 0; row < arrayWidth; row++)
         {
-            for (int j = 0; j < arrayHeight; j++)
+            for (int col = 0; col < arrayHeight; col++)
             {
-                bombArray[i][j] = new Tile(0, i, j, false);
+                bombArray[row][col] = new Tile(0, row, col, false);
+                mineField.add(bombArray[row][col]);
             }
         }
         
@@ -113,6 +115,7 @@ public class MinesweeperWindow implements Runnable, ActionListener
             if (!tile.isBomb())
             {
                 tile.setNumber(-1);
+                i++;
             }
         }
     }
@@ -125,5 +128,17 @@ public class MinesweeperWindow implements Runnable, ActionListener
     public void actionPerformed(ActionEvent e)
     {
         
+    }
+    
+    /**
+     * Main method to run the program, allows user to select the color of their ball.
+     * 
+     * @param args[] no command line input necessary.
+     */
+    public static void main(String args[])
+    {
+        //Easy medium and hard settings will go here. 
+
+        javax.swing.SwingUtilities.invokeLater(new MinesweeperWindow());
     }
 }
