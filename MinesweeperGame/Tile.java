@@ -12,7 +12,7 @@ import java.awt.Color;
 public class Tile extends Thread
 {
     private final int SIZE = 50;
-    
+
     private int number;
     private int row;
     private int col;
@@ -20,7 +20,7 @@ public class Tile extends Thread
     private Point upperLeft;
     private JComponent container;
     private boolean isPressed;
-    
+    private boolean tileExposed;
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
     {
@@ -77,27 +77,40 @@ public class Tile extends Thread
     {
         return SIZE;
     }
-    
+
     public void paint(Graphics g)
     {
-        if (isPressed)
+        if (!tileExposed && isPressed)
         {
             g.setColor(Color.GRAY);
             g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
         }
+        
+        if (tileExposed)
+        {
+            if (isBomb)
+            {
+                g.setColor(Color.RED);
+                g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+            }
+            else
+            {
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+            }
+        }
+        
         g.setColor(Color.BLACK);
         g.drawRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
     }
-    
-    public void press()
+
+    public void press(boolean isPressed)
     {
-        if (isPressed)
-        {
-            isPressed = false;
-        }
-        else
-        {
-            isPressed = true;
-        }
+        this.isPressed = isPressed;
+    }
+
+    public void showTile()
+    {
+        tileExposed = true;
     }
 }
