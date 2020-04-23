@@ -20,6 +20,13 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
+//NEED TO EDIT LATER
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
 /**
  * NEED TO EDIT THIS!! Write a description of class GameWindow here.
  *
@@ -35,7 +42,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
     private final int LINE_POS = 20;
 
-    private JFrame gameFrame;
+    private static JFrame gameFrame;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
@@ -47,6 +54,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private int lineNum;
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
+    private static int swordType;
 
     /**
      * The run method which establishes the graphical interface.
@@ -128,15 +136,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     gameOverLabel.setVisible(true);
                 }
 
-
                 newFT.paint(g);
-
             }
-
         };
-
         newFT = new FruitThrower(fruitPanel);
-
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
@@ -212,14 +215,25 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
-        AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+        if(swordType == 1)
+        {
+            AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+            lastMouse = e.getPoint();
+            swordList.add(newLine);
 
-        lastMouse = e.getPoint();
-        swordList.add(newLine);
+            newLine.start();
+            newFT.setMousePos(e.getPoint());
+            fruitPanel.repaint();
+        }
+        
+        //Other SwordTypes will go here once they are in.
 
-        newLine.start();
-        newFT.setMousePos(e.getPoint());
-        fruitPanel.repaint();
+        // lastMouse = e.getPoint();
+        // swordList.add(newLine);
+
+        // newLine.start();
+        // newFT.setMousePos(e.getPoint());
+        //fruitPanel.repaint();
     }
 
     /**
@@ -242,9 +256,30 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
 
-        Object welcomeMenu = JOptionPane.showConfirmDialog(null, "Press 'OK' to continue! Or 'Cancel' to quit", "Welcome to Fruit Ninja!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        //User will select Game Settings
+        String[] swordOpts = {"Vanishing", "Rainbow", "Red", "Blue"};
+
+        Object selectedValue = JOptionPane.showInputDialog(null,
+                "Choose a Sword Type: ", "Welcome to Fruit Ninja!",
+                JOptionPane.PLAIN_MESSAGE, null,
+                swordOpts, swordOpts[0]);
+
+        String chosenSword = (String) selectedValue;
+
+        switch(chosenSword)
+        {
+            case "Vanishing": swordType = 1;
+            break;
+            case "Rainbow": swordType = 2;
+            break;
+            case "Red": swordType = 3;
+            break;
+            case "Blue": swordType = 4;
+            break;
+        }
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
+
     }
 
 }
