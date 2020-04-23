@@ -26,20 +26,19 @@ import java.util.Random;
  * @author Kate Frisch, Van Griffith & Abby Hall
  * @version Spring 2020
  */
-public class MinesweeperWindow implements Runnable, ActionListener
+public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionListener
 {
     private final int WINDOW_HEIGHT = 600;
     private final int WINDOW_WIDTH = 500;
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
+    private final int TILE_SIZE = 50;
 
-    private final int LINE_POS = 20;
-    
     private int arrayWidth = 9;
     private int arrayHeight = 9;
     private int bombCount = 10;
     private Tile[][] bombArray;
-    
+
     private JFrame gameFrame;
     private JPanel menuPanel;
     private JPanel mineField;
@@ -47,71 +46,88 @@ public class MinesweeperWindow implements Runnable, ActionListener
     private JLabel timer;
     private JLabel bombLabel;
     
+    private Tile currentTile;
+
     public void run()
     {
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
-        
+
         gameFrame = new JFrame("Minesweeper");
-        gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setLayout(new BorderLayout());
-        
-         menuPanel = new JPanel();
+
+        menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         gameFrame.add(menuPanel, BorderLayout.NORTH);
-        
+
         faceButton = new JButton("New Game");
         faceButton.addActionListener(this);
         menuPanel.add(faceButton);
-        
+
         timer = new JLabel("0");
         menuPanel.add(timer);
-        
+
         bombLabel = new JLabel("0");
         menuPanel.add(bombLabel);
-        
+
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
-         @Override
-         public void paintComponent(Graphics g)
-         {
-             super.paintComponent(g);
-             g.setColor(Color.BLACK);
-             
-             //Line to divide JFrame
-             g.drawLine(0, 0, WINDOW_WIDTH, 0);
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                g.setColor(Color.BLACK);
+                for (int row = 0; row < arrayWidth; row++)
+                {
+                    for (int col = 0; col < arrayHeight; col++)
+                    {
+                        Tile tile = bombArray[row][col];
+                        tile.paint(g);
+                    }
+                }
             }
         };
+        mineField.addMouseListener(this);
         gameFrame.add(mineField); 
-        bombArray = new Tile[arrayWidth][arrayHeight];
         
+        bombArray = new Tile[arrayWidth][arrayHeight];
+
         newGame();
         
+        gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
+
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
-    
+
+    /**
+     * Starts a new game
+     */
     public void newGame()
     {
         Random rand = new Random();
-        
+
+        int upperLeftX = 0;
+        int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
         {
+            upperLeftY = 0;
             for (int col = 0; col < arrayHeight; col++)
             {
-                bombArray[row][col] = new Tile(0, row, col, false);
-                mineField.add(bombArray[row][col]);
+                bombArray[row][col] = new Tile(0, row, col, new Point(upperLeftX, upperLeftY), mineField);
+                upperLeftY += 50;
             }
+            upperLeftX += 50;
         }
-        
+
         int i = 0;
         while (i < bombCount)
         {
             int row = rand.nextInt(arrayWidth);
             int col = rand.nextInt(arrayHeight);
-            
+
             Tile tile = bombArray[row][col];
-            
+
             if (!tile.isBomb())
             {
                 tile.setNumber(-1);
@@ -119,7 +135,7 @@ public class MinesweeperWindow implements Runnable, ActionListener
             }
         }
     }
-    
+
     /**
      * Action performed event handler, handles the game start and game reset buttons.
      * 
@@ -127,9 +143,45 @@ public class MinesweeperWindow implements Runnable, ActionListener
      */
     public void actionPerformed(ActionEvent e)
     {
-        
+
     }
     
+    public void mousePressed (MouseEvent e)
+    {
+        Point mousePos = e.getPoint(); 
+        int tileRow = mousePos.x / TILE_SIZE;
+        int tileCol = mousePos.y / TILE_SIZE;
+        
+        
+        
+        try
+        {
+            currentTile = bombArray[tileRow][tileCol];
+            currentTile.press();
+        }
+        catch (ArrayIndexOutOfBoundsException k)
+        {
+            
+        }
+        
+        
+        mineField.repaint();
+    }
+    
+    public void mouseReleased(MouseEvent e)
+    {
+        try
+        {
+            currentTile.press();
+        }
+        catch (NullPointerException k)
+        {
+            
+        }
+        mineField.repaint();
+        currentTile = null;
+    }
+
     /**
      * Main method to run the program, allows user to select the color of their ball.
      * 
