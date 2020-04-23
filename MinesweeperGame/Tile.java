@@ -44,6 +44,10 @@ public class Tile extends JButton
     public void setNumber(int number)
     {
         this.number = number;
+        if (number == -1)
+        {
+            isBomb = true;
+        }
     }
     
     public void incrementNumber()
