@@ -35,9 +35,9 @@ public class MinesweeperWindow implements Runnable, ActionListener
 
     private final int LINE_POS = 20;
     
-    private int arrayWidth;
-    private int arrayHeight;
-    private int bombCount;
+    private int arrayWidth = 9;
+    private int arrayHeight = 9;
+    private int bombCount = 10;
     private Tile[][] bombArray;
     
     private JFrame gameFrame;
