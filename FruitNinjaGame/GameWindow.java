@@ -122,13 +122,12 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     default: strikeLabel.setText("");
                     break;
                 }
-                
+
                 if(newFT.done())
                 {
                     gameOverLabel.setVisible(true);
                 }
-                
-                
+
 
                 newFT.paint(g);
 
@@ -163,7 +162,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     fruitPanel.repaint();
                 }
 
-                
             }
         }.start();
 
@@ -243,6 +241,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     public static void main(String args[])
     {
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
+
+        Object welcomeMenu = JOptionPane.showConfirmDialog(null, "Press 'OK' to continue! Or 'Cancel' to quit", "Welcome to Fruit Ninja!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
     }
