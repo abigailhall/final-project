@@ -38,7 +38,7 @@ public class MinesweeperWindow implements Runnable, ActionListener
     private int arrayWidth;
     private int arrayHeight;
     private int bombCount;
-    private JButton[][] bombArray;
+    private Tile[][] bombArray;
     
     private JFrame gameFrame;
     private JPanel menuPanel;
@@ -83,11 +83,38 @@ public class MinesweeperWindow implements Runnable, ActionListener
             }
         };
         gameFrame.add(mineField); 
+        bombArray = new Tile[arrayWidth][arrayHeight];
         
-        bombArray = new JButton[arrayWidth][arrayHeight];
+        newGame();
         
         
+    }
+    
+    public void newGame()
+    {
+        Random rand = new Random();
         
+        for (int i = 0; i < arrayWidth; i++)
+        {
+            for (int j = 0; j < arrayHeight; j++)
+            {
+                bombArray[i][j] = new Tile(0, i, j, false);
+            }
+        }
+        
+        int i = 0;
+        while (i < bombCount)
+        {
+            int row = rand.nextInt(arrayWidth);
+            int col = rand.nextInt(arrayHeight);
+            
+            Tile tile = bombArray[row][col];
+            
+            if (!tile.isBomb())
+            {
+                tile.setNumber(-1);
+            }
+        }
     }
     
     /**
