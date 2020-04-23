@@ -55,6 +55,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
     private static int swordType;
+    private static int diffLevel;
 
     /**
      * The run method which establishes the graphical interface.
@@ -139,7 +140,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 newFT.paint(g);
             }
         };
-        newFT = new FruitThrower(fruitPanel);
+        newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
@@ -192,7 +193,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         if (e.getSource() == resetButton)
         {
-            newFT = new FruitThrower(fruitPanel);
+            newFT = new FruitThrower(fruitPanel, diffLevel);
             gameOverLabel.setVisible(false);
             strikeLabel.setText("");
             newFT.start();
@@ -225,7 +226,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             newFT.setMousePos(e.getPoint());
             fruitPanel.repaint();
         }
-        
+
         //Other SwordTypes will go here once they are in.
 
         // lastMouse = e.getPoint();
@@ -257,14 +258,37 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
 
         //User will select Game Settings
+
+        //User will select DifficultyDifficulty
+        String[] diffOpts = {"Easy", "Medium", "Hard"};
+
+        Object selectedValue1 = JOptionPane.showInputDialog(null,
+                "Choose a level of Difficulty: ", "Welcome to Fruit Ninja!",
+                JOptionPane.PLAIN_MESSAGE, null,
+                diffOpts, diffOpts[0]);
+
+        String chosenDiff = (String) selectedValue1;
+
+        switch(chosenDiff)
+        {
+            case "Easy": diffLevel = 1;
+            break;
+            case "Medium": diffLevel = 2;
+            break;
+            case "Hard": diffLevel = 3;
+            break;
+        }
+
+        
+        //User will select sword settings
         String[] swordOpts = {"Vanishing", "Rainbow", "Red", "Blue"};
 
-        Object selectedValue = JOptionPane.showInputDialog(null,
-                "Choose a Sword Type: ", "Welcome to Fruit Ninja!",
+        Object selectedValue2 = JOptionPane.showInputDialog(null,
+                "Choose a Sword Type: ", "Game Settings",
                 JOptionPane.PLAIN_MESSAGE, null,
                 swordOpts, swordOpts[0]);
 
-        String chosenSword = (String) selectedValue;
+        String chosenSword = (String) selectedValue2;
 
         switch(chosenSword)
         {

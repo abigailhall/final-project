@@ -23,11 +23,29 @@ public abstract  class Fruit extends Thread
     // complication for now
     protected static final int fruitPicHeight = 100; 
 
-    //max xSpeed
+    //max xSpeed easy
     protected static final int MAX_X_SPEED = 10;
 
-    //max ySpeed
+    //max ySpeed easay
     protected static final int MAX_Y_SPEED = 5;
+
+    //max xSpeed easy
+    protected static final int MAX_X_SPEED_EASY = 10;
+
+    //max ySpeed easay
+    protected static final int MAX_Y_SPEED_EASY = 5;
+
+    //max xSpeed medium
+    protected static final int MAX_X_SPEED_MED = 10;
+
+    //max ySpeed medium
+    protected static final int MAX_Y_SPEED_MED = 5;
+
+    //max xSpeed hard
+    protected static final int MAX_X_SPEED_HARD = 10;
+
+    //max ySpeed medium
+    protected static final int MAX_Y_SPEED_HARD = 5;
 
     // delay between snow motions
     protected static final int DELAY_TIME = 33;
@@ -38,6 +56,7 @@ public abstract  class Fruit extends Thread
     protected static final int POINT_VALUE = 1;
 
     protected JComponent panel;
+    
 
     // pixels to move each iteration
     protected double xSpeed, ySpeed;
@@ -56,9 +75,8 @@ public abstract  class Fruit extends Thread
 
     // has the fruit been sliced?
     protected boolean isSliced;
-    
-    protected boolean isBomb;
 
+    protected boolean isBomb;
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -109,34 +127,33 @@ public abstract  class Fruit extends Thread
     @Override
     public void run() {
 
-        while (upperLeftY < bottom) 
-        {
-            try {
-                sleep(DELAY_TIME);
-            }
-            catch (InterruptedException e) {
-            }
-            if(!isSliced)
+        
+        
+            while (upperLeftY < bottom) 
             {
-                // every iteration, update the coordinates
-                // by a pixel
-                upperLeftX += xSpeed;
+                try {
+                    sleep(DELAY_TIME);
+                }
+                catch (InterruptedException e) {
+                }
+                if(!isSliced)
+                {
+                    // every iteration, update the coordinates
+                    // by a pixel
+                    upperLeftX += xSpeed;
+
+                }
+
+                upperLeftY += ySpeed;
+                // gravity factor also
+                ySpeed += GRAVITY;
+
+                panel.repaint();
 
             }
 
-            upperLeftY += ySpeed;
-            // gravity factor also
-            ySpeed += GRAVITY;
-
-            panel.repaint();
-
-        }
+            done = true;
         
-        
-        
-        
-
-        done = true;
 
     }
 
@@ -148,12 +165,12 @@ public abstract  class Fruit extends Thread
     {
         return done;
     }
-    
+
     public boolean isSliced()
     {
         return isSliced;
     }
-    
+
     public boolean isBomb()
     {
         return isBomb;
