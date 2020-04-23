@@ -157,7 +157,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         try
         {
             currentTile = bombArray[tileRow][tileCol];
-            currentTile.press();
+            currentTile.press(true);
         }
         catch (ArrayIndexOutOfBoundsException k)
         {
@@ -172,12 +172,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         try
         {
-            currentTile.press();
+            currentTile.press(false);
+            currentTile.showTile();
         }
         catch (NullPointerException k)
         {
             
         }
+        
         mineField.repaint();
         currentTile = null;
     }
