@@ -40,8 +40,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
 
-    private final int LINE_POS = 20;
-
     private static JFrame gameFrame;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
@@ -102,26 +100,28 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
 
-                //Divides up the JFrame
-                g.drawLine(0, 0, WINDOW_WIDTH, 0);
-
                 //will chose the background the user selected
+                //Got some help writing this code from: https://www.youtube.com/watch?v=bv4PBdhoo4o
+                //Images are from a public domain website: https://www.pexels.com/
                 
-                //Got some help writing this code from https://www.youtube.com/watch?v=bv4PBdhoo4o
                 contentPane = new JLabel();
                 ImageIcon background;
                 switch(backType)
                 {
-                    case 1:
+                    case 1: background = new ImageIcon("close-up-of-wooden-plank-326311.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
                     case 2: background = new ImageIcon("abstract-ancient-antique-art-235985.jpg");
-                    g.drawImage(background.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+                    case 3: background = new ImageIcon("close-up-photo-of-blue-body-of-water-1435752.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+                    case 4: background = new ImageIcon("grayscale-photo-of-brickwall-1022692.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
 
                 }
-                
-                
-                
                
 
                 int i = swordList.size() - 1;
