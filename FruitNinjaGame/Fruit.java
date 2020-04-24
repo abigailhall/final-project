@@ -35,7 +35,7 @@ public abstract  class Fruit extends Thread
     // what to add to ySpeed to simulate gravity?
     protected static final double GRAVITY = 0.3;
 
-    protected static final int POINT_VALUE = 1;
+    protected int pointValue;
 
     protected JComponent panel;
 
@@ -56,9 +56,12 @@ public abstract  class Fruit extends Thread
 
     // has the fruit been sliced?
     protected boolean isSliced;
-    
+
     protected boolean isBomb;
 
+    protected boolean explosion;
+
+    protected Color fruitColor;
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -71,6 +74,7 @@ public abstract  class Fruit extends Thread
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;
         isSliced = false;
+        explosion = false;
 
         Random rand = new Random();
 
@@ -95,12 +99,20 @@ public abstract  class Fruit extends Thread
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
-        if(isSliced)
-            g.setColor(Color.GRAY);
-        else
-            g.setColor(Color.BLACK);
+        if(!explosion)
+        {
+            if(isSliced)
+                g.setColor(Color.GRAY);
+            else
+                g.setColor(fruitColor);
 
-        g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+            g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+        }
+        else
+        {
+            g.setColor(Color.RED);
+            g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+        }
     }
 
     /**
@@ -116,12 +128,16 @@ public abstract  class Fruit extends Thread
             }
             catch (InterruptedException e) {
             }
-            if(!isSliced)
+            if(isSliced && isBomb)
+            {
+                explosion = true;
+                panel.repaint();
+            }
+            else if(!isSliced)
             {
                 // every iteration, update the coordinates
                 // by a pixel
                 upperLeftX += xSpeed;
-
             }
 
             upperLeftY += ySpeed;
@@ -131,10 +147,6 @@ public abstract  class Fruit extends Thread
             panel.repaint();
 
         }
-        
-        
-        
-        
 
         done = true;
 
@@ -148,12 +160,12 @@ public abstract  class Fruit extends Thread
     {
         return done;
     }
-    
+
     public boolean isSliced()
     {
         return isSliced;
     }
-    
+
     public boolean isBomb()
     {
         return isBomb;
@@ -171,7 +183,7 @@ public abstract  class Fruit extends Thread
         {
             isSliced = true;
             ySpeed = 10;
-            return POINT_VALUE;
+            return pointValue;
         }
 
         return 0;

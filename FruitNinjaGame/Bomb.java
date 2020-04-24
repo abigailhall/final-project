@@ -21,39 +21,9 @@ public class Bomb extends Fruit
     {
         super(panel);
         isBomb = true;
+        fruitColor = Color.BLACK;
+        pointValue = -1;
     }
 
-    /**
-    Draw the ball at its current location.
-    @param g the Graphics object on which the ball should be drawn
-     */
-    @Override
-    public void paint(Graphics g) {
-        g.setColor(Color.GREEN);
-
-        g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
-    }
-
-    /**
-     * Check if the mouse overlaps the fruit.
-     */
-    @Override
-    public int mouseOverlapsFruit(Point mousePos)
-    {
-        if (mousePos == null) return 0;
-        int radius = fruitPicHeight / 2;
-
-        if (!isSliced && mousePos.distance(new Point((int) upperLeftX + radius, (int) upperLeftY  + radius)) < radius)
-        {
-            isSliced = true;
-            ySpeed = 10;
-            return -1;
-        }
-        else
-        {
-
-            return 0;
-        }
-    }
 
 }
