@@ -139,17 +139,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 scoreLabel.setText("Score: " + newFT.getScore());
                 ImageIcon strikes = new ImageIcon("X.jpg");
+                //Image is from a public domain website: https://publicdomainvectors.org/
                 switch (newFT.getStrikeCount())
                 {
-                    case 1: strikeLabel.setText("X");
-                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    case 1: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
-                    case 2: strikeLabel.setText("X X");
-                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    case 2: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
-                    case 3: strikeLabel.setText("X X X");
-                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    case 3: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     g.drawImage(strikes.getImage(), 950, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
