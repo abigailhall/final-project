@@ -103,8 +103,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 //will chose the background the user selected
                 //Got some help writing this code from: https://www.youtube.com/watch?v=bv4PBdhoo4o
                 //Images are from a public domain website: https://www.pexels.com/
-                
-                contentPane = new JLabel();
+
                 ImageIcon background;
                 switch(backType)
                 {
@@ -122,7 +121,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     break;
 
                 }
-               
 
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
@@ -140,14 +138,20 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
 
                 scoreLabel.setText("Score: " + newFT.getScore());
-
+                ImageIcon strikes = new ImageIcon("X.jpg");
                 switch (newFT.getStrikeCount())
                 {
                     case 1: strikeLabel.setText("X");
+                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
                     case 2: strikeLabel.setText("X X");
+                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
                     case 3: strikeLabel.setText("X X X");
+                    g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 950, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
                     default: strikeLabel.setText("");
                     break;
@@ -161,7 +165,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 newFT.paint(g);
             }
         };
-        
+
         newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
