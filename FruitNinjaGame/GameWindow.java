@@ -54,8 +54,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private int lineNum;
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
+    private JLabel contentPane;
     private static int swordType;
     private static int diffLevel;
+    private static int backType;
 
     /**
      * The run method which establishes the graphical interface.
@@ -103,6 +105,25 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 //Divides up the JFrame
                 g.drawLine(0, 0, WINDOW_WIDTH, 0);
 
+                //will chose the background the user selected
+                
+                //Got some help writing this code from https://www.youtube.com/watch?v=bv4PBdhoo4o
+                contentPane = new JLabel();
+                ImageIcon background;
+                switch(backType)
+                {
+                    case 1:
+                    break;
+                    case 2: background = new ImageIcon("abstract-ancient-antique-art-235985.jpg");
+                    g.drawImage(background.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
+                    break;
+
+                }
+                
+                
+                
+               
+
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -140,6 +161,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 newFT.paint(g);
             }
         };
+        
         newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
@@ -279,12 +301,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             break;
         }
 
-        
         //User will select sword settings
         String[] swordOpts = {"Vanishing", "Rainbow", "Red", "Blue"};
 
         Object selectedValue2 = JOptionPane.showInputDialog(null,
-                "Choose a Sword Type: ", "Game Settings",
+                "Choose a Sword Type: ", "Sword Settings",
                 JOptionPane.PLAIN_MESSAGE, null,
                 swordOpts, swordOpts[0]);
 
@@ -299,6 +320,28 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             case "Red": swordType = 3;
             break;
             case "Blue": swordType = 4;
+            break;
+        }
+
+        //User will select a backdrop
+        String[] backOpts = {"Wood", "Vintage", "Water", "Brick"};
+
+        Object selectedValue3 = JOptionPane.showInputDialog(null,
+                "Choose a Background: ", "Background Settings",
+                JOptionPane.PLAIN_MESSAGE, null,
+                backOpts, backOpts[0]);
+
+        String chosenBG = (String) selectedValue3;
+
+        switch(chosenBG)
+        {
+            case "Wood": backType = 1;
+            break;
+            case "Vintage": backType = 2;
+            break;
+            case "Water": backType = 3;
+            break;
+            case "Brick": backType = 4;
             break;
         }
 
