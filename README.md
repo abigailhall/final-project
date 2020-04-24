@@ -6,3 +6,5 @@ Kate Frisch, Van Griffith, Abby Hall
 4/21 - All members were present while working on the project. 
 
 4/22 - All members were present while working on the project. 
+
+4/23 - All members were present while working on the project. 
