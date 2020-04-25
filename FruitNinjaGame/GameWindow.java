@@ -66,7 +66,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
-        
+
         gameFrame = new JFrame("Fuit Ninja");
         gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,17 +77,22 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
+        
+        Font newFont = new Font("Georgia", Font.BOLD, 25);
 
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
+        startButton.setFont(newFont);
         menuPanel.add(startButton);
 
         resetButton = new JButton("Reset Game");
         resetButton.addActionListener(this);
         resetButton.setVisible(false);
+        resetButton.setFont(newFont);
         menuPanel.add(resetButton);
 
         scoreLabel = new JLabel("Score: 0");
+        scoreLabel.setFont(newFont);
         scoreLabel.setVisible(false);
         menuPanel.add(scoreLabel);
 
@@ -163,7 +168,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 {
 
                     gameOverLabel.setVisible(true);
- 
+
                 }
 
                 newFT.paint(g);
@@ -173,17 +178,16 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
-
-        Font newFont = new Font("Georgia", Font.BOLD, 35);
+        
+        Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
-        gameOverLabel.setFont(newFont);
+        gameOverLabel.setFont(newFont2);
         gameOverLabel.setBackground(new Color (255, 0, 0));
         gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
         fruitPanel.add(gameOverLabel);
-
 
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
