@@ -177,8 +177,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
-        gameOverLabel.setBackground(Color.RED);
-        gameOverLabel.setOpaque(true);
+        gameOverLabel.setForeground(Color.RED);
+        //gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
         fruitPanel.add(gameOverLabel);
