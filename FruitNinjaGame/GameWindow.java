@@ -66,10 +66,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
-
+        
         gameFrame = new JFrame("Fuit Ninja");
         gameFrame.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
         menuPanel = new JPanel();
@@ -180,7 +181,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
-        fruitPanel.add(gameOverLabel,  BorderLayout.CENTER);
+        fruitPanel.add(gameOverLabel);
 
 
         fruitPanel.addMouseListener(this);
