@@ -78,6 +78,8 @@ public abstract  class Fruit extends Thread
     protected boolean isBomb;
 
     protected boolean explosion;
+    
+    protected boolean explosionOver;
 
     protected Color fruitColor;
 
@@ -94,6 +96,7 @@ public abstract  class Fruit extends Thread
         upperLeftY = bottom - 1;
         isSliced = false;
         explosion = false;
+        explosionOver = false;
 
         Random rand = new Random();
 
@@ -142,7 +145,9 @@ public abstract  class Fruit extends Thread
     @Override
     public void run() {
 
-        while (upperLeftY < bottom && !explosion) 
+
+        while (upperLeftY < bottom && !explosionOver) 
+
         {
             try {
                 sleep(DELAY_TIME);
@@ -161,9 +166,11 @@ public abstract  class Fruit extends Thread
                     }
                     catch (InterruptedException e) {
                     }
+                    i++;
                     panel.repaint();
                 }
-
+                
+                explosionOver = true;
             }
             else if(!isSliced)
             {
@@ -240,6 +247,11 @@ public abstract  class Fruit extends Thread
     public void setExplosion()
     {
         explosion = true;
+    }
+    
+    public boolean explosionOver()
+    {
+        return explosionOver;
     }
     // /**
     // Set the Image to be used by all FallingSnow objects, to be 

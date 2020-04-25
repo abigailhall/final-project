@@ -62,7 +62,7 @@ public class FruitThrower extends Thread
         while (i < fruits.size())
         {
             Fruit fruit = fruits.get(i);
-            if (fruit.done())
+            if (fruit.done() && !fruit.explosionOver())
             {
 
                 if(!fruit.isSliced() && !fruit.isBomb())
@@ -77,6 +77,7 @@ public class FruitThrower extends Thread
                 fruits.remove(i);
 
             }
+            
             else
             {
 
@@ -84,11 +85,13 @@ public class FruitThrower extends Thread
 
                 if(scoreVal == -1)
                 {
+
                     
                     fruit.setExplosion();
                     
                     
                     done = true;
+
                 }
                 else
                 {
@@ -135,6 +138,7 @@ public class FruitThrower extends Thread
         }
 
     }
+
     /**
     Check if this FruitThrower's work is done.
 
