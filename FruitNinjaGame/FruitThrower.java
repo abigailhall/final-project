@@ -29,9 +29,8 @@ public class FruitThrower extends Thread
     private boolean done;
 
     private int score;
-    
+
     private int strikeCount;
-    
 
     /**
     Construct a new FruitThrower, using the given component to pass along
@@ -62,18 +61,18 @@ public class FruitThrower extends Thread
             Fruit fruit = fruits.get(i);
             if (fruit.done())
             {
-                
+
                 if(!fruit.isSliced() && !fruit.isBomb())
                 {
                     strikeCount++;
-                    
+
                     if(strikeCount == 3)
                     {
                         done = true;
                     }
                 }
                 fruits.remove(i);
-                
+
             }
             else
             {
@@ -82,7 +81,9 @@ public class FruitThrower extends Thread
 
                 if(scoreVal == -1)
                 {
-                    done = true;
+                    
+                    fruit.setExplosion();
+
                 }
                 else
                 {
@@ -105,36 +106,30 @@ public class FruitThrower extends Thread
     public void run() 
     {
         Random r = new Random();
-        
 
         while(!done)
-
         {
-            // wait a bit before creating the next snowflake
             try {
                 sleep(FRUIT_INTERVAL);
             }
             catch (InterruptedException e) {
             }
-            
+
             Fruit newFruit;
-            switch (r.nextInt(2))
+            switch (r.nextInt(10))
             {
-                case 0: newFruit = new Bomb(panel);
+                case 0:
+                newFruit = new Bomb(panel);
                 break;
                 default: newFruit = new Orange(panel);
                 break;
             }
 
-            
             fruits.add(newFruit);
             newFruit.start();
         }
-        
-        
 
     }
-
     /**
     Check if this FruitThrower's work is done.
 
@@ -153,10 +148,10 @@ public class FruitThrower extends Thread
     {
         return score;
     }
-    
+
     public int getStrikeCount()
     {
         return strikeCount;
     }
-    
+
 }

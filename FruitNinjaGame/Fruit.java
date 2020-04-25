@@ -21,7 +21,7 @@ public abstract  class Fruit extends Thread
 
     // its height should really be queried, but we will ignore that
     // complication for now
-    protected static final int fruitPicHeight = 100; 
+    protected  int fruitPicHeight = 100; 
 
     //max xSpeed
     protected static final int MAX_X_SPEED = 10;
@@ -99,19 +99,21 @@ public abstract  class Fruit extends Thread
     @param g the Graphics object on which the ball should be drawn
      */
     public void paint(Graphics g) {
-        if(!explosion)
+        if(explosion)
         {
+            g.setColor(Color.RED);
+            g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+        }
+        else
+        {
+
             if(isSliced)
                 g.setColor(Color.GRAY);
             else
                 g.setColor(fruitColor);
 
             g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
-        }
-        else
-        {
-            g.setColor(Color.RED);
-            g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+
         }
     }
 
@@ -128,10 +130,21 @@ public abstract  class Fruit extends Thread
             }
             catch (InterruptedException e) {
             }
-            if(isSliced && isBomb)
+            if(explosion)
             {
-                explosion = true;
-                panel.repaint();
+
+                int i = 0;
+                while(i < 25)
+                {
+                    fruitPicHeight += 5;
+                    try {
+                        sleep(DELAY_TIME);
+                    }
+                    catch (InterruptedException e) {
+                    }
+                    panel.repaint();
+                }
+
             }
             else if(!isSliced)
             {
@@ -189,6 +202,10 @@ public abstract  class Fruit extends Thread
         return 0;
     }
 
+    public void setExplosion()
+    {
+        explosion = true;
+    }
     // /**
     // Set the Image to be used by all FallingSnow objects, to be 
     // called by the main method before the GUI gets set up
