@@ -138,8 +138,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
 
                 scoreLabel.setText("Score: " + newFT.getScore());
-                ImageIcon strikes = new ImageIcon("X.jpg");
+                
                 //Image is from a public domain website: https://publicdomainvectors.org/
+                ImageIcon strikes = new ImageIcon("X.jpg");
                 switch (newFT.getStrikeCount())
                 {
                     case 1: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
@@ -220,6 +221,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             newFT = new FruitThrower(fruitPanel, diffLevel);
             gameOverLabel.setVisible(false);
             strikeLabel.setText("");
+            fruitPanel.repaint();
             newFT.start();
         }
     }
