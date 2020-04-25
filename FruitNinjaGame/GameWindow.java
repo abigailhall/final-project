@@ -46,7 +46,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JButton startButton;
     private JButton resetButton;
     private JLabel scoreLabel;
-    private FruitThrower newFT;
+    private static FruitThrower newFT;
     private ArrayList<AnimatedLine> swordList;
     private Point lastMouse;
     private int lineNum;
@@ -56,6 +56,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private static int swordType;
     private static int diffLevel;
     private static int backType;
+    private JLabel dirLabel;
 
     /**
      * The run method which establishes the graphical interface.
@@ -93,7 +94,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         menuPanel.add(strikeLabel);
 
         // Creates and adds fruitPanel to Jframe
-        fruitPanel = new JPanel() {
+        fruitPanel = new JPanel(new BorderLayout()) {
             @Override
             public void paintComponent(Graphics g)
             {
@@ -138,7 +139,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
 
                 scoreLabel.setText("Score: " + newFT.getScore());
-                
+
                 //Image is from a public domain website: https://publicdomainvectors.org/
                 ImageIcon strikes = new ImageIcon("X.jpg");
                 switch (newFT.getStrikeCount())
@@ -158,7 +159,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 if(newFT.done())
                 {
+
                     gameOverLabel.setVisible(true);
+ 
                 }
 
                 newFT.paint(g);
@@ -169,12 +172,19 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
+        Font newFont = new Font("Georgia", Font.BOLD, 35);
+
+        gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
+        gameOverLabel.setFont(newFont);
+        gameOverLabel.setBackground(new Color (255, 0, 0));
+        gameOverLabel.setOpaque(true);
+        gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOverLabel.setVisible(false);
+        fruitPanel.add(gameOverLabel,  BorderLayout.CENTER);
+
+
         fruitPanel.addMouseListener(this);
         fruitPanel.addMouseMotionListener(this);
-
-        gameOverLabel = new JLabel("GAME OVER!! PRESS RESTART TO PLAY AGAIN!");
-        gameOverLabel.setVisible(false);
-        menuPanel.add(gameOverLabel);
 
         new Thread(){
             @Override
@@ -350,7 +360,5 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
-
     }
-
 }
