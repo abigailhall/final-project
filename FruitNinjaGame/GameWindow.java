@@ -364,6 +364,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             case "Brick": backType = 4;
             break;
         }
+        
+        //Direction Window
+        JOptionPane directions = new JOptionPane();
+        directions.showMessageDialog(null, "Use the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
+            "Directions", JOptionPane.INFORMATION_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
     }
