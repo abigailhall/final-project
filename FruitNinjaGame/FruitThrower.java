@@ -83,8 +83,12 @@ public class FruitThrower extends Thread
                 if(scoreVal == -1)
                 {
 
+                    
                     fruit.setExplosion();
-                     done = true;
+                    
+                    
+                    done = true;
+
                 }
                 else
                 {

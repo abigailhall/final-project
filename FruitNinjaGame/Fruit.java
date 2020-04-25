@@ -126,7 +126,9 @@ public abstract  class Fruit extends Thread
     @Override
     public void run() {
 
+
         while (upperLeftY < bottom && !explosionOver) 
+
         {
             try {
                 sleep(DELAY_TIME);
