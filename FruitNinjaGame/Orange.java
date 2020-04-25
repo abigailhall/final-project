@@ -21,7 +21,10 @@ public class Orange extends Fruit
     {
         super(panel);
         isBomb = false;
+        fruitColor = Color.ORANGE;
+        pointValue = 1;
     }
-
+    
+    
 
 }
