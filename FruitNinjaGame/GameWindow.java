@@ -75,6 +75,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
+        menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
         startButton = new JButton("Start Game");
