@@ -124,9 +124,9 @@ public class FruitThrower extends Thread
             switch (r.nextInt(10))
             {
                 case 0:
-                newFruit = new Bomb(panel);
+                newFruit = new Bomb(panel, diffLevel);
                 break;
-                default: newFruit = new Orange(panel);
+                default: newFruit = new Orange(panel, diffLevel);
                 break;
             }
 
@@ -135,6 +135,7 @@ public class FruitThrower extends Thread
         }
 
     }
+    
     /**
     Check if this FruitThrower's work is done.
 
@@ -158,5 +159,7 @@ public class FruitThrower extends Thread
     {
         return strikeCount;
     }
+    
+
 
 }

@@ -17,9 +17,9 @@ public class Bomb extends Fruit
     /**
      * Constructor for objects of class Bomb
      */
-    public Bomb(JComponent panel)
+    public Bomb(JComponent panel, int diffLevel)
     {
-        super(panel);
+        super(panel, diffLevel);
         isBomb = true;
         fruitColor = Color.BLACK;
         pointValue = -1;

@@ -17,9 +17,9 @@ public class Orange extends Fruit
     /**
      * Constructor for objects of class Orange
      */
-    public Orange(JComponent panel)
+    public Orange(JComponent panel, int diffLevel)
     {
-        super(panel);
+        super(panel, diffLevel);
         isBomb = false;
         fruitColor = Color.ORANGE;
         pointValue = 1;

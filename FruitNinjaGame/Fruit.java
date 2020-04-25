@@ -62,6 +62,8 @@ public abstract  class Fruit extends Thread
 
     //bottom of panel
     protected int bottom;
+    
+    protected int diffLevel;
 
     // latest location of the ball
     protected double upperLeftX, upperLeftY;
@@ -87,8 +89,9 @@ public abstract  class Fruit extends Thread
     @param panel the Component in which this FallingSnow will live
     objects
      */
-    public Fruit(JComponent panel) {
+    public Fruit(JComponent panel, int diffLevel) {
         this.panel = panel;
+        this.diffLevel = diffLevel;
 
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;
@@ -141,7 +144,9 @@ public abstract  class Fruit extends Thread
      */
     @Override
     public void run() {
-
+        
+        //do if or switch statement for the diffLevel
+        
         while (upperLeftY < bottom && !explosion) 
         {
             try {
