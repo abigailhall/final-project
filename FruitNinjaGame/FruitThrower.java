@@ -17,6 +17,8 @@ public class FruitThrower extends Thread
 
     // the Component where we'll be creating Fruit
     private JComponent panel;
+    
+    private int diffLevel;
 
     // list of Fruit objects that are the responsibility
     // of this class
@@ -39,9 +41,10 @@ public class FruitThrower extends Thread
     @param panel the Component in which this FruitThrower will generate Fruit
     objects
      */
-    public FruitThrower(JComponent panel) {
+    public FruitThrower(JComponent panel, int diffLevel) {
 
         this.panel = panel;
+        this.diffLevel = diffLevel;
         fruits = new Vector<Fruit>();
         done = false;
     }
@@ -102,7 +105,7 @@ public class FruitThrower extends Thread
 
     /**
     Run method to define the life of this FruitThrower, which consists of
-    generating Faruit objects for a while.
+    generating Fruit objects for a while.
      */
     @Override
     public void run() 

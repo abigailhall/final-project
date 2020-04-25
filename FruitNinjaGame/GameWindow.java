@@ -20,6 +20,13 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
+//NEED TO EDIT LATER
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+
 /**
  * NEED TO EDIT THIS!! Write a description of class GameWindow here.
  *
@@ -33,9 +40,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
 
-    private final int LINE_POS = 20;
-
-    private JFrame gameFrame;
+    private static JFrame gameFrame;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
@@ -47,6 +52,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private int lineNum;
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
+    private JLabel contentPane;
+    private static int swordType;
+    private static int diffLevel;
+    private static int backType;
 
     /**
      * The run method which establishes the graphical interface.
@@ -91,8 +100,27 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
 
-                //Divides up the JFrame
-                g.drawLine(0, 0, WINDOW_WIDTH, 0);
+                //will chose the background the user selected
+                //Got some help writing this code from: https://www.youtube.com/watch?v=bv4PBdhoo4o
+                //Images are from a public domain website: https://www.pexels.com/
+
+                ImageIcon background;
+                switch(backType)
+                {
+                    case 1: background = new ImageIcon("close-up-of-wooden-plank-326311.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+                    case 2: background = new ImageIcon("abstract-ancient-antique-art-235985.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+                    case 3: background = new ImageIcon("close-up-photo-of-blue-body-of-water-1435752.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+                    case 4: background = new ImageIcon("grayscale-photo-of-brickwall-1022692.jpg");
+                    g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
+                    break;
+
+                }
 
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
@@ -110,34 +138,33 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
 
                 scoreLabel.setText("Score: " + newFT.getScore());
-
+                ImageIcon strikes = new ImageIcon("X.jpg");
+                //Image is from a public domain website: https://publicdomainvectors.org/
                 switch (newFT.getStrikeCount())
                 {
-                    case 1: strikeLabel.setText("X");
+                    case 1: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
-                    case 2: strikeLabel.setText("X X");
+                    case 2: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
-                    case 3: strikeLabel.setText("X X X");
+                    case 3: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
+                    g.drawImage(strikes.getImage(), 950, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
                     default: strikeLabel.setText("");
                     break;
                 }
-                
+
                 if(newFT.done())
                 {
                     gameOverLabel.setVisible(true);
                 }
-                
-                
 
                 newFT.paint(g);
-
             }
-
         };
 
-        newFT = new FruitThrower(fruitPanel);
-
+        newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
@@ -163,7 +190,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     fruitPanel.repaint();
                 }
 
-                
             }
         }.start();
 
@@ -191,7 +217,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         if (e.getSource() == resetButton)
         {
-            newFT = new FruitThrower(fruitPanel);
+            newFT = new FruitThrower(fruitPanel, diffLevel);
             gameOverLabel.setVisible(false);
             strikeLabel.setText("");
             newFT.start();
@@ -214,14 +240,25 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
-        AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+        if(swordType == 1)
+        {
+            AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+            lastMouse = e.getPoint();
+            swordList.add(newLine);
 
-        lastMouse = e.getPoint();
-        swordList.add(newLine);
+            newLine.start();
+            newFT.setMousePos(e.getPoint());
+            fruitPanel.repaint();
+        }
 
-        newLine.start();
-        newFT.setMousePos(e.getPoint());
-        fruitPanel.repaint();
+        //Other SwordTypes will go here once they are in.
+
+        // lastMouse = e.getPoint();
+        // swordList.add(newLine);
+
+        // newLine.start();
+        // newFT.setMousePos(e.getPoint());
+        //fruitPanel.repaint();
     }
 
     /**
@@ -244,7 +281,74 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     {
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
 
+        //User will select Game Settings
+
+        //User will select DifficultyDifficulty
+        String[] diffOpts = {"Easy", "Medium", "Hard"};
+
+        Object selectedValue1 = JOptionPane.showInputDialog(null,
+                "Choose a level of Difficulty: ", "Welcome to Fruit Ninja!",
+                JOptionPane.PLAIN_MESSAGE, null,
+                diffOpts, diffOpts[0]);
+
+        String chosenDiff = (String) selectedValue1;
+
+        switch(chosenDiff)
+        {
+            case "Easy": diffLevel = 1;
+            break;
+            case "Medium": diffLevel = 2;
+            break;
+            case "Hard": diffLevel = 3;
+            break;
+        }
+
+        //User will select sword settings
+        String[] swordOpts = {"Vanishing", "Rainbow", "Red", "Blue"};
+
+        Object selectedValue2 = JOptionPane.showInputDialog(null,
+                "Choose a Sword Type: ", "Sword Settings",
+                JOptionPane.PLAIN_MESSAGE, null,
+                swordOpts, swordOpts[0]);
+
+        String chosenSword = (String) selectedValue2;
+
+        switch(chosenSword)
+        {
+            case "Vanishing": swordType = 1;
+            break;
+            case "Rainbow": swordType = 2;
+            break;
+            case "Red": swordType = 3;
+            break;
+            case "Blue": swordType = 4;
+            break;
+        }
+
+        //User will select a backdrop
+        String[] backOpts = {"Wood", "Vintage", "Water", "Brick"};
+
+        Object selectedValue3 = JOptionPane.showInputDialog(null,
+                "Choose a Background: ", "Background Settings",
+                JOptionPane.PLAIN_MESSAGE, null,
+                backOpts, backOpts[0]);
+
+        String chosenBG = (String) selectedValue3;
+
+        switch(chosenBG)
+        {
+            case "Wood": backType = 1;
+            break;
+            case "Vintage": backType = 2;
+            break;
+            case "Water": backType = 3;
+            break;
+            case "Brick": backType = 4;
+            break;
+        }
+
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
+
     }
 
 }

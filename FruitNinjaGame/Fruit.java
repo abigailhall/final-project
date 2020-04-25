@@ -23,11 +23,29 @@ public abstract  class Fruit extends Thread
     // complication for now
     protected  int fruitPicHeight = 100; 
 
-    //max xSpeed
+    //max xSpeed easy
     protected static final int MAX_X_SPEED = 10;
 
-    //max ySpeed
+    //max ySpeed easay
     protected static final int MAX_Y_SPEED = 5;
+
+    //max xSpeed easy
+    protected static final int MAX_X_SPEED_EASY = 10;
+
+    //max ySpeed easay
+    protected static final int MAX_Y_SPEED_EASY = 5;
+
+    //max xSpeed medium
+    protected static final int MAX_X_SPEED_MED = 10;
+
+    //max ySpeed medium
+    protected static final int MAX_Y_SPEED_MED = 5;
+
+    //max xSpeed hard
+    protected static final int MAX_X_SPEED_HARD = 10;
+
+    //max ySpeed medium
+    protected static final int MAX_Y_SPEED_HARD = 5;
 
     // delay between snow motions
     protected static final int DELAY_TIME = 33;
@@ -62,6 +80,7 @@ public abstract  class Fruit extends Thread
     protected boolean explosion;
 
     protected Color fruitColor;
+
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -153,18 +172,34 @@ public abstract  class Fruit extends Thread
                 upperLeftX += xSpeed;
             }
 
-            upperLeftY += ySpeed;
-            // gravity factor also
-            ySpeed += GRAVITY;
+        
+            while (upperLeftY < bottom) 
+            {
+                try {
+                    sleep(DELAY_TIME);
+                }
+                catch (InterruptedException e) {
+                }
+                if(!isSliced)
+                {
+                    // every iteration, update the coordinates
+                    // by a pixel
+                    upperLeftX += xSpeed;
 
-            panel.repaint();
+                }
 
+                upperLeftY += ySpeed;
+                // gravity factor also
+                ySpeed += GRAVITY;
+
+                panel.repaint();
+
+            }
         }
 
         done = true;
 
     }
-
     /**
     Check if this Fruits work is done.
     @return true if this Fruit work is done
