@@ -56,7 +56,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private static int swordType;
     private static int diffLevel;
     private static int backType;
-    private JLabel dirLabel;
 
     /**
      * The run method which establishes the graphical interface.
@@ -77,7 +76,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
-        
+
         Font newFont = new Font("Georgia", Font.BOLD, 25);
 
         startButton = new JButton("Start Game");
@@ -95,10 +94,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         scoreLabel.setFont(newFont);
         scoreLabel.setVisible(false);
         menuPanel.add(scoreLabel);
-
-        strikeLabel = new JLabel();
-        strikeLabel.setVisible(true);
-        menuPanel.add(strikeLabel);
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel(new BorderLayout()) {
@@ -130,6 +125,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 }
 
+
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -160,8 +156,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     g.drawImage(strikes.getImage(), 900, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     g.drawImage(strikes.getImage(), 950, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
                     break;
-                    default: strikeLabel.setText("");
-                    break;
                 }
 
                 if(newFT.done())
@@ -178,12 +172,12 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         newFT = new FruitThrower(fruitPanel, diffLevel);
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
-        
-        Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
+        Font newFont2 = new Font("Georgia", Font.BOLD, 35);
+        
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
-        gameOverLabel.setBackground(new Color (255, 0, 0));
+        gameOverLabel.setBackground(Color.RED);
         gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
@@ -236,7 +230,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         {
             newFT = new FruitThrower(fruitPanel, diffLevel);
             gameOverLabel.setVisible(false);
-            strikeLabel.setText("");
             fruitPanel.repaint();
             newFT.start();
         }
@@ -364,7 +357,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             case "Brick": backType = 4;
             break;
         }
-        
+
         //Direction Window
         JOptionPane directions = new JOptionPane();
         directions.showMessageDialog(null, "Use the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
