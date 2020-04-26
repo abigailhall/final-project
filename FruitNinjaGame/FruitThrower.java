@@ -5,7 +5,8 @@ import javax.swing.JComponent;
 import java.util.Random;
 import java.util.Vector;
 /**
- * Write a description of class FruitThrower here.
+ * The class that is responsible for creating and managing the life of the
+ * fruit and bombs that are being thrown.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
  * @version 4/26/2020
