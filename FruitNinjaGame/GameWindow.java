@@ -135,8 +135,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 }
 
                 //Paint and remove the sword on screen
-                int i = swordList.size() - 1;
-                while(i >= 0 && !swordList.isEmpty())
+                int i = 0;
+                while(i < swordList.size())
                 {
                     AnimatedLine line = swordList.get(i);
                     if(line.done())
@@ -146,7 +146,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     else 
                     {
                         line.paint(g);
-                        i--;
+                        i++;
                     }
                 }
 
