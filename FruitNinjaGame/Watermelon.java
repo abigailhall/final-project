@@ -1,31 +1,39 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.Random;
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
 /**
- * Write a description of class Cantaloupe here.
+ * This Watermelon class extends the abstract class 'Fruit' in order to have all of its proper
+ * functionality. This class loads the proper Watermelon picture, so that when it is thrown,
+ * a watermelon image will appear on the screen. When it is sliced, a sliced image will appear.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version Spring 2020
+ * @version 4/26/2020
  */
 public class Watermelon extends Fruit
 {
     private static Image fruitPic;
     private static Image fruitSlice;
+
     /**
-     * Constructor for objects of class Cantaloupe
+     * Construct a new Watermelon object.
+     * 
+     * @param panel the Component in which this Watermelon will live
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Watermelon(JComponent panel, int diffLevel)
     {
         super(panel, diffLevel);
         isBomb = false;
         pointValue = 1;
-
     }
 
+    /**
+     * Will draw the watermelon at a certain position if it has not been sliced yet.
+     * If it has been sliced, an image of a sliced watermelon will appear. 
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public void paint(Graphics g)
     {
         if(isSliced)
@@ -35,7 +43,13 @@ public class Watermelon extends Fruit
             g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
     }
 
+    /**
+     * Set the Image to be used by all Watermelon objects (either whole
+     * or sliced), to be called by the main method before 
+     * the GUI gets set up.
+     */
     public static void loadFruitPic() {
+        //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Watermelon.fruitPic = toolkit.getImage("watermelon.png");
         Watermelon.fruitSlice = toolkit.getImage("watermelonSlice.png");
