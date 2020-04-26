@@ -14,18 +14,26 @@ public class Peach extends Fruit
 {
     private static Image fruitPic;
     private static Image fruitSlice;
-    
+
     /**
-     * Constructor for objects of class Cantaloupe
+     * Construct a new Peach object.
+     * 
+     * @param panel the Component in which this Peach will live
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Peach(JComponent panel, int diffLevel)
     {
         super(panel, diffLevel);
         isBomb = false;
         pointValue = 1;
-
     }
 
+    /**
+     * Will draw the peach at a certain position if it has not been sliced yet.
+     * If it has been sliced, an image of a sliced peach will appear. 
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public void paint(Graphics g)
     {
         if(isSliced)
@@ -35,7 +43,13 @@ public class Peach extends Fruit
             g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
     }
 
+    /**
+     * Set the Image to be used by all Peach objects (either whole
+     * or sliced), to be called by the main method before 
+     * the GUI gets set up.
+     */
     public static void loadFruitPic() {
+        //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Peach.fruitPic = toolkit.getImage("peach.png");
         Peach.fruitSlice = toolkit.getImage("peachSlice.png");
