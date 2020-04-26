@@ -30,7 +30,7 @@ public class VanishingLine extends AnimatedLine
 
     /**
      * Will draw the VanishingLine at given position. ColorNum is used to keep track of 
-     * the changing color (black).
+     * the increase color (black).
      * 
      * @param g the Graphics object in which to paint
      */
