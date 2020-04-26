@@ -17,7 +17,7 @@ public class FruitThrower extends Thread
 
     // the Component where we'll be creating Fruit
     private JComponent panel;
-    
+
     private int diffLevel;
 
     // list of Fruit objects that are the responsibility
@@ -77,7 +77,7 @@ public class FruitThrower extends Thread
                 fruits.remove(i);
 
             }
-            
+
             else
             {
 
@@ -86,9 +86,7 @@ public class FruitThrower extends Thread
                 if(scoreVal == -1)
                 {
 
-                    
                     fruit.setExplosion();
-                    
                     
                     done = true;
 
@@ -124,15 +122,30 @@ public class FruitThrower extends Thread
             }
 
             Fruit newFruit;
-            switch (r.nextInt(10))
+            switch (r.nextInt(11))
             {
                 case 0:
                 newFruit = new Bomb(panel, diffLevel);
                 break;
-                case 1: case 2: case 3: case 4:
+
+                case 1: case 2: 
+                newFruit = new Banana(panel, diffLevel);
+                break;
+                
+                case 3: case 4:
                 newFruit = new Apple(panel, diffLevel);
                 break;
-                default: newFruit = new Orange(panel, diffLevel);
+
+                case 5: case 6: 
+                newFruit = new Watermelon(panel, diffLevel);
+                break;
+                
+                case 7: case 8: 
+                newFruit = new Strawberry(panel, diffLevel);
+                break;
+
+                default: 
+                newFruit = new Orange(panel, diffLevel);
                 break;
             }
 
@@ -141,8 +154,6 @@ public class FruitThrower extends Thread
         }
 
     }
-
-    
 
 
     /**
@@ -168,7 +179,6 @@ public class FruitThrower extends Thread
     {
         return strikeCount;
     }
-    
 
 
 }
