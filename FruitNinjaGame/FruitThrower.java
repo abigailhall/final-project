@@ -14,7 +14,7 @@ import java.util.Vector;
 public class FruitThrower extends Thread
 {
     //time between fruit
-    private static final int FRUIT_INTERVAL = 900;
+    private int fruit_interval = 900;
 
     //the Component where we'll be creating Fruit
     private JComponent panel;
@@ -50,6 +50,16 @@ public class FruitThrower extends Thread
         this.diffLevel = diffLevel;
         fruits = new Vector<Fruit>();
         done = false;
+
+        if(diffLevel == 2)
+        {
+            fruit_interval = 600;
+        }
+        else if(diffLevel == 3)
+        {
+            fruit_interval = 300;
+        }
+
     }
 
     /**
@@ -120,7 +130,7 @@ public class FruitThrower extends Thread
         while(!done)
         {
             try {
-                sleep(FRUIT_INTERVAL);
+                sleep(fruit_interval);
             }
             catch (InterruptedException e) {
             }
@@ -136,7 +146,7 @@ public class FruitThrower extends Thread
                 case 1: case 2: 
                 newFruit = new Banana(panel);
                 break;
-                
+
                 case 3: case 4:
                 newFruit = new Apple(panel);
                 break;
@@ -144,15 +154,15 @@ public class FruitThrower extends Thread
                 case 5: case 6: 
                 newFruit = new Watermelon(panel);
                 break;
-                
+
                 case 7: case 8: 
                 newFruit = new Strawberry(panel);
                 break;
-                
+
                 case 9: case 10: 
                 newFruit = new Peach(panel);
                 break;
-                
+
                 case 11: case 12: 
                 newFruit = new Avocado(panel);
                 break;
@@ -167,8 +177,6 @@ public class FruitThrower extends Thread
         }
 
     }
-
-
 
     /**
      * Check if this FruitThrower's work is done.
