@@ -18,7 +18,7 @@ public class Orange extends Fruit
     /**
      * Construct a new Orange object.
      * 
-     * @param panel the Component in which this Fruit will live
+     * @param panel the Component in which this Orange will live
      *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Orange(JComponent panel, int diffLevel)
