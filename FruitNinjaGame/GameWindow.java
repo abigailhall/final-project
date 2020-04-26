@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -17,6 +18,7 @@ import java.awt.event.MouseEvent;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.Component;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -183,7 +185,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         //Created a fruit thrower object to user throughout the class
         newFT = new FruitThrower(fruitPanel, diffLevel);
-        
+
         //Creating and adding the fruit panel to the game frame.
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
@@ -295,7 +297,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         {
             newLine = new BlueLine(lastMouse, e.getPoint(), fruitPanel);
         }
-        
+
         lastMouse = e.getPoint();
         swordList.add(newLine);
 
@@ -333,7 +335,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         Strawberry.loadFruitPic();
         Peach.loadFruitPic();
         Avocado.loadFruitPic();
-
 
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
         //User will select Game Settings
