@@ -17,7 +17,7 @@ public class Bomb extends Fruit
     /**
      * Construct a new Bomb object.
      * 
-     * @param panel the Component in which this Fruit will live
+     * @param panel the Component in which this Bomb will live
      *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Bomb(JComponent panel, int diffLevel)
