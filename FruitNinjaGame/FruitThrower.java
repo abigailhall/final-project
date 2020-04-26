@@ -1,9 +1,9 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Color;
+import javax.swing.JComponent;
+import java.util.Random;
+import java.util.Vector;
 /**
  * Write a description of class FruitThrower here.
  *
