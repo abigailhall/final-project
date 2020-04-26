@@ -8,41 +8,43 @@ import java.util.Vector;
  * Write a description of class FruitThrower here.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version 4/16/2020
+ * @version 4/26/2020
  */
 public class FruitThrower extends Thread
 {
-    // time between FRUIT
+    //time between fruit
     private static final int FRUIT_INTERVAL = 900;
 
-    // the Component where we'll be creating Fruit
+    //the Component where we'll be creating Fruit
     private JComponent panel;
-    
+
+    //the difficulty level that is chosen by the user
     private int diffLevel;
 
-    // list of Fruit objects that are the responsibility
-    // of this class
+    //list of Fruit objects that are the responsibility
+    //of this class
     private java.util.List<Fruit> fruits;
 
-    // mouse Position
+    //mouse Position
     private Point mousePos;
 
-    // check if done
+    //check if done
     private boolean done;
 
+    //keeps track of the score
     private int score;
 
+    //keeps track of the strike count
     private int strikeCount;
 
     /**
-    Construct a new FruitThrower, using the given component to pass along
-    to its Fruit objects that it will create.
-
-    @param panel the Component in which this FruitThrower will generate Fruit
-    objects
+     * Construct a new FruitThrower, using the given component to pass along
+     * to its Fruit objects that it will create.
+     * 
+     * @param panel the Component in which this FruitThrower will generate Fruit objects
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public FruitThrower(JComponent panel, int diffLevel) {
-
         this.panel = panel;
         this.diffLevel = diffLevel;
         fruits = new Vector<Fruit>();
@@ -50,9 +52,9 @@ public class FruitThrower extends Thread
     }
 
     /**
-    Pass along a paint to all Fruit objects managed by this FruitThrower.
-
-    @param g the Graphics object in which to paint
+     * Pass along a paint to all Fruit objects managed by this FruitThrower.
+     * 
+     * @param g the Graphics object in which to paint
      */
     public void paint(Graphics g) {
 
@@ -62,9 +64,12 @@ public class FruitThrower extends Thread
         while (i < fruits.size())
         {
             Fruit fruit = fruits.get(i);
+
             if (fruit.done() && !fruit.explosionOver())
             {
-
+                //If the fruit is not sliced and it is not a bomb
+                //that means it is a strike, so the strike count must 
+                //increased. Once there are 3 strikes, the game ends.
                 if(!fruit.isSliced() && !fruit.isBomb())
                 {
                     strikeCount++;
@@ -74,24 +79,21 @@ public class FruitThrower extends Thread
                         done = true;
                     }
                 }
-                fruits.remove(i);
 
+                //remove the fruit from the list
+                fruits.remove(i);
             }
-            
+
             else
             {
-
                 int scoreVal = fruit.mouseOverlapsFruit(mousePos);
 
+                //if the user hits a bomb, game over
                 if(scoreVal == -1)
                 {
-
-                    
                     fruit.setExplosion();
-                    
-                    
-                    done = true;
 
+                    done = true;
                 }
                 else
                 {
@@ -107,8 +109,8 @@ public class FruitThrower extends Thread
     }
 
     /**
-    Run method to define the life of this FruitThrower, which consists of
-    generating Fruit objects for a while.
+     * Run method to define the life of this FruitThrower, which consists of
+     * generating Fruit objects for a while.
      */
     @Override
     public void run() 
@@ -123,6 +125,7 @@ public class FruitThrower extends Thread
             catch (InterruptedException e) {
             }
 
+            //Randomly chooses what kind of fruit is thrown or if a bomb is thrown
             Fruit newFruit;
             switch (r.nextInt(10))
             {
@@ -142,33 +145,44 @@ public class FruitThrower extends Thread
 
     }
 
-    
-
-
     /**
-    Check if this FruitThrower's work is done.
-
-    @return true if this FruitThrower's work is done
+     * Check if this FruitThrower's work is done.
+     * 
+     * @return true if this FruitThrower's work is done
      */
     public boolean done() {
         return done;
     }
 
+    /**
+     * Mutator method to set the mouse position
+     * 
+     * @param mousePoint, the current mouse position
+     */
     public void setMousePos(Point mousePos)
     {
         this.mousePos = mousePos;
     }
 
+    /**
+     * Accessor method which returns the current score of the game
+     * 
+     * @return score, the score of the game
+     */
     public int getScore()
     {
         return score;
     }
 
+    /**
+     * Accessor method which returns the number of strikes the
+     * user currently has.
+     * 
+     * @return strikeCount, the number of strikes
+     */
     public int getStrikeCount()
     {
         return strikeCount;
     }
-    
-
 
 }
