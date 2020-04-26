@@ -18,7 +18,7 @@ public class Banana extends Fruit
     /**
      * Construct a new Banana object.
      * 
-     * @param panel the Component in which this Fruit will live
+     * @param panel the Component in which this Banana will live
      *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Banana(JComponent panel, int diffLevel)
