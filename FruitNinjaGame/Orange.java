@@ -23,8 +23,19 @@ public class Orange extends Fruit
         isBomb = false;
         fruitColor = Color.ORANGE;
         pointValue = 1;
+        
     }
-    
-    
+
+    public void paint(Graphics g)
+    {
+        g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
+    }
+
+
+    public static void loadFruitPic() {
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Fruit.fruitPic = toolkit.getImage("orange.png");
+    }
 
 }

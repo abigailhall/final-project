@@ -125,7 +125,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 }
 
-
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -174,7 +173,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
         Font newFont2 = new Font("Georgia", Font.BOLD, 35);
-        
+
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
         gameOverLabel.setForeground(Color.RED);
@@ -290,6 +289,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
      */
     public static void main(String args[])
     {
+        // Load fruit pics
+        Orange.loadFruitPic();
+        Bomb.loadFruitPic();
+
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
 
         //User will select Game Settings

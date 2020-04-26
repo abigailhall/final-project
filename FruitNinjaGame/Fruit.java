@@ -15,9 +15,7 @@ import java.util.Random;
 public abstract  class Fruit extends Thread
 {
     //protected static Image fruitPic;
-
-    // the filename that will be loaded into snowPic
-    //protected static final String snowPicFilename = "snow.gif";
+    protected static Image fruitPic;
 
     // its height should really be queried, but we will ignore that
     // complication for now
@@ -52,7 +50,7 @@ public abstract  class Fruit extends Thread
 
     // what to add to ySpeed to simulate gravity?
     protected static final double GRAVITY = 0.3;
-
+    
     protected int pointValue;
 
     protected JComponent panel;
@@ -62,7 +60,7 @@ public abstract  class Fruit extends Thread
 
     //bottom of panel
     protected int bottom;
-    
+
     protected int diffLevel;
 
     // latest location of the ball
@@ -80,11 +78,10 @@ public abstract  class Fruit extends Thread
     protected boolean isBomb;
 
     protected boolean explosion;
-    
+
     protected boolean explosionOver;
 
     protected Color fruitColor;
-
 
     /**
     Construct a new Fruitobject at the given position and speed.
@@ -126,19 +123,21 @@ public abstract  class Fruit extends Thread
     public void paint(Graphics g) {
         if(explosion)
         {
-            g.setColor(Color.RED);
-            g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+            // g.setColor(Color.RED);
+            // g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+
+            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, null);
         }
         else
         {
 
-            if(isSliced)
-                g.setColor(Color.GRAY);
-            else
-                g.setColor(fruitColor);
+            // if(isSliced)
+                // g.setColor(Color.GRAY);
+            // else
+                // g.setColor(fruitColor);
 
-            g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
-
+            // g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
         }
     }
 
@@ -148,75 +147,70 @@ public abstract  class Fruit extends Thread
     @Override
     public void run() {
 
-        
         //do if or switch statement for the diffLevel
-        
         while (upperLeftY < bottom && !explosion) 
 
+            while (upperLeftY < bottom && !explosionOver) 
 
-
-        while (upperLeftY < bottom && !explosionOver) 
-
-
-        {
-            try {
-                sleep(DELAY_TIME);
-            }
-            catch (InterruptedException e) {
-            }
-            if(explosion)
-            {
-
-                int i = 0;
-                while(i < 25)
-                {
-                    fruitPicHeight += 5;
-                    try {
-                        sleep(DELAY_TIME);
-                    }
-                    catch (InterruptedException e) {
-                    }
-                    i++;
-                    panel.repaint();
-                }
-                
-                explosionOver = true;
-            }
-            else if(!isSliced)
-            {
-                // every iteration, update the coordinates
-                // by a pixel
-                upperLeftX += xSpeed;
-            }
-
-        
-            while (upperLeftY < bottom) 
             {
                 try {
                     sleep(DELAY_TIME);
                 }
                 catch (InterruptedException e) {
                 }
-                if(!isSliced)
+                if(explosion)
+                {
+
+                    int i = 0;
+                    while(i < 25)
+                    {
+                        fruitPicHeight += 5;
+                        try {
+                            sleep(DELAY_TIME);
+                        }
+                        catch (InterruptedException e) {
+                        }
+                        i++;
+                        panel.repaint();
+                    }
+
+                    explosionOver = true;
+                }
+                else if(!isSliced)
                 {
                     // every iteration, update the coordinates
                     // by a pixel
                     upperLeftX += xSpeed;
-
                 }
 
-                upperLeftY += ySpeed;
-                // gravity factor also
-                ySpeed += GRAVITY;
+                while (upperLeftY < bottom) 
+                {
+                    try {
+                        sleep(DELAY_TIME);
+                    }
+                    catch (InterruptedException e) {
+                    }
+                    if(!isSliced)
+                    {
+                        // every iteration, update the coordinates
+                        // by a pixel
+                        upperLeftX += xSpeed;
 
-                panel.repaint();
+                    }
 
+                    upperLeftY += ySpeed;
+                    // gravity factor also
+                    ySpeed += GRAVITY;
+
+                    panel.repaint();
+
+                }
             }
-        }
 
         done = true;
 
     }
+
     /**
     Check if this Fruits work is done.
     @return true if this Fruit work is done
@@ -258,18 +252,11 @@ public abstract  class Fruit extends Thread
     {
         explosion = true;
     }
-    
+
     public boolean explosionOver()
     {
         return explosionOver;
     }
-    // /**
-    // Set the Image to be used by all FallingSnow objects, to be 
-    // called by the main method before the GUI gets set up
-    // */
-    // public static void loadFruitPic() {
 
-    // Toolkit toolkit = Toolkit.getDefaultToolkit();
-    // FallingSnow.snowPic = toolkit.getImage(snowPicFilename);
-    // }
+    
 }
