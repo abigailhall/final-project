@@ -5,8 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -20,12 +21,6 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
 
 /**
  * NEED TO EDIT THIS!! Write a description of class GameWindow here.
@@ -41,21 +36,22 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private final int MENU_HEIGHT = 100;
 
     private static JFrame gameFrame;
+    private static int swordType;
+    private static int diffLevel;
+    private static int backType;
+    private static FruitThrower newFT;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
     private JButton resetButton;
     private JLabel scoreLabel;
-    private static FruitThrower newFT;
-    private ArrayList<AnimatedLine> swordList;
-    private Point lastMouse;
-    private int lineNum;
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
     private JLabel contentPane;
-    private static int swordType;
-    private static int diffLevel;
-    private static int backType;
+    private ArrayList<AnimatedLine> swordList;
+    private Point lastMouse;
+    private int lineNum;
+
 
     /**
      * The run method which establishes the graphical interface.
@@ -294,11 +290,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         Orange.loadFruitPic();
         Apple.loadFruitPic();
 
-        //Easy medium and hard settings will go here. Background settings and sword settings will come. 
-
-        //User will select Game Settings
-
-        //User will select DifficultyDifficulty
+        //User will select Difficulty
         String[] diffOpts = {"Easy", "Medium", "Hard"};
 
         Object selectedValue1 = JOptionPane.showInputDialog(null,
@@ -364,7 +356,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         //Direction Window
         JOptionPane directions = new JOptionPane();
-        directions.showMessageDialog(null, "Use the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
+        directions.showMessageDialog(null, "Drag the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
             "Directions", JOptionPane.INFORMATION_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
