@@ -157,7 +157,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 //This will display the number of strikes the user has during the course of the game
                 //Image is from a public domain website: https://publicdomainvectors.org/
-                ImageIcon strikes = new ImageIcon("X.jpg");
+                ImageIcon strikes = new ImageIcon("X.png");
                 switch (newFT.getStrikeCount())
                 {
                     case 1: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);
