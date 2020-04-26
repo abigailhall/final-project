@@ -122,7 +122,7 @@ public class FruitThrower extends Thread
             }
 
             Fruit newFruit;
-            switch (r.nextInt(11))
+            switch (r.nextInt(13))
             {
                 case 0:
                 newFruit = new Bomb(panel, diffLevel);
@@ -142,6 +142,10 @@ public class FruitThrower extends Thread
                 
                 case 7: case 8: 
                 newFruit = new Strawberry(panel, diffLevel);
+                break;
+                
+                case 9: case 10: 
+                newFruit = new Peach(panel, diffLevel);
                 break;
 
                 default: 
