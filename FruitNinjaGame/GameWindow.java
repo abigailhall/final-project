@@ -21,12 +21,14 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 /**
- * NEED TO EDIT THIS!! Write a description of class GameWindow here.
+ * A java version/simulation of the app "Fruit Ninja." The objective of this game is to slice as many fruit as possible while 
+ * dragging the mouse (the sword). The two things that will end the game are slicing a bomb or letting 3 fruit fall through 
+ * without slicing them. In our version, we added 3 difficulty levels, 4 swords options, and 4 background options that the user is
+ * able to select. 
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version 4/16/2020
+ * @version 4/26/2020
  */
 public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 {
