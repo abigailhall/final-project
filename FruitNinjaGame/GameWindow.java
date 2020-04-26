@@ -250,25 +250,30 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mouseDragged(MouseEvent e)
     {
+        AnimatedLine newLine;
+        
         if(swordType == 1)
         {
-            AnimatedLine newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
-            lastMouse = e.getPoint();
-            swordList.add(newLine);
+            newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
+        }
+        else if(swordType == 2)
+        {
+            newLine = new ColorLine(lastMouse, e.getPoint(), fruitPanel);
 
-            newLine.start();
-            newFT.setMousePos(e.getPoint());
-            fruitPanel.repaint();
+        }
+        else
+        {
+            newLine = null;
         }
 
         //Other SwordTypes will go here once they are in.
 
-        // lastMouse = e.getPoint();
-        // swordList.add(newLine);
+        lastMouse = e.getPoint();
+        swordList.add(newLine);
 
-        // newLine.start();
-        // newFT.setMousePos(e.getPoint());
-        //fruitPanel.repaint();
+        newLine.start();
+        newFT.setMousePos(e.getPoint());
+        fruitPanel.repaint();
     }
 
     /**
@@ -298,7 +303,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         Strawberry.loadFruitPic();
         Peach.loadFruitPic();
         Avocado.loadFruitPic();
-        
+
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
         //User will select Game Settings
         //User will select DifficultyDifficulty
