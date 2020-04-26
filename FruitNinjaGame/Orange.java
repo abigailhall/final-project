@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Orange extends Fruit
 {
-
+    private static Image fruitPic;
     /**
      * Constructor for objects of class Orange
      */
@@ -35,7 +35,7 @@ public class Orange extends Fruit
     public static void loadFruitPic() {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Fruit.fruitPic = toolkit.getImage("orange.png");
+        Orange.fruitPic = toolkit.getImage("orange.png");
     }
 
 }

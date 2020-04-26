@@ -13,7 +13,8 @@ import java.util.Random;
  */
 public class Bomb extends Fruit
 {
-
+    private static Image fruitPic;
+    
     /**
      * Constructor for objects of class Bomb
      */
@@ -33,7 +34,7 @@ public class Bomb extends Fruit
     public static void loadFruitPic() {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Fruit.fruitPic = toolkit.getImage("bomb.png");
+        Bomb.fruitPic = toolkit.getImage("bomb.png");
     }
 
 

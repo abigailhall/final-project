@@ -290,8 +290,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     public static void main(String args[])
     {
         // Load fruit pics
-        Orange.loadFruitPic();
         Bomb.loadFruitPic();
+        Orange.loadFruitPic();
+        
 
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
 

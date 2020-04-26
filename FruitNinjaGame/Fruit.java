@@ -14,9 +14,6 @@ import java.util.Random;
  */
 public abstract  class Fruit extends Thread
 {
-    //protected static Image fruitPic;
-    protected static Image fruitPic;
-
     // its height should really be queried, but we will ignore that
     // complication for now
     protected  int fruitPicHeight = 100; 
@@ -50,7 +47,7 @@ public abstract  class Fruit extends Thread
 
     // what to add to ySpeed to simulate gravity?
     protected static final double GRAVITY = 0.3;
-    
+
     protected int pointValue;
 
     protected JComponent panel;
@@ -116,30 +113,8 @@ public abstract  class Fruit extends Thread
 
     }
 
-    /**
-    Draw the ball at its current location.
-    @param g the Graphics object on which the ball should be drawn
-     */
-    public void paint(Graphics g) {
-        if(explosion)
-        {
-            // g.setColor(Color.RED);
-            // g.fillRect((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
+    public abstract void paint(Graphics g);
 
-            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, null);
-        }
-        else
-        {
-
-            // if(isSliced)
-                // g.setColor(Color.GRAY);
-            // else
-                // g.setColor(fruitColor);
-
-            // g.fillOval((int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight);
-            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
-        }
-    }
 
     /**
     Run method to define the life of this Fruit. EDIT LATER.
@@ -258,5 +233,4 @@ public abstract  class Fruit extends Thread
         return explosionOver;
     }
 
-    
 }
