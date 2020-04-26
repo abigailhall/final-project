@@ -20,7 +20,6 @@ public class VanishingLine extends AnimatedLine
      * @param start the starting point
      *        end the ends point
      *        panel the Component in which this Fruit will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public VanishingLine(Point start, Point end, JComponent container)
     {
