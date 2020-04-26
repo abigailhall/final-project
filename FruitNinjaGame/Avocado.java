@@ -1,15 +1,14 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.Random;
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
 /**
- * Write a description of class Cantaloupe here.
+ * This Avocado class extends the abstract class 'Fruit' in order to have all of its proper
+ * functionality. This class loads the proper Avocado picture, so that when it is thrown,
+ * aan avocado image will appear on the screen. When it is sliced, a sliced image will appear.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version Spring 2020
+ * @version 4/26/2020
  */
 public class Avocado extends Fruit
 {
