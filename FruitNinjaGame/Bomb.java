@@ -42,7 +42,7 @@ public class Bomb extends Fruit
      * called by the main method before the GUI gets set up
      */
     public static void loadFruitPic() {
-
+        //image is from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Bomb.fruitPic = toolkit.getImage("bomb.png");
     }
