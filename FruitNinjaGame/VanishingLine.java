@@ -42,7 +42,7 @@ public class VanishingLine extends AnimatedLine
 
     /**
      * Run method to define the life of the VanishingLine. This method is what makes
-     * it have its 'swprd' appearance. 
+     * it have its 'sword' appearance. 
      */
     @Override
     public void run() {
