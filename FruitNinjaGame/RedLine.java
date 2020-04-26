@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 /**
  * This RedLine class extends the abstract class 'AnimatedLine' in order to have all of its proper
- * functionality so it appears as a sword. This class makes it so that the sword red and it 
+ * functionality so it appears as a sword. This class makes it so that the sword is red and it 
  * looks like it also vanishes while moving it.
  *
  * @author Kate Frisch, based heavily off of the animations lab
