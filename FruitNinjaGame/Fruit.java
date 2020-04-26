@@ -115,6 +115,11 @@ public abstract class Fruit extends Thread
 
     }
 
+    /**
+     * Abstract paint method that will change depending on which type of fruit or bomb is being thrown.
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public abstract void paint(Graphics g);
 
     /**
