@@ -16,7 +16,10 @@ public class Apple extends Fruit
     private static Image fruitSlice;
 
     /**
-     * Constructor for objects of class Apple
+     * Construct a new Apple object.
+     * 
+     * @param panel the Component in which this Fruit will live
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Apple(JComponent panel, int diffLevel)
     {
@@ -26,6 +29,12 @@ public class Apple extends Fruit
 
     }
 
+    /**
+     * Will draw the apple at a certain position if it has not been sliced yet.
+     * If it has been sliced, an image of a sliced apple will appear. 
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public void paint(Graphics g)
     {
         if(isSliced)
@@ -34,6 +43,11 @@ public class Apple extends Fruit
             g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
     }
 
+    /**
+     * Set the Image to be used by all Apple objects (either whole
+     * or sliced), to be called by the main method before 
+     * the GUI gets set up.
+     */
     public static void loadFruitPic() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Apple.fruitPic = toolkit.getImage("apple.png");
