@@ -54,11 +54,6 @@ public abstract class Fruit extends Thread
     //is it a bomb?
     protected boolean isBomb;
 
-    //has it exploded?
-    protected boolean explosion;
-
-    //is the explosion over?
-    protected boolean explosionOver;
 
     /**
      * Construct a new Fruit object at the given position and speed.
@@ -71,8 +66,6 @@ public abstract class Fruit extends Thread
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;
         isSliced = false;
-        explosion = false;
-        explosionOver = false;
 
         Random rand = new Random();
 
@@ -108,9 +101,9 @@ public abstract class Fruit extends Thread
     public void run() {
 
         //do if or switch statement for the diffLevel
-        while (upperLeftY < bottom && !explosion) 
+        while (upperLeftY < bottom)
 
-            while (upperLeftY < bottom && !explosionOver) 
+            while (upperLeftY < bottom) 
 
             {
                 try {
@@ -119,26 +112,7 @@ public abstract class Fruit extends Thread
                 catch (InterruptedException e) {
                 }
 
-                //ADD COMMENT HERE 
-                if(explosion)
-                {
-
-                    int i = 0;
-                    while(i < 25)
-                    {
-                        fruitPicHeight += 5;
-                        try {
-                            sleep(DELAY_TIME);
-                        }
-                        catch (InterruptedException e) {
-                        }
-                        i++;
-                        panel.repaint();
-                    }
-
-                    explosionOver = true;
-                }
-                else if(!isSliced)
+                if(!isSliced)
                 {
                     // every iteration, update the coordinates
                     // by a pixel
@@ -221,22 +195,6 @@ public abstract class Fruit extends Thread
     public boolean isBomb()
     {
         return isBomb;
-    }
-
-    /**
-     * EDIT THIS
-     */
-    public void setExplosion()
-    {
-        explosion = true;
-    }
-
-    /**
-     * EDIT THIS
-     */
-    public boolean explosionOver()
-    {
-        return explosionOver;
     }
 
 }

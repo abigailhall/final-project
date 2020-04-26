@@ -66,7 +66,7 @@ public class FruitThrower extends Thread
         {
             Fruit fruit = fruits.get(i);
 
-            if (fruit.done() && !fruit.explosionOver())
+            if (fruit.done())
             {
                 //If the fruit is not sliced and it is not a bomb
                 //that means it is a strike, so the strike count must 
@@ -92,12 +92,6 @@ public class FruitThrower extends Thread
                 //if the user hits a bomb, game over
                 if(scoreVal == -1)
                 {
-
-                    fruit.setExplosion();
-                    
-                    done = true;
-
-                    fruit.setExplosion();
 
                     done = true;
                 }
