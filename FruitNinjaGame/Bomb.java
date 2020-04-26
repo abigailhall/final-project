@@ -13,9 +13,12 @@ import javax.swing.JComponent;
 public class Bomb extends Fruit
 {
     private static Image fruitPic;
-    
+
     /**
-     * Constructor for objects of class Bomb
+     * Construct a new Bomb object.
+     * 
+     * @param panel the Component in which this Fruit will live
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Bomb(JComponent panel, int diffLevel)
     {
@@ -23,17 +26,25 @@ public class Bomb extends Fruit
         isBomb = true;
         pointValue = -1;
     }
-    
+
+    /**
+     * Will draw the bomb at a certain position. 
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public void paint(Graphics g)
     {
         g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
     }
-    
+
+    /**
+     * Set the Image to be used by all Bomb objects, to be 
+     * called by the main method before the GUI gets set up
+     */
     public static void loadFruitPic() {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Bomb.fruitPic = toolkit.getImage("bomb.png");
     }
-
 
 }
