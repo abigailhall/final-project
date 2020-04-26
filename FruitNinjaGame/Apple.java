@@ -19,11 +19,10 @@ public class Apple extends Fruit
      * Construct a new Apple object.
      * 
      * @param panel the Component in which this Apple will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Apple(JComponent panel, int diffLevel)
+    public Apple(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
 

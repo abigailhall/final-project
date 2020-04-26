@@ -19,11 +19,10 @@ public class Strawberry extends Fruit
      * Construct a new Strawberry object.
      * 
      * @param panel the Component in which this Strawberry will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Strawberry(JComponent panel, int diffLevel)
+    public Strawberry(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
     }

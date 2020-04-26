@@ -136,35 +136,35 @@ public class FruitThrower extends Thread
             switch (r.nextInt(15))
             {
                 case 0:
-                newFruit = new Bomb(panel, diffLevel);
+                newFruit = new Bomb(panel);
                 break;
 
                 case 1: case 2: 
-                newFruit = new Banana(panel, diffLevel);
+                newFruit = new Banana(panel);
                 break;
                 
                 case 3: case 4:
-                newFruit = new Apple(panel, diffLevel);
+                newFruit = new Apple(panel);
                 break;
 
                 case 5: case 6: 
-                newFruit = new Watermelon(panel, diffLevel);
+                newFruit = new Watermelon(panel);
                 break;
                 
                 case 7: case 8: 
-                newFruit = new Strawberry(panel, diffLevel);
+                newFruit = new Strawberry(panel);
                 break;
                 
                 case 9: case 10: 
-                newFruit = new Peach(panel, diffLevel);
+                newFruit = new Peach(panel);
                 break;
                 
                 case 11: case 12: 
-                newFruit = new Avocado(panel, diffLevel);
+                newFruit = new Avocado(panel);
                 break;
 
                 default: 
-                newFruit = new Orange(panel, diffLevel);
+                newFruit = new Orange(panel);
                 break;
             }
 

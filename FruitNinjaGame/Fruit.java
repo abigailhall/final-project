@@ -39,9 +39,6 @@ public abstract class Fruit extends Thread
     //bottom of panel
     protected int bottom;
 
-    //the difficulty level that is chosen by the user
-    protected int diffLevel;
-
     // latest location of the ball
     protected double upperLeftX, upperLeftY;
 
@@ -67,11 +64,9 @@ public abstract class Fruit extends Thread
      * Construct a new Fruit object at the given position and speed.
      * 
      * @param panel the Component in which this Fruit will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Fruit(JComponent panel, int diffLevel) {
+    public Fruit(JComponent panel) {
         this.panel = panel;
-        this.diffLevel = diffLevel;
 
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;

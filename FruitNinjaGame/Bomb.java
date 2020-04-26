@@ -20,9 +20,9 @@ public class Bomb extends Fruit
      * @param panel the Component in which this Bomb will live
      *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Bomb(JComponent panel, int diffLevel)
+    public Bomb(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = true;
         pointValue = -1;
     }
