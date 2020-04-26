@@ -251,7 +251,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     public void mouseDragged(MouseEvent e)
     {
         AnimatedLine newLine;
-        
+
         if(swordType == 1)
         {
             newLine = new VanishingLine(lastMouse, e.getPoint(), fruitPanel);
@@ -259,7 +259,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         else if(swordType == 2)
         {
             newLine = new RainbowLine(lastMouse, e.getPoint(), fruitPanel);
-
+        }
+        else if(swordType == 3)
+        {
+            newLine = new RedLine(lastMouse, e.getPoint(), fruitPanel);
         }
         else
         {
