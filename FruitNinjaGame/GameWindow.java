@@ -266,11 +266,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
         else
         {
-            newLine = null;
+            newLine = new BlueLine(lastMouse, e.getPoint(), fruitPanel);
         }
-
-        //Other SwordTypes will go here once they are in.
-
+        
         lastMouse = e.getPoint();
         swordList.add(newLine);
 
