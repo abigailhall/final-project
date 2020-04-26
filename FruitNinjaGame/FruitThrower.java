@@ -137,38 +137,38 @@ public class FruitThrower extends Thread
 
             //Randomly chooses what kind of fruit is thrown or if a bomb is thrown
             Fruit newFruit;
-            switch (r.nextInt(15))
+            switch (r.nextInt(15 + diffLevel))
             {
-                case 0:
-                newFruit = new Bomb(panel);
+                case 0: case 1:
+                newFruit = new Orange(panel);
                 break;
 
-                case 1: case 2: 
+                case 2: case 3: 
                 newFruit = new Banana(panel);
                 break;
 
-                case 3: case 4:
+                case 4: case 5:
                 newFruit = new Apple(panel);
                 break;
 
-                case 5: case 6: 
+                case 6: case 7: 
                 newFruit = new Watermelon(panel);
                 break;
 
-                case 7: case 8: 
+                case 8: case 9: 
                 newFruit = new Strawberry(panel);
                 break;
 
-                case 9: case 10: 
+                case 10: case 11: 
                 newFruit = new Peach(panel);
                 break;
 
-                case 11: case 12: 
+                case 12: case 13: 
                 newFruit = new Avocado(panel);
                 break;
 
                 default: 
-                newFruit = new Orange(panel);
+                newFruit = new Bomb(panel);
                 break;
             }
 
