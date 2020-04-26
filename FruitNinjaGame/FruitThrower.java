@@ -129,6 +129,9 @@ public class FruitThrower extends Thread
                 case 0:
                 newFruit = new Bomb(panel, diffLevel);
                 break;
+                case 1: case 2: case 3: case 4:
+                newFruit = new Apple(panel, diffLevel);
+                break;
                 default: newFruit = new Orange(panel, diffLevel);
                 break;
             }

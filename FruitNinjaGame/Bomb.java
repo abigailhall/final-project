@@ -22,7 +22,6 @@ public class Bomb extends Fruit
     {
         super(panel, diffLevel);
         isBomb = true;
-        fruitColor = Color.BLACK;
         pointValue = -1;
     }
     

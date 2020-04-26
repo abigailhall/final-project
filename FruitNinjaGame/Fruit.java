@@ -78,7 +78,7 @@ public abstract  class Fruit extends Thread
 
     protected boolean explosionOver;
 
-    protected Color fruitColor;
+    
 
     /**
     Construct a new Fruitobject at the given position and speed.
