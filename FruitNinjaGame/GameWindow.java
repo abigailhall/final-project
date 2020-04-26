@@ -69,13 +69,16 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
+        //Creates and adds a menu Panel to the JFrame
         menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
+        //Creates a new font to use with different labels
         Font newFont = new Font("Georgia", Font.BOLD, 25);
 
+        //Creates the start and reset game buttons
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
         startButton.setFont(newFont);
@@ -87,6 +90,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         resetButton.setFont(newFont);
         menuPanel.add(resetButton);
 
+        //Creates the score label 
         scoreLabel = new JLabel("Score: 0");
         scoreLabel.setFont(newFont);
         scoreLabel.setVisible(false);
@@ -109,7 +113,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
 
-                //will chose the background the user selected
+                //This will chose the background based on what the user selected
                 //Got some help writing this code from: https://www.youtube.com/watch?v=bv4PBdhoo4o
                 //Images are from a public domain website: https://www.pexels.com/
 
@@ -131,6 +135,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 }
 
+                //Paint and remove the sword on screen
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -146,8 +151,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     }
                 }
 
+                //Updates the score as the game continues
                 scoreLabel.setText("Score: " + newFT.getScore());
 
+                //This will display the number of strikes the user has during the course of the game
                 //Image is from a public domain website: https://publicdomainvectors.org/
                 ImageIcon strikes = new ImageIcon("X.jpg");
                 switch (newFT.getStrikeCount())
@@ -163,6 +170,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     break;
                 }
 
+                //When the user has lost the game, this message will appear on the screen
                 if(newFT.done())
                 {
 
@@ -174,12 +182,17 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             }
         };
 
+        //Created a fruit thrower object to user throughout the class
         newFT = new FruitThrower(fruitPanel, diffLevel);
+        
+        //Creating and adding the fruit panel to the game frame.
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
+        //Created a different font to use for labels.
         Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
+        //Created and edit a game over label so it appears in the correct part of the panel
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
         gameOverLabel.setForeground(Color.RED);
@@ -193,8 +206,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         new Thread(){
             @Override
             /** 
-            * NEED TO EDIT THIS
-            */
+             * NEED TO EDIT THIS
+             */
             public void run(){
                 while (!newFT.done()){
                     try{
@@ -211,6 +224,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             }
         }.start();
 
+        //creating a sword list
         swordList = new ArrayList<AnimatedLine>();
 
         //display the frame we made
@@ -256,7 +270,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Mouse dragged event handler, keeps track of where the sword is being dragged
+     * Mouse dragged event handler, keeps track of where the sword is being dragged. Which
+     * sword is used is chosed by the user at the beginning of the game
      * 
      * @param e The MouseEvent object which calls the method.
      */
