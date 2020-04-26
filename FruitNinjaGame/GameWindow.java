@@ -258,7 +258,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
         else if(swordType == 2)
         {
-            newLine = new ColorLine(lastMouse, e.getPoint(), fruitPanel);
+            newLine = new RainbowLine(lastMouse, e.getPoint(), fruitPanel);
 
         }
         else
