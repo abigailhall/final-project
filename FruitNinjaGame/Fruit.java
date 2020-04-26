@@ -1,18 +1,15 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import javax.swing.JComponent;
 import java.util.Random;
-
 /**
- * Write a description of class Fruit here.
+ * This abstract class is responsible for creating and animating the fruit/bombs. They will then
+ * be painted with their individual classes.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version 4/16/2020
+ * @version 4/26/2020
  */
-public abstract  class Fruit extends Thread
+public abstract class Fruit extends Thread
 {
     // its height should really be queried, but we will ignore that
     // complication for now
@@ -78,8 +75,6 @@ public abstract  class Fruit extends Thread
 
     protected boolean explosionOver;
 
-    
-
     /**
     Construct a new Fruitobject at the given position and speed.
     @param panel the Component in which this FallingSnow will live
@@ -114,7 +109,6 @@ public abstract  class Fruit extends Thread
     }
 
     public abstract void paint(Graphics g);
-
 
     /**
     Run method to define the life of this Fruit. EDIT LATER.
