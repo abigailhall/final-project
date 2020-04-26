@@ -20,24 +20,6 @@ public abstract class Fruit extends Thread
     //max ySpeed 
     protected static final int MAX_Y_SPEED = 5;
 
-    //max xSpeed for easy level
-    protected static final int MAX_X_SPEED_EASY = 10;
-
-    //max ySpeed for easy level
-    protected static final int MAX_Y_SPEED_EASY = 5;
-
-    //max xSpeed for medium level
-    protected static final int MAX_X_SPEED_MED = 10;
-
-    //max ySpeed for medium level
-    protected static final int MAX_Y_SPEED_MED = 5;
-
-    //max xSpeed for hard level
-    protected static final int MAX_X_SPEED_HARD = 10;
-
-    //max ySpeed for hard level
-    protected static final int MAX_Y_SPEED_HARD = 5;
-
     //delay between fuit motions
     protected static final int DELAY_TIME = 33;
 
