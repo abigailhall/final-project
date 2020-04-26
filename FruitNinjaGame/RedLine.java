@@ -47,7 +47,7 @@ public class RedLine extends AnimatedLine
     @Override
     public void run() {
 
-        while (colorNum > 0) {
+        while (colorNum >= 10) {
 
             try {
                 sleep(DELAY_TIME);
