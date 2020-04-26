@@ -54,9 +54,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private Point lastMouse;
     private int lineNum;
 
-
     /**
-     * The run method which establishes the graphical interface.
+     * The run method establishes the graphical user interface of the game itself.
      */
     @Override
     public void run()
@@ -96,6 +95,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel(new BorderLayout()) {
             @Override
+            /**
+             *  This method will redraw the background depending on which one the user selects at
+             *  the beginning of the game. It also displays the sword on the screen, along with
+             *  showing the proper number of strikes on the screen as well. Once a bomb is hit,
+             *  or 3 fruit fall through the "game over" label will appear on the screen.
+             *  Repaints the scene according to the state of the game.
+             *  
+             *  @param g The Graphics component which will do the painting
+             */
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
@@ -175,7 +183,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
         gameOverLabel.setForeground(Color.RED);
-        //gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
         fruitPanel.add(gameOverLabel);
@@ -185,6 +192,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         new Thread(){
             @Override
+            /** 
+            * NEED TO EDIT THIS
+            */
             public void run(){
                 while (!newFT.done()){
                     try{
@@ -209,7 +219,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Action performed event handler, handles the game start and game reset buttons.
+     * Action performed event handler, handles the start game and resest game buttons.
      * 
      * @param e The ActionEvent object which calls the method.
      */
@@ -232,6 +242,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
     }
 
+    /**
+     * Mouse pressed event handler, gets current location of the mouse
+     * 
+     * @param e The MouseEvent object which calls the method.
+     */
     @Override
     public void mousePressed(MouseEvent e) 
     {
@@ -241,7 +256,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Mouse dragged event handler, tracks when user is dragging the ball before firing
+     * Mouse dragged event handler, keeps track of where the sword is being dragged
      * 
      * @param e The MouseEvent object which calls the method.
      */
@@ -270,7 +285,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Mouse released event handler, fires ball when user releases mouse.
+     * Mouse released event handler, if the mouse is releasd will set it to null.
      * 
      * @param e The MouseEvent object which calls the method.
      */
@@ -281,7 +296,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Main method to run the program, allows user to select the color of their ball.
+     * Main method to run the program, allows user to select their level of difficulty, their sword
+     * type, and their background type. Also, a pop up window with the directions will appear before
+     * the start of the game.
      * 
      * @param args[] no command line input necessary.
      */
