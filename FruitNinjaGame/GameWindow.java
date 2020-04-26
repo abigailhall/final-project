@@ -1,12 +1,12 @@
-//may have to edit later
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -20,18 +20,14 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
-
 /**
- * NEED TO EDIT THIS!! Write a description of class GameWindow here.
+ * A java version/simulation of the app "Fruit Ninja." The objective of this game is to slice as many fruit as possible while 
+ * dragging the mouse (the sword). The two things that will end the game are slicing a bomb or letting 3 fruit fall through 
+ * without slicing them. In our version, we added 3 difficulty levels, 4 swords options, and 4 background options that the user is
+ * able to select. 
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version 4/16/2020
+ * @version 4/26/2020
  */
 public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 {
@@ -41,24 +37,24 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private final int MENU_HEIGHT = 100;
 
     private static JFrame gameFrame;
+    private static int swordType;
+    private static int diffLevel;
+    private static int backType;
+    private static FruitThrower newFT;
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
     private JButton resetButton;
     private JLabel scoreLabel;
-    private static FruitThrower newFT;
-    private ArrayList<AnimatedLine> swordList;
-    private Point lastMouse;
-    private int lineNum;
     private JLabel gameOverLabel;
     private JLabel strikeLabel;
     private JLabel contentPane;
-    private static int swordType;
-    private static int diffLevel;
-    private static int backType;
+    private ArrayList<AnimatedLine> swordList;
+    private Point lastMouse;
+    private int lineNum;
 
     /**
-     * The run method which establishes the graphical interface.
+     * The run method establishes the graphical user interface of the game itself.
      */
     @Override
     public void run()
@@ -72,13 +68,16 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
+        //Creates and adds a menu Panel to the JFrame
         menuPanel = new JPanel();
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
+        //Creates a new font to use with different labels
         Font newFont = new Font("Georgia", Font.BOLD, 25);
 
+        //Creates the start and reset game buttons
         startButton = new JButton("Start Game");
         startButton.addActionListener(this);
         startButton.setFont(newFont);
@@ -90,6 +89,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         resetButton.setFont(newFont);
         menuPanel.add(resetButton);
 
+        //Creates the score label 
         scoreLabel = new JLabel("Score: 0");
         scoreLabel.setFont(newFont);
         scoreLabel.setVisible(false);
@@ -98,12 +98,21 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel(new BorderLayout()) {
             @Override
+            /**
+             *  This method will redraw the background depending on which one the user selects at
+             *  the beginning of the game. It also displays the sword on the screen, along with
+             *  showing the proper number of strikes on the screen as well. Once a bomb is hit,
+             *  or 3 fruit fall through the "game over" label will appear on the screen.
+             *  Repaints the scene according to the state of the game.
+             *  
+             *  @param g The Graphics component which will do the painting
+             */
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
 
-                //will chose the background the user selected
+                //This will chose the background based on what the user selected
                 //Got some help writing this code from: https://www.youtube.com/watch?v=bv4PBdhoo4o
                 //Images are from a public domain website: https://www.pexels.com/
 
@@ -125,6 +134,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 }
 
+                //Paint and remove the sword on screen
                 int i = swordList.size() - 1;
                 while(i >= 0 && !swordList.isEmpty())
                 {
@@ -140,8 +150,10 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     }
                 }
 
+                //Updates the score as the game continues
                 scoreLabel.setText("Score: " + newFT.getScore());
 
+                //This will display the number of strikes the user has during the course of the game
                 //Image is from a public domain website: https://publicdomainvectors.org/
                 ImageIcon strikes = new ImageIcon("X.jpg");
                 switch (newFT.getStrikeCount())
@@ -157,6 +169,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                     break;
                 }
 
+                //When the user has lost the game, this message will appear on the screen
                 if(newFT.done())
                 {
 
@@ -168,16 +181,20 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             }
         };
 
+        //Created a fruit thrower object to user throughout the class
         newFT = new FruitThrower(fruitPanel, diffLevel);
+        
+        //Creating and adding the fruit panel to the game frame.
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
 
+        //Created a different font to use for labels.
         Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
+        //Created and edit a game over label so it appears in the correct part of the panel
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
         gameOverLabel.setFont(newFont2);
         gameOverLabel.setForeground(Color.RED);
-        //gameOverLabel.setOpaque(true);
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
         fruitPanel.add(gameOverLabel);
@@ -187,6 +204,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         new Thread(){
             @Override
+            /** 
+             * NEED TO EDIT THIS
+             */
             public void run(){
                 while (!newFT.done()){
                     try{
@@ -203,6 +223,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             }
         }.start();
 
+        //creating a sword list
         swordList = new ArrayList<AnimatedLine>();
 
         //display the frame we made
@@ -211,7 +232,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Action performed event handler, handles the game start and game reset buttons.
+     * Action performed event handler, handles the start game and resest game buttons.
      * 
      * @param e The ActionEvent object which calls the method.
      */
@@ -234,6 +255,11 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         }
     }
 
+    /**
+     * Mouse pressed event handler, gets current location of the mouse
+     * 
+     * @param e The MouseEvent object which calls the method.
+     */
     @Override
     public void mousePressed(MouseEvent e) 
     {
@@ -243,7 +269,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Mouse dragged event handler, tracks when user is dragging the ball before firing
+     * Mouse dragged event handler, keeps track of where the sword is being dragged. Which
+     * sword is used is chosed by the user at the beginning of the game
      * 
      * @param e The MouseEvent object which calls the method.
      */
@@ -278,7 +305,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Mouse released event handler, fires ball when user releases mouse.
+     * Mouse released event handler, if the mouse is releasd will set it to null.
      * 
      * @param e The MouseEvent object which calls the method.
      */
@@ -289,7 +316,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     }
 
     /**
-     * Main method to run the program, allows user to select the color of their ball.
+     * Main method to run the program, allows user to select their level of difficulty, their sword
+     * type, and their background type. Also, a pop up window with the directions will appear before
+     * the start of the game.
      * 
      * @param args[] no command line input necessary.
      */
@@ -305,9 +334,13 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         Peach.loadFruitPic();
         Avocado.loadFruitPic();
 
+
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
         //User will select Game Settings
         //User will select DifficultyDifficulty
+
+        //User will select Difficulty
+
         String[] diffOpts = {"Easy", "Medium", "Hard"};
 
         Object selectedValue1 = JOptionPane.showInputDialog(null,
@@ -373,7 +406,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         //Direction Window
         JOptionPane directions = new JOptionPane();
-        directions.showMessageDialog(null, "Use the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
+        directions.showMessageDialog(null, "Drag the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
             "Directions", JOptionPane.INFORMATION_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());

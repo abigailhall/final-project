@@ -1,55 +1,54 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import java.awt.Graphics;
+import java.awt.Point;
+import javax.swing.JComponent;
 import java.util.Random;
-
 /**
- * Write a description of class Fruit here.
+ * This abstract class is responsible for creating and animating the fruit/bombs. They will then
+ * be painted with their individual classes.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version 4/16/2020
+ * @version 4/26/2020
  */
-public abstract  class Fruit extends Thread
+public abstract class Fruit extends Thread
 {
-    // its height should really be queried, but we will ignore that
-    // complication for now
+    //the height of each fruit. MAY HAVE TO EDIT COMMENT LATER
     protected  int fruitPicHeight = 100; 
 
-    //max xSpeed easy
+    //max xSpeed 
     protected static final int MAX_X_SPEED = 10;
 
-    //max ySpeed easay
+    //max ySpeed 
     protected static final int MAX_Y_SPEED = 5;
 
-    //max xSpeed easy
+    //max xSpeed for easy level
     protected static final int MAX_X_SPEED_EASY = 10;
 
-    //max ySpeed easay
+    //max ySpeed for easy level
     protected static final int MAX_Y_SPEED_EASY = 5;
 
-    //max xSpeed medium
+    //max xSpeed for medium level
     protected static final int MAX_X_SPEED_MED = 10;
 
-    //max ySpeed medium
+    //max ySpeed for medium level
     protected static final int MAX_Y_SPEED_MED = 5;
 
-    //max xSpeed hard
+    //max xSpeed for hard level
     protected static final int MAX_X_SPEED_HARD = 10;
 
-    //max ySpeed medium
+    //max ySpeed for hard level
     protected static final int MAX_Y_SPEED_HARD = 5;
 
-    // delay between snow motions
+    //delay between fuit motions
     protected static final int DELAY_TIME = 33;
 
-    // what to add to ySpeed to simulate gravity?
+    //constant used for gravity
     protected static final double GRAVITY = 0.3;
 
+    //the value of the point to tell if the user
+    //has sliced a bomb or not
     protected int pointValue;
 
+    //the Component where we'll be creating Fruit
     protected JComponent panel;
 
     // pixels to move each iteration
@@ -58,6 +57,7 @@ public abstract  class Fruit extends Thread
     //bottom of panel
     protected int bottom;
 
+    //the difficulty level that is chosen by the user
     protected int diffLevel;
 
     // latest location of the ball
@@ -66,24 +66,26 @@ public abstract  class Fruit extends Thread
     //is the fuit done?
     protected boolean done;
 
-    // which side is fruit coming from: left = false, right = true
+    //which side is fruit coming from: left = false, right = true
     protected boolean isRight; 
 
-    // has the fruit been sliced?
+    //has the fruit been sliced?
     protected boolean isSliced;
 
+    //is it a bomb?
     protected boolean isBomb;
 
+    //has it exploded?
     protected boolean explosion;
 
+    //is the explosion over?
     protected boolean explosionOver;
 
-    
-
     /**
-    Construct a new Fruitobject at the given position and speed.
-    @param panel the Component in which this FallingSnow will live
-    objects
+     * Construct a new Fruit object at the given position and speed.
+     * 
+     * @param panel the Component in which this Fruit will live
+     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public Fruit(JComponent panel, int diffLevel) {
         this.panel = panel;
@@ -113,11 +115,17 @@ public abstract  class Fruit extends Thread
 
     }
 
+    /**
+     * Abstract paint method that will change depending on which type of fruit or bomb is being thrown.
+     * 
+     * @param g the Graphics object in which to paint
+     */
     public abstract void paint(Graphics g);
 
-
     /**
-    Run method to define the life of this Fruit. EDIT LATER.
+     * Run method to define the life of the Fruit. It determines how fast it is being 'thrown'
+     * along with determining which side it will be thrown from. And if it sliced, it will fall 
+     * through to the bottom.
      */
     @Override
     public void run() {
@@ -133,6 +141,8 @@ public abstract  class Fruit extends Thread
                 }
                 catch (InterruptedException e) {
                 }
+
+                //ADD COMMENT HERE 
                 if(explosion)
                 {
 
@@ -165,6 +175,7 @@ public abstract  class Fruit extends Thread
                     }
                     catch (InterruptedException e) {
                     }
+
                     if(!isSliced)
                     {
                         // every iteration, update the coordinates
@@ -174,7 +185,8 @@ public abstract  class Fruit extends Thread
                     }
 
                     upperLeftY += ySpeed;
-                    // gravity factor also
+
+                    //include the gravity factor 
                     ySpeed += GRAVITY;
 
                     panel.repaint();
@@ -184,25 +196,6 @@ public abstract  class Fruit extends Thread
 
         done = true;
 
-    }
-
-    /**
-    Check if this Fruits work is done.
-    @return true if this Fruit work is done
-     */
-    public boolean done() 
-    {
-        return done;
-    }
-
-    public boolean isSliced()
-    {
-        return isSliced;
-    }
-
-    public boolean isBomb()
-    {
-        return isBomb;
     }
 
     /**
@@ -223,11 +216,47 @@ public abstract  class Fruit extends Thread
         return 0;
     }
 
+    /**
+     * Check if this Fruits work is done.
+     * 
+     * @return true if this Fruits work is done
+     */
+    public boolean done() 
+    {
+        return done;
+    }
+
+    /**
+     * Check if this Fruit has been sliced or not
+     * 
+     * @return true if this Fruit has been sliced
+     */
+    public boolean isSliced()
+    {
+        return isSliced;
+    }
+
+    /**
+     * Check if this Fruits is actually a bomb
+     * 
+     * @return true if this Fruit is a bomb
+     */
+    public boolean isBomb()
+    {
+        return isBomb;
+    }
+
+    /**
+     * EDIT THIS
+     */
     public void setExplosion()
     {
         explosion = true;
     }
 
+    /**
+     * EDIT THIS
+     */
     public boolean explosionOver()
     {
         return explosionOver;

@@ -1,15 +1,14 @@
-//NEED TO EDIT LATER
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.Random;
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import javax.swing.JComponent;
 /**
- * Write a description of class Bomb here.
+ * This Bomb class extends the abstract class 'Fruit' in order to have all of its proper
+ * functionality. This class loads the proper bomb picture, so that when it is thrown,
+ * a bomb image will appear on the screen.
  *
  * @author Kate Frisch, Van Griffith, & Abby Hall
- * @version (a version number or a date)
+ * @version 4/26/2020
  */
 public class Bomb extends Fruit
 {
