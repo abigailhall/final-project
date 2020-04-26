@@ -23,7 +23,6 @@ public abstract class AnimatedLine extends Thread
      * @param start the starting point
      *        end the ends point
      *        panel the Component in which this Fruit will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
     public AnimatedLine(Point start, Point end, JComponent container)
     {
