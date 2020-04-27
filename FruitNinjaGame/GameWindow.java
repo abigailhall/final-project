@@ -43,6 +43,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private static int diffLevel;
     private static int backType;
     private static FruitThrower newFT;
+    private static Image strikes;
+    
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
@@ -411,5 +413,15 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
             "Directions", JOptionPane.INFORMATION_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
+    }
+    
+    /**
+     * Set the Image to be used by the X, to be called by the main method before 
+     * the GUI gets set up.
+     */
+    public static void loadFruitPic() {
+        //images are from the public domain website: https://www.clipartmax.com/
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        strikes = toolkit.getImage("Images/X.png");
     }
 }
