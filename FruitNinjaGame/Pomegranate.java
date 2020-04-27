@@ -13,7 +13,6 @@ import javax.swing.JComponent;
 public class Pomegranate extends Fruit
 {
     private static Image fruitPic;
-    private static Image fruitSlice;
 
     /**
      * Construct a new Pomegranate object.
@@ -35,13 +34,44 @@ public class Pomegranate extends Fruit
      */
     public void paint(Graphics g)
     {
-        if(isSliced)
-            g.drawImage(fruitSlice, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
-        else
-            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
+        g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
 
     }
 
+    /**
+     * Run method to define the life of the Pomgranate. It determines how fast it is being 'thrown'
+     * along with determining which side it will be thrown from. And if it sliced, it will explode.
+     */
+    @Override
+    public void run() {
+
+        //do if or switch statement for the diffLevel
+        while (upperLeftY < bottom) 
+            {
+                try {
+                    sleep(DELAY_TIME);
+                }
+                catch (InterruptedException e) {
+                }
+
+                if(!isSliced)
+                {
+                    // every iteration, update the coordinates
+                    // by a pixel
+                    upperLeftX += xSpeed;
+
+                }
+
+                upperLeftY += ySpeed;
+
+                //include the gravity factor 
+                ySpeed += GRAVITY;
+
+                panel.repaint();
+
+            }
+        done = true;
+    }
     /**
      * Set the Image to be used by all Pomegranate objects, to be 
      * called by the main method before the GUI gets set up
@@ -49,8 +79,8 @@ public class Pomegranate extends Fruit
     public static void loadFruitPic() {
         //image is from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Pomegranate.fruitPic = toolkit.getImage("Image/pomegranate.png");
-        Pomegranate.fruitSlice = toolkit.getImage("Image/pomegranatePiece.png");
+        Pomegranate.fruitPic = toolkit.getImage("Images/pomegranate.png");
+        // Pomegranate.fruitSlice = toolkit.getImage("Images/pomegranatePiece.png");
     }
 
 }

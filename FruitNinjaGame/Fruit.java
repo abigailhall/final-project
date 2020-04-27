@@ -100,35 +100,33 @@ public abstract class Fruit extends Thread
     public void run() {
 
         //do if or switch statement for the diffLevel
-        while (upperLeftY < bottom)
+        while (upperLeftY < bottom) 
+        {
+            try {
+                sleep(DELAY_TIME);
+            }
+            catch (InterruptedException e) {
+            }
 
-
-            while (upperLeftY < bottom) 
+            if(!isSliced)
             {
-                try {
-                    sleep(DELAY_TIME);
-                }
-                catch (InterruptedException e) {
-                }
-
-                if(!isSliced)
-                {
-                    // every iteration, update the coordinates
-                    // by a pixel
-                    upperLeftX += xSpeed;
-
-                }
-
-                upperLeftY += ySpeed;
-
-                //include the gravity factor 
-                ySpeed += GRAVITY;
-
-                panel.repaint();
+                // every iteration, update the coordinates
+                // by a pixel
+                upperLeftX += xSpeed;
 
             }
+
+            upperLeftY += ySpeed;
+
+            //include the gravity factor 
+            ySpeed += GRAVITY;
+
+            panel.repaint();
+
+        }
         done = true;
     }
+
     /**
      * Check if the mouse overlaps the fruit.
      */
