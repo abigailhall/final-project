@@ -50,8 +50,8 @@ public class Apple extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Apple.fruitPic = toolkit.getImage("apple.png");
-        Apple.fruitSlice = toolkit.getImage("appleSlice.png");
+        Apple.fruitPic = toolkit.getImage("Images/apple.png");
+        Apple.fruitSlice = toolkit.getImage("Images/appleSlice.png");
 
     }
 

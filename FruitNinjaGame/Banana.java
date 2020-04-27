@@ -50,8 +50,8 @@ public class Banana extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Banana.fruitPic = toolkit.getImage("banana.png");
-        Banana.fruitSlice = toolkit.getImage("bananaSlice.png");
+        Banana.fruitPic = toolkit.getImage("Images/banana.png");
+        Banana.fruitSlice = toolkit.getImage("Images/bananaSlice.png");
     }
 
 }

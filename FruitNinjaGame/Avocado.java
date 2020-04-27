@@ -50,8 +50,8 @@ public class Avocado extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Avocado.fruitPic = toolkit.getImage("avocado.png");
-        Avocado.fruitSlice = toolkit.getImage("avocadoSlice.png");
+        Avocado.fruitPic = toolkit.getImage("Images/avocado.png");
+        Avocado.fruitSlice = toolkit.getImage("Images/avocadoSlice.png");
     }
 
 }

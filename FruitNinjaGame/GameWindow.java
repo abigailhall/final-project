@@ -121,16 +121,16 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 ImageIcon background;
                 switch(backType)
                 {
-                    case 1: background = new ImageIcon("close-up-of-wooden-plank-326311.jpg");
+                    case 1: background = new ImageIcon("Image/close-up-of-wooden-plank-326311.jpg");
                     g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
-                    case 2: background = new ImageIcon("abstract-ancient-antique-art-235985.jpg");
+                    case 2: background = new ImageIcon("Image/abstract-ancient-antique-art-235985.jpg");
                     g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
-                    case 3: background = new ImageIcon("close-up-photo-of-blue-body-of-water-1435752.jpg");
+                    case 3: background = new ImageIcon("Image/close-up-photo-of-blue-body-of-water-1435752.jpg");
                     g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
-                    case 4: background = new ImageIcon("grayscale-photo-of-brickwall-1022692.jpg");
+                    case 4: background = new ImageIcon("Image/grayscale-photo-of-brickwall-1022692.jpg");
                     g.drawImage(background.getImage(), 0, 0, WINDOW_WIDTH, GAME_HEIGHT, null);
                     break;
 
@@ -157,7 +157,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
                 //This will display the number of strikes the user has during the course of the game
                 //Image is from a public domain website: https://publicdomainvectors.org/
-                ImageIcon strikes = new ImageIcon("X.png");
+                ImageIcon strikes = new ImageIcon("Image/X.png");
                 switch (newFT.getStrikeCount())
                 {
                     case 1: g.drawImage(strikes.getImage(), 850, 10, strikes.getIconWidth(), strikes.getIconHeight(), null);

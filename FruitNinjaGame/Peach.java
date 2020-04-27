@@ -51,8 +51,8 @@ public class Peach extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Peach.fruitPic = toolkit.getImage("peach.png");
-        Peach.fruitSlice = toolkit.getImage("peachSlice.png");
+        Peach.fruitPic = toolkit.getImage("Images/peach.png");
+        Peach.fruitSlice = toolkit.getImage("Images/peachSlice.png");
     }
 
 }

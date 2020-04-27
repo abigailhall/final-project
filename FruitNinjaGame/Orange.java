@@ -51,8 +51,8 @@ public class Orange extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Orange.fruitPic = toolkit.getImage("orange.png");
-        Orange.fruitSlice = toolkit.getImage("orangeSlice.png");
+        Orange.fruitPic = toolkit.getImage("Images/orange.png");
+        Orange.fruitSlice = toolkit.getImage("Images/orangeSlice.png");
     }
 
 }
