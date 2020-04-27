@@ -46,32 +46,29 @@ public class Pomegranate extends Fruit
     public void run() {
 
         //do if or switch statement for the diffLevel
-        while (upperLeftY < bottom) 
-            {
-                try {
-                    sleep(DELAY_TIME);
-                }
-                catch (InterruptedException e) {
-                }
-
-                if(!isSliced)
-                {
-                    // every iteration, update the coordinates
-                    // by a pixel
-                    upperLeftX += xSpeed;
-
-                }
-
-                upperLeftY += ySpeed;
-
-                //include the gravity factor 
-                ySpeed += GRAVITY;
-
-                panel.repaint();
-
+        while (upperLeftY < bottom && !isSliced) 
+        {
+            try {
+                sleep(DELAY_TIME);
             }
+            catch (InterruptedException e) {
+            }
+
+            // every iteration, update the coordinates
+            // by a pixel
+            upperLeftX += xSpeed;
+
+            upperLeftY += ySpeed;
+
+            //include the gravity factor 
+            ySpeed += GRAVITY;
+
+
+            panel.repaint();
+        }
         done = true;
     }
+
     /**
      * Set the Image to be used by all Pomegranate objects, to be 
      * called by the main method before the GUI gets set up
