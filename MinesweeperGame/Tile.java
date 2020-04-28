@@ -18,6 +18,14 @@ public class Tile extends Thread
 
     private static Image flagPic;
     private static Image bombPic;
+    private static Image Pic1;
+    private static Image Pic2;
+    private static Image Pic3;
+    private static Image Pic4;
+    private static Image Pic5;
+    private static Image Pic6;
+    private static Image Pic7;
+    private static Image Pic8;
 
     private int number;
     private int row;
@@ -148,6 +156,13 @@ public class Tile extends Thread
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Tile.flagPic = toolkit.getImage("Flag.png");
         Tile.bombPic = toolkit.getImage("bomb.png");
-
+        Tile.Pic1 = toolkit.getImage("1-pic.png");
+        Tile.Pic2 = toolkit.getImage("2-pic.png");
+        Tile.Pic3 = toolkit.getImage("3-pic.png");
+        Tile.Pic4 = toolkit.getImage("4-pic.png");
+        Tile.Pic5 = toolkit.getImage("5-pic.png");
+        Tile.Pic6 = toolkit.getImage("6-pic.png");
+        Tile.Pic7 = toolkit.getImage("7-pic.png");
+        Tile.Pic8 = toolkit.getImage("8-pic.png");
     }
 }
