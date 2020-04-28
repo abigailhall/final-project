@@ -54,7 +54,6 @@ public abstract class Fruit extends Thread
     //is it a bomb?
     protected boolean isBomb;
 
-
     /**
      * Construct a new Fruit object at the given position and speed.
      * 
@@ -101,52 +100,31 @@ public abstract class Fruit extends Thread
     public void run() {
 
         //do if or switch statement for the diffLevel
-        while (upperLeftY < bottom)
-
-            while (upperLeftY < bottom) 
-
-            {
-                try {
-                    sleep(DELAY_TIME);
-                }
-                catch (InterruptedException e) {
-                }
-
-                if(!isSliced)
-                {
-                    // every iteration, update the coordinates
-                    // by a pixel
-                    upperLeftX += xSpeed;
-                }
-
-                while (upperLeftY < bottom) 
-                {
-                    try {
-                        sleep(DELAY_TIME);
-                    }
-                    catch (InterruptedException e) {
-                    }
-
-                    if(!isSliced)
-                    {
-                        // every iteration, update the coordinates
-                        // by a pixel
-                        upperLeftX += xSpeed;
-
-                    }
-
-                    upperLeftY += ySpeed;
-
-                    //include the gravity factor 
-                    ySpeed += GRAVITY;
-
-                    panel.repaint();
-
-                }
+        while (upperLeftY < bottom) 
+        {
+            try {
+                sleep(DELAY_TIME);
+            }
+            catch (InterruptedException e) {
             }
 
-        done = true;
+            if(!isSliced)
+            {
+                // every iteration, update the coordinates
+                // by a pixel
+                upperLeftX += xSpeed;
 
+            }
+
+            upperLeftY += ySpeed;
+
+            //include the gravity factor 
+            ySpeed += GRAVITY;
+
+            panel.repaint();
+
+        }
+        done = true;
     }
 
     /**

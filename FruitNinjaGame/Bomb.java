@@ -44,7 +44,7 @@ public class Bomb extends Fruit
     public static void loadFruitPic() {
         //image is from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Bomb.fruitPic = toolkit.getImage("bomb.png");
+        Bomb.fruitPic = toolkit.getImage("Images/bomb.png");
     }
 
 }

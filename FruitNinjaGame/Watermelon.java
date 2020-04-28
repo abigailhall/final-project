@@ -50,8 +50,8 @@ public class Watermelon extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Watermelon.fruitPic = toolkit.getImage("watermelon.png");
-        Watermelon.fruitSlice = toolkit.getImage("watermelonSlice.png");
+        Watermelon.fruitPic = toolkit.getImage("Images/watermelon.png");
+        Watermelon.fruitSlice = toolkit.getImage("Images/watermelonSlice.png");
     }
 
 }

@@ -50,8 +50,8 @@ public class Strawberry extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Strawberry.fruitPic = toolkit.getImage("strawberry.png");
-        Strawberry.fruitSlice = toolkit.getImage("strawberrySlice.png");
+        Strawberry.fruitPic = toolkit.getImage("Images/strawberry.png");
+        Strawberry.fruitSlice = toolkit.getImage("Images/strawberrySlice.png");
     }
 
 }
