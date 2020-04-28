@@ -28,6 +28,7 @@ public class Tile extends Thread
     private boolean isPressed;
     private boolean tileExposed;
     private boolean flagTile;
+    
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
     {
@@ -77,7 +78,10 @@ public class Tile extends Thread
 
     public void incrementNumber()
     {
-        number++;
+        if (!isBomb)
+        {
+            number++;
+        }
     }
 
     public int getTileSize()
