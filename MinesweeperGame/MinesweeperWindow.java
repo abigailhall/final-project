@@ -55,7 +55,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private int arrayWidth;
     private int arrayHeight;
     private int bombCount;
-    private Tile[][] bombArray;
+    private Tile[][] tileArray;
 
     private JFrame gameFrame;
     private JPanel menuPanel;
@@ -101,7 +101,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 {
                     for (int col = 0; col < arrayHeight; col++)
                     {
-                        Tile tile = bombArray[row][col];
+                        Tile tile = tileArray[row][col];
                         tile.paint(g);
                     }
                 }
@@ -145,7 +145,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             bombCount = EXPERT_BOMBS;
         }
         
-        bombArray = new Tile[arrayWidth][arrayHeight];
+        tileArray = new Tile[arrayWidth][arrayHeight];
         
         Random rand = new Random();
 
@@ -156,7 +156,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             upperLeftY = 0;
             for (int col = 0; col < arrayHeight; col++)
             {
-                bombArray[row][col] = new Tile(0, row, col, new Point(upperLeftX, upperLeftY), mineField);
+                tileArray[row][col] = new Tile(0, row, col, new Point(upperLeftX, upperLeftY), mineField);
                 upperLeftY += 50;
             }
             upperLeftX += 50;
@@ -168,7 +168,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             int row = rand.nextInt(arrayWidth);
             int col = rand.nextInt(arrayHeight);
 
-            Tile tile = bombArray[row][col];
+            Tile tile = tileArray[row][col];
 
             if (!tile.isBomb())
             {
@@ -198,7 +198,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         
         try
         {
-            currentTile = bombArray[tileRow][tileCol];
+            currentTile = tileArray[tileRow][tileCol];
             currentTile.press(true);
         }
         catch (ArrayIndexOutOfBoundsException k)
