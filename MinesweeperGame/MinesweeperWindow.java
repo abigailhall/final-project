@@ -51,9 +51,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int EXPERT_BOMBS = 99;
 
     private int difficulty;
-    private int arrayWidth = 9;
-    private int arrayHeight = 9;
-    private int bombCount = 10;
+    
+    private int arrayWidth;
+    private int arrayHeight;
+    private int bombCount;
     private Tile[][] bombArray;
 
     private JFrame gameFrame;
@@ -87,6 +88,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         bombLabel = new JLabel("0");
         menuPanel.add(bombLabel);
+        
+        newGame();
 
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
             @Override
@@ -107,9 +110,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
 
-        bombArray = new Tile[arrayWidth][arrayHeight];
-
-        newGame();
+        
 
         gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
 
@@ -122,11 +123,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
+        
+        difficulty = BEGINNER; // to be replaced with difficulty selection
+        
         if (difficulty == BEGINNER)
         {
             arrayWidth = BEGINNER_WIDTH;
             arrayHeight = BEGINNER_HEIGHT;
-            bombCount = INTERMEDIATE_BOMBS;
+            bombCount = BEGINNER_BOMBS;
         }
         else if (difficulty == INTERMEDIATE)
         {
@@ -215,7 +219,15 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
             if (SwingUtilities.isRightMouseButton(e))
             {
-                currentTile.plantFlag();
+                if (currentTile.isFlagged())
+                {
+                    currentTile.removeFlag();
+                }
+                else
+                {
+                    currentTile.plantFlag();
+                }
+                
             }
             else
             {
