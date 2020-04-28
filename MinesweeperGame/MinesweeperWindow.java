@@ -34,24 +34,24 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
     private final int TILE_SIZE = 50;
-    
+
     private final int BEGINNER = 1;
     private final int BEGINNER_WIDTH = 9;
     private final int BEGINNER_HEIGHT = 9;
     private final int BEGINNER_BOMBS = 10;
-    
+
     private final int INTERMEDIATE = 2;
     private final int INTERMEDIATE_WIDTH = 16;
     private final int INTERMEDIATE_HEIGHT = 16;
     private final int INTERMEDIATE_BOMBS = 40;
-    
+
     private final int EXPERT = 3;
     private final int EXPERT_WIDTH = 16;
     private final int EXPERT_HEIGHT = 30;
     private final int EXPERT_BOMBS = 99;
 
     private int difficulty;
-    
+
     private int arrayWidth;
     private int arrayHeight;
     private int bombCount;
@@ -88,7 +88,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         bombLabel = new JLabel("0");
         menuPanel.add(bombLabel);
-        
+
         newGame();
 
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
@@ -110,10 +110,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
 
-        
-
         gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
-
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
@@ -123,9 +120,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
-        
+
         difficulty = BEGINNER; // to be replaced with difficulty selection
-        
+
         if (difficulty == BEGINNER)
         {
             arrayWidth = BEGINNER_WIDTH;
@@ -144,9 +141,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             arrayHeight = EXPERT_HEIGHT;
             bombCount = EXPERT_BOMBS;
         }
-        
+
         tileArray = new Tile[arrayWidth][arrayHeight];
-        
+
         Random rand = new Random();
 
         int upperLeftX = 0;
@@ -173,11 +170,33 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             if (!tile.isBomb())
             {
                 tile.setNumber(-1);
+                incrementAdjacent(row, col);
                 i++;
             }
         }
+        
+        
+
     }
 
+    private void incrementAdjacent(int row, int col)
+    {
+        for (int currentRow = row - 1; currentRow <= row + 1; currentRow++)
+        {
+            for (int currentCol = col - 1; currentCol <= col + 1; currentCol++)
+            {
+                try
+                {
+                    tileArray[currentRow][currentCol].incrementNumber();
+                }
+                catch (IndexOutOfBoundsException e)
+                {
+
+                }
+            }
+        }
+    }
+    
     /**
      * Action performed event handler, handles the game start and game reset buttons.
      * 
@@ -193,9 +212,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         Point mousePos = e.getPoint(); 
         int tileRow = mousePos.x / TILE_SIZE;
         int tileCol = mousePos.y / TILE_SIZE;
-        
 
-        
         try
         {
             currentTile = tileArray[tileRow][tileCol];
@@ -206,7 +223,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         }
 
-        
         mineField.repaint();
     }
 
@@ -215,7 +231,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         try
         {
             currentTile.press(false);
-            
 
             if (SwingUtilities.isRightMouseButton(e))
             {
@@ -227,7 +242,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 {
                     currentTile.plantFlag();
                 }
-                
+
             }
             else
             {
