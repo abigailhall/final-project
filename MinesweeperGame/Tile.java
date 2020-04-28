@@ -95,17 +95,12 @@ public class Tile extends Thread
 
         if (tileExposed)
         {
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+
             if (isBomb)
             {
-                // g.setColor(Color.RED);
-                // g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
                 g.drawImage(bombPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
-
-            }
-            else
-            {
-                g.setColor(Color.LIGHT_GRAY);
-                g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
             }
         }
         else
@@ -131,12 +126,22 @@ public class Tile extends Thread
         {
             tileExposed = true;
         }
-        
+
     }
 
     public void plantFlag()
     {
         flagTile = true;
+    }
+
+    public void removeFlag()
+    {
+        flagTile = false;
+    }
+
+    public boolean isFlagged()
+    {
+        return flagTile;
     }
 
     /**
