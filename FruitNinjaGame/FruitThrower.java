@@ -138,39 +138,46 @@ public class FruitThrower extends Thread
             //Randomly chooses what kind of fruit is thrown or if a bomb is thrown
             Fruit newFruit;
             
-            switch (r.nextInt(15 + diffLevel))
+            if(r.nextInt(10) == 0)
             {
-                case 0: case 1:
-                newFruit = new Orange(panel);
-                break;
+                newFruit = new Pomegranate(panel);
+            }
+            else
+            {
+                switch (r.nextInt(15 + diffLevel))
+                {
+                    case 0: case 1:
+                    newFruit = new Orange(panel);
+                    break;
 
-                case 2: case 3: 
-                newFruit = new Banana(panel);
-                break;
+                    case 2: case 3: 
+                    newFruit = new Banana(panel);
+                    break;
 
-                case 4: case 5:
-                newFruit = new Apple(panel);
-                break;
+                    case 4: case 5:
+                    newFruit = new Apple(panel);
+                    break;
 
-                case 6: case 7: 
-                newFruit = new Watermelon(panel);
-                break;
+                    case 6: case 7: 
+                    newFruit = new Watermelon(panel);
+                    break;
 
-                case 8: case 9: 
-                newFruit = new Strawberry(panel);
-                break;
+                    case 8: case 9: 
+                    newFruit = new Strawberry(panel);
+                    break;
 
-                case 10: case 11: 
-                newFruit = new Peach(panel);
-                break;
+                    case 10: case 11: 
+                    newFruit = new Peach(panel);
+                    break;
 
-                case 12: case 13: 
-                newFruit = new Avocado(panel);
-                break;
+                    case 12: case 13: 
+                    newFruit = new Avocado(panel);
+                    break;
 
-                default: 
-                newFruit = new Bomb(panel);
-                break;
+                    default: 
+                    newFruit = new Bomb(panel);
+                    break;
+                }
             }
 
             fruits.add(newFruit);

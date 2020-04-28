@@ -337,6 +337,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         Strawberry.loadFruitPic();
         Peach.loadFruitPic();
         Avocado.loadFruitPic();
+        Pomegranate.loadFruitPic();
 
         //Easy medium and hard settings will go here. Background settings and sword settings will come. 
         //User will select Game Settings

@@ -2,6 +2,8 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import javax.swing.JComponent;
+import java.util.ArrayList;
+
 /**
  * This Pomegranate class extends the abstract class 'Fruit' in order to have all of its proper
  * functionality. This class loads the proper bomb picture, so that when it is thrown,
@@ -13,6 +15,7 @@ import javax.swing.JComponent;
 public class Pomegranate extends Fruit
 {
     private static Image fruitPic;
+    private ArrayList<ExplodingPomegranate> pieces;
 
     /**
      * Construct a new Pomegranate object.
@@ -25,6 +28,8 @@ public class Pomegranate extends Fruit
         super(panel);
         isBomb = false;
         pointValue = 10;
+        pieces = new ArrayList<ExplodingPomegranate>();
+
     }
 
     /**
@@ -34,8 +39,27 @@ public class Pomegranate extends Fruit
      */
     public void paint(Graphics g)
     {
-        g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
-
+        if(isSliced)
+        {   
+            int i = 0; 
+            while (i < pieces.size())
+            {
+                ExplodingPomegranate pom = pieces.get(i);
+                if(pom.done())
+                {
+                    pieces.remove(i);
+                }
+                else
+                {
+                    pom.paint(g);
+                    i++;
+                }
+            }
+        }
+        else
+        {
+            g.drawImage(fruitPic, (int)upperLeftX, (int)upperLeftY, fruitPicHeight, fruitPicHeight, null);
+        }
     }
 
     /**
@@ -63,8 +87,20 @@ public class Pomegranate extends Fruit
             //include the gravity factor 
             ySpeed += GRAVITY;
 
-
             panel.repaint();
+        }
+        if(isSliced)
+        {
+            for(int i = 0; i < 7; i++)
+            {
+                ExplodingPomegranate pom = new ExplodingPomegranate(panel, (int)upperLeftX, (int)upperLeftY);
+                pieces.add(pom);
+                pom.start();
+            }
+            while(!pieces.isEmpty())
+            {
+                panel.repaint();
+            }
         }
         done = true;
     }
@@ -77,7 +113,7 @@ public class Pomegranate extends Fruit
         //image is from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Pomegranate.fruitPic = toolkit.getImage("Images/pomegranate.png");
-        // Pomegranate.fruitSlice = toolkit.getImage("Images/pomegranatePiece.png");
+        ExplodingPomegranate.loadFruitPic();
     }
 
 }
