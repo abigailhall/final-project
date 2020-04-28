@@ -19,11 +19,10 @@ public class Banana extends Fruit
      * Construct a new Banana object.
      * 
      * @param panel the Component in which this Banana will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Banana(JComponent panel, int diffLevel)
+    public Banana(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
     }
@@ -51,8 +50,8 @@ public class Banana extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Banana.fruitPic = toolkit.getImage("banana.png");
-        Banana.fruitSlice = toolkit.getImage("bananaSlice.png");
+        Banana.fruitPic = toolkit.getImage("Images/banana.png");
+        Banana.fruitSlice = toolkit.getImage("Images/bananaSlice.png");
     }
 
 }

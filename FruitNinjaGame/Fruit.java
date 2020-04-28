@@ -20,24 +20,6 @@ public abstract class Fruit extends Thread
     //max ySpeed 
     protected static final int MAX_Y_SPEED = 5;
 
-    //max xSpeed for easy level
-    protected static final int MAX_X_SPEED_EASY = 10;
-
-    //max ySpeed for easy level
-    protected static final int MAX_Y_SPEED_EASY = 5;
-
-    //max xSpeed for medium level
-    protected static final int MAX_X_SPEED_MED = 10;
-
-    //max ySpeed for medium level
-    protected static final int MAX_Y_SPEED_MED = 5;
-
-    //max xSpeed for hard level
-    protected static final int MAX_X_SPEED_HARD = 10;
-
-    //max ySpeed for hard level
-    protected static final int MAX_Y_SPEED_HARD = 5;
-
     //delay between fuit motions
     protected static final int DELAY_TIME = 33;
 
@@ -57,9 +39,6 @@ public abstract class Fruit extends Thread
     //bottom of panel
     protected int bottom;
 
-    //the difficulty level that is chosen by the user
-    protected int diffLevel;
-
     // latest location of the ball
     protected double upperLeftX, upperLeftY;
 
@@ -75,16 +54,13 @@ public abstract class Fruit extends Thread
     //is it a bomb?
     protected boolean isBomb;
 
-
     /**
      * Construct a new Fruit object at the given position and speed.
      * 
      * @param panel the Component in which this Fruit will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Fruit(JComponent panel, int diffLevel) {
+    public Fruit(JComponent panel) {
         this.panel = panel;
-        this.diffLevel = diffLevel;
 
         bottom = panel.getHeight();
         upperLeftY = bottom - 1;
@@ -124,52 +100,31 @@ public abstract class Fruit extends Thread
     public void run() {
 
         //do if or switch statement for the diffLevel
-        while (upperLeftY < bottom)
-
-            while (upperLeftY < bottom) 
-
-            {
-                try {
-                    sleep(DELAY_TIME);
-                }
-                catch (InterruptedException e) {
-                }
-
-                if(!isSliced)
-                {
-                    // every iteration, update the coordinates
-                    // by a pixel
-                    upperLeftX += xSpeed;
-                }
-
-                while (upperLeftY < bottom) 
-                {
-                    try {
-                        sleep(DELAY_TIME);
-                    }
-                    catch (InterruptedException e) {
-                    }
-
-                    if(!isSliced)
-                    {
-                        // every iteration, update the coordinates
-                        // by a pixel
-                        upperLeftX += xSpeed;
-
-                    }
-
-                    upperLeftY += ySpeed;
-
-                    //include the gravity factor 
-                    ySpeed += GRAVITY;
-
-                    panel.repaint();
-
-                }
+        while (upperLeftY < bottom) 
+        {
+            try {
+                sleep(DELAY_TIME);
+            }
+            catch (InterruptedException e) {
             }
 
-        done = true;
+            if(!isSliced)
+            {
+                // every iteration, update the coordinates
+                // by a pixel
+                upperLeftX += xSpeed;
 
+            }
+
+            upperLeftY += ySpeed;
+
+            //include the gravity factor 
+            ySpeed += GRAVITY;
+
+            panel.repaint();
+
+        }
+        done = true;
     }
 
     /**

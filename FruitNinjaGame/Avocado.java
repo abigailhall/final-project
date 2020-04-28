@@ -19,11 +19,10 @@ public class Avocado extends Fruit
      * Construct a new Avocado object.
      * 
      * @param panel the Component in which this Avocado will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Avocado(JComponent panel, int diffLevel)
+    public Avocado(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
     }
@@ -51,8 +50,8 @@ public class Avocado extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Avocado.fruitPic = toolkit.getImage("avocado.png");
-        Avocado.fruitSlice = toolkit.getImage("avocadoSlice.png");
+        Avocado.fruitPic = toolkit.getImage("Images/avocado.png");
+        Avocado.fruitSlice = toolkit.getImage("Images/avocadoSlice.png");
     }
 
 }

@@ -19,11 +19,10 @@ public class Apple extends Fruit
      * Construct a new Apple object.
      * 
      * @param panel the Component in which this Apple will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Apple(JComponent panel, int diffLevel)
+    public Apple(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
 
@@ -51,8 +50,8 @@ public class Apple extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Apple.fruitPic = toolkit.getImage("apple.png");
-        Apple.fruitSlice = toolkit.getImage("appleSlice.png");
+        Apple.fruitPic = toolkit.getImage("Images/apple.png");
+        Apple.fruitSlice = toolkit.getImage("Images/appleSlice.png");
 
     }
 

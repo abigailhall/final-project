@@ -19,11 +19,10 @@ public class Watermelon extends Fruit
      * Construct a new Watermelon object.
      * 
      * @param panel the Component in which this Watermelon will live
-     *        diffLevel the difficulty level the user selects at the beginning of the game.
      */
-    public Watermelon(JComponent panel, int diffLevel)
+    public Watermelon(JComponent panel)
     {
-        super(panel, diffLevel);
+        super(panel);
         isBomb = false;
         pointValue = 1;
     }
@@ -51,8 +50,8 @@ public class Watermelon extends Fruit
     public static void loadFruitPic() {
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Watermelon.fruitPic = toolkit.getImage("watermelon.png");
-        Watermelon.fruitSlice = toolkit.getImage("watermelonSlice.png");
+        Watermelon.fruitPic = toolkit.getImage("Images/watermelon.png");
+        Watermelon.fruitSlice = toolkit.getImage("Images/watermelonSlice.png");
     }
 
 }

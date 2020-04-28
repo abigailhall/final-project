@@ -14,7 +14,7 @@ import java.util.Vector;
 public class FruitThrower extends Thread
 {
     //time between fruit
-    private static final int FRUIT_INTERVAL = 900;
+    private int fruit_interval = 900;
 
     //the Component where we'll be creating Fruit
     private JComponent panel;
@@ -50,6 +50,16 @@ public class FruitThrower extends Thread
         this.diffLevel = diffLevel;
         fruits = new Vector<Fruit>();
         done = false;
+
+        if(diffLevel == 2)
+        {
+            fruit_interval = 600;
+        }
+        else if(diffLevel == 3)
+        {
+            fruit_interval = 300;
+        }
+
     }
 
     /**
@@ -120,46 +130,54 @@ public class FruitThrower extends Thread
         while(!done)
         {
             try {
-                sleep(FRUIT_INTERVAL);
+                sleep(fruit_interval);
             }
             catch (InterruptedException e) {
             }
 
             //Randomly chooses what kind of fruit is thrown or if a bomb is thrown
             Fruit newFruit;
-            switch (r.nextInt(15))
+            
+            if(r.nextInt(10) == 0)
             {
-                case 0:
-                newFruit = new Bomb(panel, diffLevel);
-                break;
+                newFruit = new Pomegranate(panel);
+            }
+            else
+            {
+                switch (r.nextInt(15 + diffLevel))
+                {
+                    case 0: case 1:
+                    newFruit = new Orange(panel);
+                    break;
 
-                case 1: case 2: 
-                newFruit = new Banana(panel, diffLevel);
-                break;
-                
-                case 3: case 4:
-                newFruit = new Apple(panel, diffLevel);
-                break;
+                    case 2: case 3: 
+                    newFruit = new Banana(panel);
+                    break;
 
-                case 5: case 6: 
-                newFruit = new Watermelon(panel, diffLevel);
-                break;
-                
-                case 7: case 8: 
-                newFruit = new Strawberry(panel, diffLevel);
-                break;
-                
-                case 9: case 10: 
-                newFruit = new Peach(panel, diffLevel);
-                break;
-                
-                case 11: case 12: 
-                newFruit = new Avocado(panel, diffLevel);
-                break;
+                    case 4: case 5:
+                    newFruit = new Apple(panel);
+                    break;
 
-                default: 
-                newFruit = new Orange(panel, diffLevel);
-                break;
+                    case 6: case 7: 
+                    newFruit = new Watermelon(panel);
+                    break;
+
+                    case 8: case 9: 
+                    newFruit = new Strawberry(panel);
+                    break;
+
+                    case 10: case 11: 
+                    newFruit = new Peach(panel);
+                    break;
+
+                    case 12: case 13: 
+                    newFruit = new Avocado(panel);
+                    break;
+
+                    default: 
+                    newFruit = new Bomb(panel);
+                    break;
+                }
             }
 
             fruits.add(newFruit);
@@ -167,8 +185,6 @@ public class FruitThrower extends Thread
         }
 
     }
-
-
 
     /**
      * Check if this FruitThrower's work is done.
