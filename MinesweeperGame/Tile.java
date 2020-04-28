@@ -38,7 +38,7 @@ public class Tile extends Thread
     private boolean isPressed;
     private boolean tileExposed;
     private boolean flagTile;
-    private Image numberImage;
+    private Image numberPic;
     
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
@@ -63,40 +63,43 @@ public class Tile extends Thread
         return number; 
     }
     
-    public void getNumberImage()
+    public void getNumberPic()
     {
         switch (number)
         {
             case 1: 
-            numberImage = Pic1;
+            numberPic = Pic1;
             break;
             
             case 2: 
-            numberImage = Pic2;
+            numberPic = Pic2;
             break;
             
             case 3: 
-            numberImage = Pic3;
+            numberPic = Pic3;
             break;
             
             case 4: 
-            numberImage = Pic4;
+            numberPic = Pic4;
             break;
             
             case 5: 
-            numberImage = Pic5;
+            numberPic = Pic5;
             break;
             
             case 6: 
-            numberImage = Pic6;
+            numberPic = Pic6;
             break;
             
             case 7: 
-            numberImage = Pic7;
+            numberPic = Pic7;
             break;
             
             case 8: 
-            numberImage = Pic8;
+            numberPic = Pic8;
+            break;
+            
+            default:
             break;
         }
     }
@@ -130,6 +133,7 @@ public class Tile extends Thread
         if (!isBomb)
         {
             number++;
+            getNumberPic();
         }
     }
 
@@ -150,10 +154,13 @@ public class Tile extends Thread
         {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
-
             if (isBomb)
             {
                 g.drawImage(bombPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+            }
+            else
+            {
+                g.drawImage(numberPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
             }
         }
         else
