@@ -27,7 +27,7 @@ public class Pomegranate extends Fruit
     {
         super(panel);
         isBomb = false;
-        pointValue = 10;
+        pointValue = 20;
         pieces = new ArrayList<ExplodingPomegranate>();
 
     }
