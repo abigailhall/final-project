@@ -113,4 +113,9 @@ public class Tile extends Thread
     {
         tileExposed = true;
     }
+    
+    public void plantFlag()
+    {
+        
+    }
 }

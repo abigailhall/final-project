@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
@@ -45,7 +46,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private JButton faceButton;
     private JLabel timer;
     private JLabel bombLabel;
-    
+
     private Tile currentTile;
 
     public void run()
@@ -89,11 +90,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         };
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
-        
+
         bombArray = new Tile[arrayWidth][arrayHeight];
 
         newGame();
-        
+
         gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
 
         gameFrame.pack();
@@ -145,14 +146,13 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
 
     }
-    
+
     public void mousePressed (MouseEvent e)
     {
         Point mousePos = e.getPoint(); 
         int tileRow = mousePos.x / TILE_SIZE;
         int tileCol = mousePos.y / TILE_SIZE;
-        
-        
+
         
         try
         {
@@ -161,25 +161,34 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
         catch (ArrayIndexOutOfBoundsException k)
         {
-            
+
         }
-        
+
         
         mineField.repaint();
     }
-    
+
     public void mouseReleased(MouseEvent e)
     {
         try
         {
             currentTile.press(false);
-            currentTile.showTile();
+            
+
+            if (SwingUtilities.isRightMouseButton(e))
+            {
+                currentTile.plantFlag();
+            }
+            else
+            {
+                currentTile.showTile();
+            }
         }
         catch (NullPointerException k)
         {
-            
+
         }
-        
+
         mineField.repaint();
         currentTile = null;
     }
