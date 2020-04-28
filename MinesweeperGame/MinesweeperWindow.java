@@ -55,7 +55,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private int arrayWidth;
     private int arrayHeight;
     private int bombCount;
-    private Tile[][] tileArray;
+    public static Tile[][] tileArray;
 
     private JFrame gameFrame;
     private JPanel menuPanel;
