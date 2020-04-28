@@ -138,7 +138,7 @@ public class Tile extends Thread
         //images are from the public domain website: https://www.clipartmax.com/
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Tile.flagPic = toolkit.getImage("Flag.png");
-        Tile.bombPic = toolkit.getImage("");
+        Tile.bombPic = toolkit.getImage("bomb.png");
 
     }
 }
