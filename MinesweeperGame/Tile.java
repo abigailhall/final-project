@@ -100,14 +100,17 @@ public class Tile extends Thread
                 g.setColor(Color.RED);
                 g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
             }
-            else if (flagTile)
-            {
-                g.drawImage(flagPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
-            }
             else
             {
                 g.setColor(Color.LIGHT_GRAY);
                 g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+            }
+        }
+        else
+        {
+            if (flagTile)
+            {
+                g.drawImage(flagPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
             }
         }
 
@@ -122,7 +125,11 @@ public class Tile extends Thread
 
     public void showTile()
     {
-        tileExposed = true;
+        if (!flagTile)
+        {
+            tileExposed = true;
+        }
+        
     }
 
     public void plantFlag()
