@@ -26,8 +26,6 @@ public class Tile extends Thread
     private static Image Pic6;
     private static Image Pic7;
     private static Image Pic8;
-    
-    
 
     private int number;
     private int row;
@@ -39,7 +37,6 @@ public class Tile extends Thread
     private boolean tileExposed;
     private boolean flagTile;
     private Image numberPic;
-    
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
     {
@@ -62,7 +59,7 @@ public class Tile extends Thread
     {
         return number; 
     }
-    
+
     public void getNumberPic()
     {
         switch (number)
@@ -70,35 +67,35 @@ public class Tile extends Thread
             case 1: 
             numberPic = Pic1;
             break;
-            
+
             case 2: 
             numberPic = Pic2;
             break;
-            
+
             case 3: 
             numberPic = Pic3;
             break;
-            
+
             case 4: 
             numberPic = Pic4;
             break;
-            
+
             case 5: 
             numberPic = Pic5;
             break;
-            
+
             case 6: 
             numberPic = Pic6;
             break;
-            
+
             case 7: 
             numberPic = Pic7;
             break;
-            
+
             case 8: 
             numberPic = Pic8;
             break;
-            
+
             default:
             break;
         }
@@ -182,9 +179,26 @@ public class Tile extends Thread
 
     public void showTile()
     {
-        if (!flagTile)
+        if (!flagTile && !tileExposed)
         {
             tileExposed = true;
+            if (number == 0)
+            {
+                for (int currentRow = row - 1; currentRow <= row + 1; currentRow++)
+                {
+                    for (int currentCol = col - 1; currentCol <= col + 1; currentCol++)
+                    {
+                        try
+                        {
+                            MinesweeperWindow.tileArray[currentRow][currentCol].showTile();
+                        }
+                        catch (IndexOutOfBoundsException e)
+                        {
+
+                        }
+                    }
+                }
+            }
         }
 
     }
