@@ -265,9 +265,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     @Override
     public void mousePressed(MouseEvent e) 
     {
-        Random rand = new Random();
         lastMouse = e.getPoint();
-        //lineNum = rand.nextInt(6);
     }
 
     /**
