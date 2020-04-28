@@ -97,8 +97,10 @@ public class Tile extends Thread
         {
             if (isBomb)
             {
-                g.setColor(Color.RED);
-                g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+                // g.setColor(Color.RED);
+                // g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
+                g.drawImage(bombPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+
             }
             else
             {
