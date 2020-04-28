@@ -26,6 +26,8 @@ public class Tile extends Thread
     private static Image Pic6;
     private static Image Pic7;
     private static Image Pic8;
+    
+    
 
     private int number;
     private int row;
@@ -36,6 +38,7 @@ public class Tile extends Thread
     private boolean isPressed;
     private boolean tileExposed;
     private boolean flagTile;
+    private Image numberImage;
     
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
@@ -58,6 +61,44 @@ public class Tile extends Thread
     public int getNumber()
     {
         return number; 
+    }
+    
+    public void getNumberImage()
+    {
+        switch (number)
+        {
+            case 1: 
+            numberImage = Pic1;
+            break;
+            
+            case 2: 
+            numberImage = Pic2;
+            break;
+            
+            case 3: 
+            numberImage = Pic3;
+            break;
+            
+            case 4: 
+            numberImage = Pic4;
+            break;
+            
+            case 5: 
+            numberImage = Pic5;
+            break;
+            
+            case 6: 
+            numberImage = Pic6;
+            break;
+            
+            case 7: 
+            numberImage = Pic7;
+            break;
+            
+            case 8: 
+            numberImage = Pic8;
+            break;
+        }
     }
 
     public int getRow()
