@@ -34,7 +34,23 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
     private final int TILE_SIZE = 50;
+    
+    private final int BEGINNER = 1;
+    private final int BEGINNER_WIDTH = 9;
+    private final int BEGINNER_HEIGHT = 9;
+    private final int BEGINNER_BOMBS = 10;
+    
+    private final int INTERMEDIATE = 2;
+    private final int INTERMEDIATE_WIDTH = 16;
+    private final int INTERMEDIATE_HEIGHT = 16;
+    private final int INTERMEDIATE_BOMBS = 40;
+    
+    private final int EXPERT = 3;
+    private final int EXPERT_WIDTH = 16;
+    private final int EXPERT_HEIGHT = 30;
+    private final int EXPERT_BOMBS = 99;
 
+    private int difficulty;
     private int arrayWidth = 9;
     private int arrayHeight = 9;
     private int bombCount = 10;
@@ -106,6 +122,27 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
+        if (difficulty == BEGINNER)
+        {
+            arrayWidth = BEGINNER_WIDTH;
+            arrayHeight = BEGINNER_HEIGHT;
+            bombCount = INTERMEDIATE_BOMBS;
+        }
+        else if (difficulty == INTERMEDIATE)
+        {
+            arrayWidth = INTERMEDIATE_WIDTH;
+            arrayHeight = INTERMEDIATE_HEIGHT;
+            bombCount = INTERMEDIATE_BOMBS;
+        }
+        else if (difficulty == EXPERT)
+        {
+            arrayWidth = EXPERT_WIDTH;
+            arrayHeight = EXPERT_HEIGHT;
+            bombCount = EXPERT_BOMBS;
+        }
+        
+        bombArray = new Tile[arrayWidth][arrayHeight];
+        
         Random rand = new Random();
 
         int upperLeftX = 0;
@@ -152,6 +189,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         Point mousePos = e.getPoint(); 
         int tileRow = mousePos.x / TILE_SIZE;
         int tileCol = mousePos.y / TILE_SIZE;
+        
 
         
         try
