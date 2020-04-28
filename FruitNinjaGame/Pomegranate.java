@@ -27,7 +27,7 @@ public class Pomegranate extends Fruit
     {
         super(panel);
         isBomb = false;
-        pointValue = 20;
+        pointValue = 15;
         pieces = new ArrayList<ExplodingPomegranate>();
 
     }
@@ -69,7 +69,6 @@ public class Pomegranate extends Fruit
     @Override
     public void run() {
 
-        //do if or switch statement for the diffLevel
         while (upperLeftY < bottom && !isSliced) 
         {
             try {

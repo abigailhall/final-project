@@ -44,7 +44,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private static int backType;
     private static FruitThrower newFT;
     private static Image strikes;
-    
+
     private JPanel fruitPanel;
     private JPanel menuPanel; 
     private JButton startButton;
@@ -78,8 +78,9 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         menuPanel.setBackground(Color.LIGHT_GRAY);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
-        //Creates a new font to use with different labels
+        //Creates new fonts to use with different labels
         Font newFont = new Font("Georgia", Font.BOLD, 25);
+        Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
         //Creates the start and reset game buttons
         startButton = new JButton("Start Game");
@@ -98,6 +99,7 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         scoreLabel.setFont(newFont);
         scoreLabel.setVisible(false);
         menuPanel.add(scoreLabel);
+
 
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel(new BorderLayout()) {
@@ -191,9 +193,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         //Creating and adding the fruit panel to the game frame.
         fruitPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, GAME_HEIGHT));
         gameFrame.add(fruitPanel, BorderLayout.SOUTH);
-
-        //Created a different font to use for labels.
-        Font newFont2 = new Font("Georgia", Font.BOLD, 35);
 
         //Created and edit a game over label so it appears in the correct part of the panel
         gameOverLabel = new JLabel("GAME OVER!! PRESS 'RESET GAME' TO PLAY AGAIN!");
@@ -408,12 +407,12 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         //Direction Window
         JOptionPane directions = new JOptionPane();
-        directions.showMessageDialog(null, "Drag the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\nGood luck!",
+        directions.showMessageDialog(null, "Drag the mouse to slice as many fruit as possible!\nSlicing a bomb or letting 3 fruit pass will automatically end the game.\n\nTip: Slice the pomegranate for +15 points! \nGood luck!",
             "Directions", JOptionPane.INFORMATION_MESSAGE);
 
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
     }
-    
+
     /**
      * Set the Image to be used by the X, to be called by the main method before 
      * the GUI gets set up.
