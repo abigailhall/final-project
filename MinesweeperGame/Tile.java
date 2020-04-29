@@ -157,14 +157,14 @@ public class Tile extends Thread
             }
             else
             {
-                g.drawImage(numberPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+                g.drawImage(numberPic, upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
             }
         }
         else
         {
             if (flagTile)
             {
-                g.drawImage(flagPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+                g.drawImage(flagPic, upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
             }
         }
 
@@ -206,6 +206,8 @@ public class Tile extends Thread
     public void plantFlag()
     {
         flagTile = true;
+        
+        container.repaint();
     }
 
     public void removeFlag()
