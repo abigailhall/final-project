@@ -68,6 +68,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     public void run()
     {
+        
+        
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -204,7 +206,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void actionPerformed(ActionEvent e)
     {
-
+        if (e.getSource() == faceButton)
+        {
+            newGame();
+            mineField.repaint();
+        }
     }
 
     public void mousePressed (MouseEvent e)
@@ -248,13 +254,17 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             {
                 currentTile.showTile();
             }
+            
+            
         }
         catch (NullPointerException k)
         {
 
         }
 
+        
         mineField.repaint();
+        
         currentTile = null;
     }
 
