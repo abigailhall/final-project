@@ -12,7 +12,7 @@ import java.awt.Image;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Tile extends Thread
+public class Tile
 {
     private final int SIZE = 50;
 
@@ -94,9 +94,6 @@ public class Tile extends Thread
 
             case 8: 
             numberPic = Pic8;
-            break;
-
-            default:
             break;
         }
     }
