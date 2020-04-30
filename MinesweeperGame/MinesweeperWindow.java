@@ -63,6 +63,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private JButton faceButton;
     private JLabel timer;
     private JLabel bombLabel;
+    private boolean gameStarted;
 
     private Tile currentTile;
 
@@ -152,6 +153,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         tileArray = new Tile[arrayWidth][arrayHeight];
 
         Random rand = new Random();
+      
+        
+        
 
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
@@ -165,6 +169,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
             upperLeftX += 50;
         }
+        
+        if (!gameStarted)
+        {
+            currentTile = tileArray[arrayWidth / 2][arrayHeight / 2];
+        }
 
         int i = 0;
         while (i < bombCount)
@@ -174,7 +183,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
             Tile tile = tileArray[row][col];
 
-            if (!tile.isBomb())
+            if (!tile.isBomb() && !tile.isAdjacentTo(currentTile))
             {
                 tile.setNumber(-1);
                 incrementAdjacent(row, col);
@@ -210,6 +219,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         if (e.getSource() == faceButton)
         {
+            gameStarted = false;
             newGame();
             mineField.repaint();
         }
@@ -227,6 +237,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         {
             currentTile = tileArray[tileRow][tileCol];
             currentTile.press(true);
+            if (!gameStarted)
+            {
+                gameStarted = true;
+                newGame();
+            }
         }
         catch (ArrayIndexOutOfBoundsException k)
         {
