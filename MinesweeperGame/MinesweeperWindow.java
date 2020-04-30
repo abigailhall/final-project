@@ -49,7 +49,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int EXPERT_WIDTH = 30;
     private final int EXPERT_HEIGHT = 16;
     private final int EXPERT_BOMBS = 99;
-    TimerClass timer = new TimerClass();
+    TimerClass timer;
 
     private int difficulty;
 
@@ -87,13 +87,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             public void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
-                while (gameStarted)
-                {
-
-                }
+                timerLabel.setText("Time: " + timer.getSeconds());
             }
         };
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
+        timer = new TimerClass(menuPanel);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
         bombLabel = new JLabel();
@@ -105,7 +103,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         timerLabel = new JLabel("Time: ");
         menuPanel.add(timerLabel);
-
 
         newGame();
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
@@ -205,8 +202,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
 
-        timer.start();
-
+        if(gameStarted)
+        {
+            timer.start();
+        }
     }
 
     private void incrementAdjacent(int row, int col)
@@ -310,6 +309,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private void win()
     {
         System.out.println("You won");
+        timer.stopTimer();
     }
 
     /**
