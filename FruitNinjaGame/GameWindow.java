@@ -100,7 +100,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         scoreLabel.setVisible(false);
         menuPanel.add(scoreLabel);
 
-
         // Creates and adds fruitPanel to Jframe
         fruitPanel = new JPanel(new BorderLayout()) {
             @Override
@@ -350,15 +349,21 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 diffOpts, diffOpts[0]);
 
         String chosenDiff = (String) selectedValue1;
-
-        switch(chosenDiff)
+        try
         {
-            case "Easy": diffLevel = 1;
-            break;
-            case "Medium": diffLevel = 2;
-            break;
-            case "Hard": diffLevel = 3;
-            break;
+            switch(chosenDiff)
+            {
+                case "Easy": diffLevel = 1;
+                break;
+                case "Medium": diffLevel = 2;
+                break;
+                case "Hard": diffLevel = 3;
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
         }
 
         //User will select sword settings
@@ -370,17 +375,23 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
                 swordOpts, swordOpts[0]);
 
         String chosenSword = (String) selectedValue2;
-
-        switch(chosenSword)
+        try
         {
-            case "Vanishing": swordType = 1;
-            break;
-            case "Rainbow": swordType = 2;
-            break;
-            case "Red": swordType = 3;
-            break;
-            case "Blue": swordType = 4;
-            break;
+            switch(chosenSword)
+            {
+                case "Vanishing": swordType = 1;
+                break;
+                case "Rainbow": swordType = 2;
+                break;
+                case "Red": swordType = 3;
+                break;
+                case "Blue": swordType = 4;
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
         }
 
         //User will select a backdrop
@@ -393,16 +404,23 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
 
         String chosenBG = (String) selectedValue3;
 
-        switch(chosenBG)
+        try
         {
-            case "Wood": backType = 1;
-            break;
-            case "Vintage": backType = 2;
-            break;
-            case "Water": backType = 3;
-            break;
-            case "Brick": backType = 4;
-            break;
+            switch(chosenBG)
+            {
+                case "Wood": backType = 1;
+                break;
+                case "Vintage": backType = 2;
+                break;
+                case "Water": backType = 3;
+                break;
+                case "Brick": backType = 4;
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
         }
 
         //Direction Window
