@@ -77,6 +77,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         gameFrame = new JFrame("Minesweeper");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
         menuPanel = new JPanel();
