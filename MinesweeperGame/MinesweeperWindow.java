@@ -198,6 +198,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
 
         timer = new TimerClass(menuPanel);
+        timer.start();
         tilesExposed = 0;
     }
 
