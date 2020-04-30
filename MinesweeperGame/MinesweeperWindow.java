@@ -49,6 +49,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int EXPERT_WIDTH = 30;
     private final int EXPERT_HEIGHT = 16;
     private final int EXPERT_BOMBS = 99;
+    TimerClass timer = new TimerClass();
 
     private int difficulty;
 
@@ -61,11 +62,12 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private JPanel menuPanel;
     private JPanel mineField;
     private JButton faceButton;
-    private JLabel timer;
+    private JLabel timerLabel;
     private JLabel bombLabel;
     private boolean gameStarted;
     public static int tilesExposed;
     private int totalTiles;
+    private int flagCount;
 
     private Tile currentTile;
 
@@ -80,22 +82,32 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
-        menuPanel = new JPanel();
+        menuPanel = new JPanel(){
+            @Override
+            public void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                while (gameStarted)
+                {
+
+                }
+            }
+        };
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         gameFrame.add(menuPanel, BorderLayout.NORTH);
+
+        bombLabel = new JLabel();
+        menuPanel.add(bombLabel);
 
         faceButton = new JButton("New Game");
         faceButton.addActionListener(this);
         menuPanel.add(faceButton);
 
-        timer = new JLabel("0");
-        menuPanel.add(timer);
+        timerLabel = new JLabel("Time: ");
+        menuPanel.add(timerLabel);
 
-        bombLabel = new JLabel("0");
-        menuPanel.add(bombLabel);
 
         newGame();
-
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
             @Override
             public void paintComponent(Graphics g)
@@ -154,11 +166,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
         totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
+        flagCount = bombCount;
+        bombLabel.setText("Flags: " + flagCount);
 
         Random rand = new Random();
-      
-        
-        
 
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
@@ -172,7 +183,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
             upperLeftX += TILE_SIZE;
         }
-        
+
         if (!gameStarted)
         {
             currentTile = tileArray[arrayWidth / 2][arrayHeight / 2];
@@ -194,7 +205,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
 
+        timer.start();
+
     }
+
     private void incrementAdjacent(int row, int col)
     {
         for (int currentRow = row - 1; currentRow <= row + 1; currentRow++)
@@ -231,7 +245,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     public void mousePressed (MouseEvent e)
     {
 
-        
         Point mousePos = e.getPoint(); 
         int tileRow = mousePos.x / TILE_SIZE;
         int tileCol = mousePos.y / TILE_SIZE;
@@ -265,12 +278,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 if (currentTile.isFlagged())
                 {
                     currentTile.removeFlag();
+                    flagCount++;
                 }
                 else
                 {
                     currentTile.plantFlag();
+                    flagCount--;
                 }
-
+                bombLabel.setText("Flags: " + flagCount);
             }
             else
             {
@@ -282,7 +297,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         {
 
         }
-        
+
         if (tilesExposed + bombCount == totalTiles)
         {
             win();
@@ -291,7 +306,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         mineField.repaint();
         currentTile = null;
     }
-    
+
     private void win()
     {
         System.out.println("You won");
