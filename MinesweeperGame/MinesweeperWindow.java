@@ -46,8 +46,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int INTERMEDIATE_BOMBS = 40;
 
     private final int EXPERT = 3;
-    private final int EXPERT_WIDTH = 16;
-    private final int EXPERT_HEIGHT = 30;
+    private final int EXPERT_WIDTH = 30;
+    private final int EXPERT_HEIGHT = 16;
     private final int EXPERT_BOMBS = 99;
 
     private int difficulty;
@@ -64,6 +64,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private JLabel timer;
     private JLabel bombLabel;
     private boolean gameStarted;
+    public static int tilesExposed;
+    private int totalTiles;
 
     private Tile currentTile;
 
@@ -149,7 +151,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             arrayHeight = EXPERT_HEIGHT;
             bombCount = EXPERT_BOMBS;
         }
-
+        totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
 
         Random rand = new Random();
@@ -279,9 +281,19 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         {
 
         }
+        
+        if (tilesExposed + bombCount == totalTiles)
+        {
+            win();
+        }
 
         mineField.repaint();
         currentTile = null;
+    }
+    
+    private void win()
+    {
+        System.out.println("You won");
     }
 
     /**

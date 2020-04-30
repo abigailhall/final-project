@@ -202,8 +202,10 @@ public class Tile
                     }
                 }
             }
+            MinesweeperWindow.tilesExposed++;
+            System.out.println(MinesweeperWindow.tilesExposed + " out of " + 81);
         }
-
+        
     }
 
     public void plantFlag()
@@ -231,6 +233,11 @@ public class Tile
                 other.col == col - 1 ||
                 other.col == col ||
                 other.col == col + 1);
+    }
+    
+    public boolean isExposed()
+    {
+        return tileExposed;
     }
 
     /**
