@@ -278,7 +278,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             else
             {
                 currentTile.showTile();
-                if(currentTile.isBomb())
+                if(currentTile.isBomb() && !currentTile.isFlagged())
                 {
                     lose();
                 }
