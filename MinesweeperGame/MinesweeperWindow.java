@@ -68,8 +68,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     public void run()
     {
-        
-        
+
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
 
@@ -104,7 +103,13 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                     for (int col = 0; col < arrayHeight; col++)
                     {
                         Tile tile = tileArray[row][col];
-                        tile.paint(g);
+                        try
+                        {
+                            tile.paint(g);
+                        }
+                        catch(NullPointerException e)
+                        {
+                        }
                     }
                 }
             }
@@ -176,8 +181,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 i++;
             }
         }
-        
-        
+
 
     }
 
@@ -198,7 +202,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
     }
-    
+
     /**
      * Action performed event handler, handles the game start and game reset buttons.
      * 
@@ -254,17 +258,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             {
                 currentTile.showTile();
             }
-            
-            
+
         }
         catch (NullPointerException k)
         {
 
         }
 
-        
         mineField.repaint();
-        
         currentTile = null;
     }
 
