@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.Image;
+import javax.swing.ImageIcon;
+
 
 /**
  * Write a description of class Tile here.
@@ -16,16 +18,16 @@ public class Tile
 {
     private final int SIZE = 50;
 
-    private static Image flagPic;
-    private static Image bombPic;
-    private static Image Pic1;
-    private static Image Pic2;
-    private static Image Pic3;
-    private static Image Pic4;
-    private static Image Pic5;
-    private static Image Pic6;
-    private static Image Pic7;
-    private static Image Pic8;
+    private static ImageIcon flagPic = new ImageIcon("Flag.png");
+    private static ImageIcon bombPic = new ImageIcon("bomb.png");
+    // private  ImageIcon Pic1 = new ImageIcon("Pic-1.png");
+    // private  ImageIcon Pic2 = new ImageIcon("Pic-2.png");
+    // private  ImageIcon Pic3 = new ImageIcon("Pic-3.png");
+    // private ImageIcon Pic4 = new ImageIcon("Pic-4.png");
+    // private  ImageIcon Pic5 = new ImageIcon("Pic-5.png");
+    // private  ImageIcon Pic6 = new ImageIcon("Pic-6.png");
+    // private  ImageIcon Pic7 = new ImageIcon("Pic-7.png");
+    // private ImageIcon Pic8 = new ImageIcon("Pic-8.png");
 
     private int number;
     private int row;
@@ -36,7 +38,7 @@ public class Tile
     private boolean isPressed;
     private boolean tileExposed;
     private boolean flagTile;
-    private Image numberPic;
+    private ImageIcon numberPic;
 
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
     {
@@ -65,35 +67,35 @@ public class Tile
         switch (number)
         {
             case 1: 
-            numberPic = Pic1;
+            numberPic = new ImageIcon("1-pic.png");
             break;
 
             case 2: 
-            numberPic = Pic2;
+            numberPic = new ImageIcon("2-pic.png");
             break;
 
             case 3: 
-            numberPic = Pic3;
+            numberPic = new ImageIcon("3-pic.png");
             break;
 
             case 4: 
-            numberPic = Pic4;
+            numberPic = new ImageIcon("4-pic.png");
             break;
 
             case 5: 
-            numberPic = Pic5;
+            numberPic = new ImageIcon("5-pic.png");
             break;
 
             case 6: 
-            numberPic = Pic6;
+            numberPic = new ImageIcon("6-pic.png");
             break;
 
             case 7: 
-            numberPic = Pic7;
+            numberPic = new ImageIcon("7-pic.png");
             break;
 
             case 8: 
-            numberPic = Pic8;
+            numberPic = new ImageIcon("8-pic.png");
             break;
         }
     }
@@ -136,7 +138,7 @@ public class Tile
         return SIZE;
     }
 
-    public void paint(Graphics g)
+    public void paint(Graphics g) throws NullPointerException
     {
         if (!tileExposed && isPressed)
         {
@@ -150,18 +152,18 @@ public class Tile
             g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
             if (isBomb)
             {
-                g.drawImage(bombPic, upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+                g.drawImage(bombPic.getImage(), upperLeft.x, upperLeft.y, SIZE, SIZE, null);
             }
             else
             {
-                g.drawImage(numberPic, upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
+                g.drawImage(numberPic.getImage(), upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
             }
         }
         else
         {
             if (flagTile)
             {
-                g.drawImage(flagPic, upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
+                g.drawImage(flagPic.getImage(), upperLeft.x + 5, upperLeft.y + 5, SIZE - 10, SIZE -10, null);
             }
         }
 
@@ -223,16 +225,16 @@ public class Tile
      */
     public static void loadTilePic() {
         //images are from the public domain website: https://www.clipartmax.com/
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Tile.flagPic = toolkit.getImage("Flag.png");
-        Tile.bombPic = toolkit.getImage("bomb.png");
-        Tile.Pic1 = toolkit.getImage("1-pic.png");
-        Tile.Pic2 = toolkit.getImage("2-pic.png");
-        Tile.Pic3 = toolkit.getImage("3-pic.png");
-        Tile.Pic4 = toolkit.getImage("4-pic.png");
-        Tile.Pic5 = toolkit.getImage("5-pic.png");
-        Tile.Pic6 = toolkit.getImage("6-pic.png");
-        Tile.Pic7 = toolkit.getImage("7-pic.png");
-        Tile.Pic8 = toolkit.getImage("8-pic.png");
+        // Toolkit toolkit = Toolkit.getDefaultToolkit();
+        // Tile.flagPic = toolkit.getImage("Flag.png");
+        // Tile.bombPic = toolkit.getImage("bomb.png");
+        // Tile.Pic1 = toolkit.getImage("1-pic.png");
+        // Tile.Pic2 = toolkit.getImage("2-pic.png");
+        // Tile.Pic3 = toolkit.getImage("3-pic.png");
+        // Tile.Pic4 = toolkit.getImage("4-pic.png");
+        // Tile.Pic5 = toolkit.getImage("5-pic.png");
+        // Tile.Pic6 = toolkit.getImage("6-pic.png");
+        // Tile.Pic7 = toolkit.getImage("7-pic.png");
+        // Tile.Pic8 = toolkit.getImage("8-pic.png");
     }
 }
