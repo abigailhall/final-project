@@ -150,9 +150,13 @@ public class Tile
         {
             g.setColor(Color.LIGHT_GRAY);
             g.fillRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
-            if (isBomb)
+            if (isBomb) 
             {
                 g.drawImage(bombPic.getImage(), upperLeft.x, upperLeft.y, SIZE, SIZE, null);
+            }
+            else if (number == 0)
+            {
+                
             }
             else
             {
