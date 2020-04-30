@@ -222,6 +222,16 @@ public class Tile
     {
         return flagTile;
     }
+    
+    public boolean isAdjacentTo(Tile other)
+    {
+        return (other.row == row - 1 ||
+                other.row == row ||
+                other.row == row + 1 ||
+                other.col == col - 1 ||
+                other.col == col ||
+                other.col == col + 1);
+    }
 
     /**
      * Set the Images to be used by all Tile objectsto be called by the main method before 
@@ -241,4 +251,6 @@ public class Tile
         // Tile.Pic7 = toolkit.getImage("7-pic.png");
         // Tile.Pic8 = toolkit.getImage("8-pic.png");
     }
+    
+    
 }
