@@ -70,6 +70,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private int flagCount;
 
     private Tile currentTile;
+    private boolean gameOver;
 
     public void run()
     {
@@ -140,6 +141,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     public void newGame()
     {
         tilesExposed = 0;
+        gameOver = false;
         difficulty = BEGINNER; // to be replaced with difficulty selection
 
         if (difficulty == BEGINNER)
@@ -244,27 +246,29 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     public void mousePressed (MouseEvent e)
     {
-
-        Point mousePos = e.getPoint(); 
-        int tileRow = mousePos.x / TILE_SIZE;
-        int tileCol = mousePos.y / TILE_SIZE;
-
-        try
+        if(!gameOver)
         {
-            currentTile = tileArray[tileRow][tileCol];
-            currentTile.press(true);
-            if (!gameStarted)
+            Point mousePos = e.getPoint(); 
+            int tileRow = mousePos.x / TILE_SIZE;
+            int tileCol = mousePos.y / TILE_SIZE;
+
+            try
             {
-                gameStarted = true;
-                newGame();
+                currentTile = tileArray[tileRow][tileCol];
+                currentTile.press(true);
+                if (!gameStarted)
+                {
+                    gameStarted = true;
+                    newGame();
+                }
             }
-        }
-        catch (ArrayIndexOutOfBoundsException k)
-        {
+            catch (ArrayIndexOutOfBoundsException k)
+            {
 
-        }
+            }
 
-        mineField.repaint();
+            mineField.repaint();
+        }
     }
 
     public void mouseReleased(MouseEvent e)
@@ -290,6 +294,15 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             else
             {
                 currentTile.showTile();
+                if(currentTile.isBomb())
+                {
+                    lose();
+                }
+            }
+
+            if (tilesExposed + bombCount == totalTiles)
+            {
+                win();
             }
 
         }
@@ -298,10 +311,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         }
 
-        if (tilesExposed + bombCount == totalTiles)
-        {
-            win();
-        }
 
         mineField.repaint();
         currentTile = null;
@@ -309,7 +318,15 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     private void win()
     {
+        gameOver = true;
         System.out.println("You won");
+        timer.stopTimer();
+    }
+
+    private void lose()
+    {
+        gameOver = true;
+        System.out.println("You lost");
         timer.stopTimer();
     }
 
