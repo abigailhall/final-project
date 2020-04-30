@@ -91,7 +91,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         };
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
-        timer = new TimerClass(menuPanel);
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
         bombLabel = new JLabel();
@@ -140,7 +139,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
-
+        tilesExposed = 0;
         difficulty = BEGINNER; // to be replaced with difficulty selection
 
         if (difficulty == BEGINNER)
@@ -201,6 +200,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 i++;
             }
         }
+
+        timer = new TimerClass(menuPanel);
 
         if(gameStarted)
         {
