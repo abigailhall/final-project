@@ -182,9 +182,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
 
-
     }
-
     private void incrementAdjacent(int row, int col)
     {
         for (int currentRow = row - 1; currentRow <= row + 1; currentRow++)
@@ -219,6 +217,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     public void mousePressed (MouseEvent e)
     {
+
+        
         Point mousePos = e.getPoint(); 
         int tileRow = mousePos.x / TILE_SIZE;
         int tileCol = mousePos.y / TILE_SIZE;
