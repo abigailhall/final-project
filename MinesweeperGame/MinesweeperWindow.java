@@ -33,7 +33,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int WINDOW_WIDTH = 500;
     private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
-    private final int TILE_SIZE = 50;
+    private int TILE_SIZE = Tile.SIZE;
 
     private final int BEGINNER = 1;
     private final int BEGINNER_WIDTH = 9;
@@ -165,9 +165,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             for (int col = 0; col < arrayHeight; col++)
             {
                 tileArray[row][col] = new Tile(0, row, col, new Point(upperLeftX, upperLeftY), mineField);
-                upperLeftY += 50;
+                upperLeftY += TILE_SIZE;
             }
-            upperLeftX += 50;
+            upperLeftX += TILE_SIZE;
         }
         
         if (!gameStarted)
