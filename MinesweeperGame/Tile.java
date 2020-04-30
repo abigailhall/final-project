@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
  */
 public class Tile
 {
-    private final int SIZE = 50;
+    public static final int SIZE = 35;
 
     private static ImageIcon flagPic = new ImageIcon("Flag.png");
     private static ImageIcon bombPic = new ImageIcon("bomb.png");
