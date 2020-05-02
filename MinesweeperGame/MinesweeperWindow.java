@@ -78,6 +78,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     private Tile currentTile;
     private boolean gameOver;
+    private boolean gameStarted;
 
     public void run()
     {
@@ -110,7 +111,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         timerLabel = new JLabel("Time: ");
         menuPanel.add(timerLabel);
-        
+
         //Create the panel
         mineField = new JPanel() {
             @Override
@@ -118,17 +119,30 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             {
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
-                for (int row = 0; row < arrayWidth; row++)
+                if (gameStarted)
                 {
-                    for (int col = 0; col < arrayHeight; col++)
+                    for (int row = 0; row < arrayWidth; row++)
                     {
-                        Tile tile = tileArray[row][col];
-                        try
+                        for (int col = 0; col < arrayHeight; col++)
                         {
-                            tile.paint(g);
+                            Tile tile = tileArray[row][col];
+                            try
+                            {
+                                tile.paint(g);
+                            }
+                            catch(NullPointerException e)
+                            {
+                            }
                         }
-                        catch(NullPointerException e)
+                    }
+                }
+                else
+                {
+                    for (int row = 0; row < arrayWidth; row++)
+                    {
+                        for (int col = 0; col < arrayHeight; col++)
                         {
+                            g.drawRect(row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                         }
                     }
                 }
@@ -143,13 +157,27 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
+    
+    /**
+     * Will draw a dummy board beforehand so that the players first move can consistently be blank
+     */
+    private void preGameSetup()
+    {
+        chooseDifficulty();
+    }
+    
+    private void chooseDifficulty()
+    {
+        
+    }
+    
 
     /**
      * Starts a new game
      */
     public void newGame()
     {
-        
+
         gameOver = false;
         difficulty = BEGINNER; // to be replaced with difficulty selection
 
@@ -246,7 +274,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             mineField.repaint();
         }
     }
-    
+
     /**
      * Mouse pressed event handler, this will draw the tiles a dark gray while clicking them to provide feedback 
      * on what tile is being clicked on
@@ -276,8 +304,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             mineField.repaint();
         }
     }
-    
-    
+
     /**
      * Mouse Released Event Handler which handles exposing tiles, marking flags
      * 
@@ -324,7 +351,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         {
 
         }
-
 
         mineField.repaint();
         currentTile = null;
