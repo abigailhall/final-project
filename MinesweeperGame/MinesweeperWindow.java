@@ -166,19 +166,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         chooseDifficulty();
     }
     
+    /**
+     * Choose the difficulty fot the game
+     */
     private void chooseDifficulty()
     {
-        
-    }
-    
-
-    /**
-     * Starts a new game
-     */
-    public void newGame()
-    {
-
-        gameOver = false;
         difficulty = BEGINNER; // to be replaced with difficulty selection
 
         if (difficulty == BEGINNER)
@@ -201,6 +193,16 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
         totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
+    }
+    
+
+    /**
+     * Starts a new game
+     */
+    public void newGame()
+    {
+
+        gameOver = false;
         flagCount = bombCount;
         bombLabel.setText("Flags: " + flagCount);
 
