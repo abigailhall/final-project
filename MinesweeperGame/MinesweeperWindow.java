@@ -111,8 +111,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         timerLabel = new JLabel("Time: ");
         menuPanel.add(timerLabel);
         
-        newGame();        
-        mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
+        //Create the panel
+        mineField = new JPanel() {
             @Override
             public void paintComponent(Graphics g)
             {
