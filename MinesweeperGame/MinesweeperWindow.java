@@ -1,9 +1,11 @@
+
 //may have to edit later
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
@@ -51,6 +53,12 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int EXPERT_BOMBS = 99;
     TimerClass timer;
 
+    private ImageIcon faceBomb = new ImageIcon("face_bomb.png");
+    private ImageIcon facePress = new ImageIcon("face_press.png");
+    private ImageIcon faceShock = new ImageIcon("face_shock.png");
+    private ImageIcon faceSmile = new ImageIcon("face_smile.png");
+    private ImageIcon faceWin = new ImageIcon("face_win.png");
+
     private int difficulty;
 
     private int arrayWidth;
@@ -96,7 +104,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         bombLabel = new JLabel();
         menuPanel.add(bombLabel);
 
-        faceButton = new JButton("New Game");
+        faceButton = new JButton(faceSmile);
         faceButton.addActionListener(this);
         menuPanel.add(faceButton);
 
@@ -200,6 +208,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         timer = new TimerClass(menuPanel);
         timer.start();
         tilesExposed = 0;
+
+        faceButton.setIcon(faceSmile);
     }
 
     private void incrementAdjacent(int row, int col)
@@ -229,6 +239,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         if (e.getSource() == faceButton)
         {
+            faceButton.setIcon(facePress);
             newGame();
             mineField.repaint();
         }
@@ -241,6 +252,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             Point mousePos = e.getPoint(); 
             int tileRow = mousePos.x / TILE_SIZE;
             int tileCol = mousePos.y / TILE_SIZE;
+
+            faceButton.setIcon(faceShock);
 
             try
             {
@@ -261,6 +274,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         try
         {
             currentTile.press(false);
+
+            faceButton.setIcon(faceSmile);
 
             if (SwingUtilities.isRightMouseButton(e))
             {
@@ -303,6 +318,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     private void win()
     {
+        faceButton.setIcon(faceWin);
         gameOver = true;
         System.out.println("You won");
         timer.stopTimer();
@@ -310,6 +326,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
     private void lose()
     {
+        faceButton.setIcon(faceBomb);
         gameOver = true;
         System.out.println("You lost");
         timer.stopTimer();
