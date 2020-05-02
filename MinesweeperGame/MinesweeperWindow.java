@@ -136,6 +136,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         };
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
+        newGame();
+        //preGameSetup();
 
         gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
         gameFrame.pack();
@@ -231,7 +233,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     }
 
     /**
-     * Action performed event handler, handles the game start and game reset buttons.
+     * Action performed event handler, handles the face button for restarting the game
      * 
      * @param e The ActionEvent object which calls the method.
      */
@@ -244,7 +246,13 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             mineField.repaint();
         }
     }
-
+    
+    /**
+     * Mouse pressed event handler, this will draw the tiles a dark gray while clicking them to provide feedback 
+     * on what tile is being clicked on
+     * 
+     * @param e The MouseEvent object which calls the method
+     */
     public void mousePressed (MouseEvent e)
     {
         if(!gameOver)
@@ -268,7 +276,13 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             mineField.repaint();
         }
     }
-
+    
+    
+    /**
+     * Mouse Released Event Handler which handles exposing tiles, marking flags
+     * 
+     * @param e The MouseEvent object which calls the method
+     */
     public void mouseReleased(MouseEvent e)
     {
         try
@@ -316,6 +330,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         currentTile = null;
     }
 
+    /**
+     * Call when the player's won the game
+     */
     private void win()
     {
         faceButton.setIcon(faceWin);
@@ -324,11 +341,26 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         timer.stopTimer();
     }
 
+    /**
+     * Called when the player loses the game
+     */
     private void lose()
     {
         faceButton.setIcon(faceBomb);
         gameOver = true;
         System.out.println("You lost");
+        for (int row = 0; row < arrayWidth; row++)
+        {
+            for (int col = 0; col < arrayHeight; col++)
+            {
+                Tile tile = tileArray[row][col];
+                if (tile.isBomb())
+                {
+                    tile.removeFlag();
+                    tile.showTile();
+                }
+            }
+        }
         timer.stopTimer();
     }
 
