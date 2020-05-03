@@ -2,7 +2,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
@@ -17,10 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Graphics;
 import java.awt.Font;
-import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * A java version/simulation of the app "Fruit Ninja." The objective of this game is to slice as many fruit as possible while 
