@@ -40,7 +40,6 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private static int diffLevel;
     private static int backType;
     private static FruitThrower newFT;
-    private static Image strikes;
 
     private JPanel fruitPanel;
     private JPanel menuPanel; 
@@ -48,11 +47,8 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
     private JButton resetButton;
     private JLabel scoreLabel;
     private JLabel gameOverLabel;
-    private JLabel strikeLabel;
-    private JLabel contentPane;
     private ArrayList<AnimatedLine> swordList;
     private Point lastMouse;
-    private int lineNum;
 
     /**
      * The run method establishes the graphical user interface of the game itself.
