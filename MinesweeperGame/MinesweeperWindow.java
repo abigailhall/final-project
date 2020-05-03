@@ -5,8 +5,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -15,8 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Graphics;
-import java.awt.Component;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -31,9 +29,7 @@ import java.util.Random;
  */
 public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionListener
 {
-    private final int WINDOW_HEIGHT = 600;
     private final int WINDOW_WIDTH = 500;
-    private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
     private int TILE_SIZE = Tile.SIZE;
 
@@ -72,6 +68,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private JButton faceButton;
     private JLabel timerLabel;
     private JLabel bombLabel;
+    private JLabel gameOverLabel;
+    private JLabel winLabel;
     public static int tilesExposed;
     private int totalTiles;
     private int flagCount;
@@ -170,8 +168,23 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                     }
 
                 }
+
             }
         };
+
+        //Created and edit a game over label so it appears in the correct part of the panel
+        gameOverLabel = new JLabel("YOU LOST! PRESS THE SMILEY FACE TO PLAY AGAIN!");
+        gameOverLabel.setForeground(Color.RED);
+        gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gameOverLabel.setVisible(false);
+        menuPanel.add(gameOverLabel);
+
+        //Created and edit a game over label so it appears in the correct part of the panel
+        winLabel = new JLabel("YOU WON! PRESS THE SMILEY FACE TO PLAY AGAIN!");
+        winLabel.setForeground(Color.RED);
+        winLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        winLabel.setVisible(false);
+        menuPanel.add(winLabel);
 
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
@@ -201,8 +214,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     private void chooseDifficulty()
     {
-            //Difficulty level is chosen by the user at the start of the game
-            //The size of the gameboard is decided by the level the user picks
+        //Difficulty level is chosen by the user at the start of the game
+        //The size of the gameboard is decided by the level the user picks
         if (difficulty == BEGINNER)
         {
             arrayWidth = BEGINNER_WIDTH;
@@ -227,12 +240,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         flagCount = bombCount;
         bombLabel.setText("Flags: " + flagCount);
     }
-    
+
     /**
      * Starts a new game
      */
     public void newGame()
     {
+        gameOverLabel.setVisible(false);
+        winLabel.setVisible(false);
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
@@ -304,6 +319,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             faceButton.setIcon(facePress);
             preGameSetup();
             mineField.repaint();
+            gameOverLabel.setVisible(false);
+            winLabel.setVisible(false);
         }
     }
 
@@ -418,29 +435,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         faceButton.setIcon(faceWin);
         gameOver = true;
-        System.out.println("You won");
+        winLabel.setVisible(true);
         timer.stopTimer();
-
-        //Will display a pop up message
-        Object[] options = { "OK"};
-
-        Object selectedValue2 = JOptionPane.showOptionDialog(null, "Click 'Ok' to play again!", "You won!",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, options, options[0]);
-
-        String chosenDiff = (String) selectedValue2;
-        try
-        {
-            switch(chosenDiff)
-            {
-                case "OK":  newGame();
-                break;
-            }
-        }
-        catch(NullPointerException e)
-        {
-            System.exit(1);
-        }
     }
 
     /**
@@ -451,7 +447,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         faceButton.setIcon(faceBomb);
         gameOver = true;
-        System.out.println("You lost");
+        gameOverLabel.setVisible(true);
         for (int row = 0; row < arrayWidth; row++)
         {
             for (int col = 0; col < arrayHeight; col++)
@@ -465,28 +461,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
         timer.stopTimer();
-
-        //Will display a pop up message
-        Object[] options = { "OK" };
-
-        Object selectedValue2 = JOptionPane.showOptionDialog(null, "Click 'Ok' to play again!", "You lost!",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-                null, options, options[0]);
-
-        String chosenDiff = (String) selectedValue2;
-
-        try
-        {
-            switch(chosenDiff)
-            {
-                case "OK":  newGame();
-                break;
-            }
-        }
-        catch(NullPointerException e)
-        {
-            System.exit(1);
-        }
 
     }
 
