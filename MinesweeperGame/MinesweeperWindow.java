@@ -204,6 +204,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         chooseDifficulty();
         gameOver = false;
         gameStarted = false;
+        gameOverLabel.setVisible(false);
+        winLabel.setVisible(false);
         tilesExposed = 0;
         timer = new TimerClass(menuPanel);
         faceButton.setIcon(faceSmile);
@@ -246,8 +248,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
-        gameOverLabel.setVisible(false);
-        winLabel.setVisible(false);
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
@@ -319,8 +319,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             faceButton.setIcon(facePress);
             preGameSetup();
             mineField.repaint();
-            gameOverLabel.setVisible(false);
-            winLabel.setVisible(false);
         }
     }
 
