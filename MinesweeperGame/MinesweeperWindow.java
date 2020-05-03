@@ -434,9 +434,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public static void main(String args[])
     {
-        //Easy medium and hard settings will go here. 
-        Tile.loadTilePic();
-
         //User will select Difficulty
         String[] diffOpts = {"Beginner", "Intermediate", "Expert"};
 

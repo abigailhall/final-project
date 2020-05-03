@@ -7,12 +7,11 @@ import java.awt.Toolkit;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-
 /**
  * Write a description of class Tile here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Frisch, Van Griffith, Abby Hall
+ * @version 5/2/2020
  */
 public class Tile
 {
@@ -20,14 +19,6 @@ public class Tile
 
     private static ImageIcon flagPic = new ImageIcon("Flag.png");
     private static ImageIcon bombPic = new ImageIcon("bomb.png");
-    // private  ImageIcon Pic1 = new ImageIcon("Pic-1.png");
-    // private  ImageIcon Pic2 = new ImageIcon("Pic-2.png");
-    // private  ImageIcon Pic3 = new ImageIcon("Pic-3.png");
-    // private ImageIcon Pic4 = new ImageIcon("Pic-4.png");
-    // private  ImageIcon Pic5 = new ImageIcon("Pic-5.png");
-    // private  ImageIcon Pic6 = new ImageIcon("Pic-6.png");
-    // private  ImageIcon Pic7 = new ImageIcon("Pic-7.png");
-    // private ImageIcon Pic8 = new ImageIcon("Pic-8.png");
 
     private int number;
     private int row;
@@ -206,6 +197,8 @@ public class Tile
             System.out.println(MinesweeperWindow.tilesExposed + " out of " + 81);
         }
         
+        
+        
     }
 
     public void plantFlag()
@@ -240,24 +233,4 @@ public class Tile
         return tileExposed;
     }
 
-    /**
-     * Set the Images to be used by all Tile objectsto be called by the main method before 
-     * the GUI gets set up.
-     */
-    public static void loadTilePic() {
-        //images are from the public domain website: https://www.clipartmax.com/
-        // Toolkit toolkit = Toolkit.getDefaultToolkit();
-        // Tile.flagPic = toolkit.getImage("Flag.png");
-        // Tile.bombPic = toolkit.getImage("bomb.png");
-        // Tile.Pic1 = toolkit.getImage("1-pic.png");
-        // Tile.Pic2 = toolkit.getImage("2-pic.png");
-        // Tile.Pic3 = toolkit.getImage("3-pic.png");
-        // Tile.Pic4 = toolkit.getImage("4-pic.png");
-        // Tile.Pic5 = toolkit.getImage("5-pic.png");
-        // Tile.Pic6 = toolkit.getImage("6-pic.png");
-        // Tile.Pic7 = toolkit.getImage("7-pic.png");
-        // Tile.Pic8 = toolkit.getImage("8-pic.png");
-    }
-    
-    
 }
