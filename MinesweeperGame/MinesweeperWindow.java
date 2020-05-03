@@ -437,6 +437,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameOver = true;
         winLabel.setVisible(true);
         timer.stopTimer();
+        Audio.playSound("applause.wav");
     }
 
     /**
