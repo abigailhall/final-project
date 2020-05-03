@@ -194,7 +194,6 @@ public class Tile
                 }
             }
             MinesweeperWindow.tilesExposed++;
-            System.out.println(MinesweeperWindow.tilesExposed + " out of " + 81);
         }
         
         
