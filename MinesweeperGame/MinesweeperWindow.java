@@ -37,17 +37,17 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private final int MENU_HEIGHT = 100;
     private int TILE_SIZE = Tile.SIZE;
 
-    private final int BEGINNER = 1;
+    private static final int BEGINNER = 1;
     private final int BEGINNER_WIDTH = 9;
     private final int BEGINNER_HEIGHT = 9;
     private final int BEGINNER_BOMBS = 10;
 
-    private final int INTERMEDIATE = 2;
+    private static final int INTERMEDIATE = 2;
     private final int INTERMEDIATE_WIDTH = 16;
     private final int INTERMEDIATE_HEIGHT = 16;
     private final int INTERMEDIATE_BOMBS = 40;
 
-    private final int EXPERT = 3;
+    private static final int EXPERT = 3;
     private final int EXPERT_WIDTH = 30;
     private final int EXPERT_HEIGHT = 16;
     private final int EXPERT_BOMBS = 99;
@@ -59,7 +59,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private ImageIcon faceSmile = new ImageIcon("face_smile.png");
     private ImageIcon faceWin = new ImageIcon("face_win.png");
 
-    private int difficulty;
+    private static int difficulty;
 
     private int arrayWidth;
     private int arrayHeight;
@@ -110,8 +110,9 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         timerLabel = new JLabel("Time: ");
         menuPanel.add(timerLabel);
-        
-        newGame();        
+
+
+        newGame();     
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
             @Override
             public void paintComponent(Graphics g)
@@ -134,6 +135,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 }
             }
         };
+
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
 
@@ -147,9 +149,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
-        
+
         gameOver = false;
-        difficulty = BEGINNER; // to be replaced with difficulty selection
 
         if (difficulty == BEGINNER)
         {
@@ -169,6 +170,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             arrayHeight = EXPERT_HEIGHT;
             bombCount = EXPERT_BOMBS;
         }
+        
         totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
         flagCount = bombCount;
@@ -311,7 +313,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         }
 
-
         mineField.repaint();
         currentTile = null;
     }
@@ -341,6 +342,32 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         //Easy medium and hard settings will go here. 
         Tile.loadTilePic();
+
+        //User will select Difficulty
+        String[] diffOpts = {"Beginner", "Intermediate", "Expert"};
+
+        Object selectedValue1 = JOptionPane.showInputDialog(null,
+                "Choose a level of Difficulty: ", "Welcome to Minesweeper!",
+                JOptionPane.PLAIN_MESSAGE, null,
+                diffOpts, diffOpts[0]);
+
+        String chosenDiff = (String) selectedValue1;
+        try
+        {
+            switch(chosenDiff)
+            {
+                case "Beginner":  difficulty =  BEGINNER;
+                break;
+                case "Intermediate": difficulty = INTERMEDIATE;
+                break;
+                case "Expert": difficulty = EXPERT;
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
+        }
 
         javax.swing.SwingUtilities.invokeLater(new MinesweeperWindow());
     }
