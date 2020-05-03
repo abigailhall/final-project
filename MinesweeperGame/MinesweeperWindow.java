@@ -162,13 +162,15 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     }
 
     /**
-     * Starts a new game
+     * This method starts a new game.
      */
     public void newGame()
     {
 
         gameOver = false;
 
+        //Difficulty level is chosen by the user at the start of the game
+        //The size of the gameboard is decided by the level the user picks
         if (difficulty == BEGINNER)
         {
             arrayWidth = BEGINNER_WIDTH;
@@ -195,6 +197,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
         Random rand = new Random();
 
+        //Randomly Creates a gameboard
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
@@ -208,6 +211,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             upperLeftX += TILE_SIZE;
         }
 
+        //Randomly places the bombs in appropriate places
         int i = 0;
         while (i < bombCount)
         {
@@ -224,6 +228,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
 
+        //Starts the timer
         timer = new TimerClass(menuPanel);
         timer.start();
         tilesExposed = 0;
@@ -231,6 +236,12 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         faceButton.setIcon(faceSmile);
     }
 
+    /**
+     * This method increments the adjacent tiles of a bomb. EDIT?
+     * 
+     * @param int row the given row
+     *        int col the given coloumn
+     */
     private void incrementAdjacent(int row, int col)
     {
         for (int currentRow = row - 1; currentRow <= row + 1; currentRow++)
@@ -250,7 +261,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     }
 
     /**
-     * Action performed event handler, handles the game start and game reset buttons.
+     * Action performed event handler, handles the reset game smiley face button.
      * 
      * @param e The ActionEvent object which calls the method.
      */
@@ -264,6 +275,12 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
     }
 
+    /**
+     * Mouse pressed event handler gets the current location of the mouse.
+     * Meaning, the tile that has been clicked.
+     * 
+     * @param e The MouseEvent object which calls the method.
+     */
     public void mousePressed (MouseEvent e)
     {
         if(!gameOver)
@@ -288,6 +305,14 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
     }
 
+    /**
+     * Mouse released event handler allows the user to play the game. If the user right clicks
+     * on a square it will show a bomb; if they left click they will either hit a safe tile or a bomb.
+     * The proper smiley face icon will also appear on the button depending on what type of square the
+     * user presses/releases from.
+     * 
+     * @param e The MouseEvent object which calls the method.
+     */
     public void mouseReleased(MouseEvent e)
     {
         try
@@ -334,6 +359,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         currentTile = null;
     }
 
+    /**
+     * If the user wins the game, the face on the button will smile, the timer will stop, 
+     * and a 'you won' message will appear. 
+     */
     private void win()
     {
         faceButton.setIcon(faceWin);
@@ -342,6 +371,10 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         timer.stopTimer();
     }
 
+    /**
+     * If the user loses the game, the proper icon will appear on the button, the timer will stop, 
+     * and a 'you lost' message will appear. 
+     */
     private void lose()
     {
         faceButton.setIcon(faceBomb);
