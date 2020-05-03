@@ -28,6 +28,15 @@ public class Tile
     private boolean flagTile;
     private ImageIcon numberPic;
 
+    /**
+     * Creates a tile object.
+     * 
+     * @param number The number of bombs surrounding the tile.
+     * @param row The row number of the tile.
+     * @param col The column number of the tile.
+     * @param upperLeft The coordinate of the upper left point of the tile to draw the tile.
+     * @param container The panel the tiles exist on.
+     */
     public Tile(int number, int row, int col, Point upperLeft, JComponent container)
     {
         this.number = number;
@@ -45,11 +54,19 @@ public class Tile
         this.container = container;
     }
 
+    /**
+     * Returns the number of bombs surrounding th tile.
+     * 
+     * @return The tile's number.
+     */
     public int getNumber()
     {
         return number; 
     }
 
+    /**
+     * Sets the picture for the tile.
+     */
     public void getNumberPic()
     {
         switch (number)
@@ -88,21 +105,41 @@ public class Tile
         }
     }
 
+/**
+ * Returns the tile's row number.
+ * 
+ * @return The tile's row number.
+ */
     public int getRow()
     {
         return row; 
     }
 
+/**
+ * Returns the tile's column number.
+ * 
+ * @return The tile's column number.
+ */
     public int getCol()
     {
         return col; 
     }
 
+    /**
+     * Returns whether the tile is a bomb or not.
+     * 
+     * @return True if the tile is a bomb and flase otherwise.
+     */
     public boolean isBomb()
     {
         return isBomb; 
     }
 
+    /**
+     * Sets the number of the tile and if the umber is -1 the tile is a bomb.
+     * 
+     * @param number The number of bombs surounding the tile.
+     */
     public void setNumber(int number)
     {
         this.number = number;
@@ -112,6 +149,9 @@ public class Tile
         }
     }
 
+    /**
+     * Increments the tile's number.
+     */
     public void incrementNumber()
     {
         if (!isBomb)
@@ -121,11 +161,22 @@ public class Tile
         }
     }
 
+    /**
+     * Returns the height and width of the tile.
+     * 
+     * @return The size of the tile.
+     */
     public int getTileSize()
     {
         return SIZE;
     }
 
+    /**
+     * Paints the tile with the number, bomb, or flag.
+     * 
+     * @param g The graphics component that does the painting.
+     * @throws NullPointerException
+     */
     public void paint(Graphics g) throws NullPointerException
     {
         if (!tileExposed && isPressed)
@@ -163,11 +214,19 @@ public class Tile
         g.drawRect(upperLeft.x, upperLeft.y, SIZE, SIZE);
     }
 
+    /**
+     * Helps animate the tile by changing press to darken the tile.
+     * 
+     * @param isPressed True if the tile has been clicked, false.
+     */
     public void press(boolean isPressed)
     {
         this.isPressed = isPressed;
     }
 
+    /**
+    * Show adjacent tiles if the tile is an empty tile.
+    */
     public void showTile()
     {
         if (!flagTile && !tileExposed)
@@ -192,11 +251,11 @@ public class Tile
             }
             MinesweeperWindow.tilesExposed++;
         }
-        
-        
-        
     }
 
+    /**
+     * Places a flag on the tile.
+     */
     public void plantFlag()
     {
         flagTile = true;
@@ -204,16 +263,30 @@ public class Tile
         container.repaint();
     }
 
+    /**
+     * Removes the flag from the tile.
+     */
     public void removeFlag()
     {
         flagTile = false;
     }
 
+    /**
+     * Returns whether the flag is on the tile.
+     * 
+     * @return True if the tile is flagged and flase otherwise.
+     */
     public boolean isFlagged()
     {
         return flagTile;
     }
     
+    /**
+     * Compares if the this tile is adjacent to the tile paramter.
+     * 
+     * @param other A tile object
+     * @return True if the given tile is adjacent ot this tile and false otherwise.
+     */
     public boolean isAdjacentTo(Tile other)
     {
         return (other.row == row - 1 ||
@@ -224,6 +297,11 @@ public class Tile
                 other.col == col + 1);
     }
     
+    /**
+     * Returns if the tile is showing its number.
+     * 
+     * @return True if the tile is showing its number and false otherwise.
+     */
     public boolean isExposed()
     {
         return tileExposed;
