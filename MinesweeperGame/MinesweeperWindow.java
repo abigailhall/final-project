@@ -1,10 +1,7 @@
-
-//may have to edit later
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -18,16 +15,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Graphics;
-import java.awt.Font;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Write a description of class GameWindow here.
+ * A java version/simulation of the microsoft game Minesweeper. To play this game, the user must first select a level of difficulty 
+ * (beginner, intermediate, or expert). Then you must click any spot so the game board will be made. 
+ * Some squares will contain mines (bombs) while others do not. The objective of the game is to click all of the squares without hitting any bombs.
+ * Left clicking a square (that is not a bomb) will tell you the number of neighboring squares that are touching bombs. A square can be touching
+ * a bomb if it is adjacent above, below, left, right, and all 4 diagonals. To mark a square you think is a bomb, right click on it. 
  *
  * @author Kate Frisch, Van Griffith & Abby Hall
- * @version Spring 2020
+ * @version 5/2/2020
  */
 public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionListener
 {
@@ -79,18 +79,27 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private Tile currentTile;
     private boolean gameOver;
 
+    /**
+     * The run method establishes the graphical user interface of the game itself.
+     */
     public void run()
     {
 
         //Creates and adds JFrame
         JFrame.setDefaultLookAndFeelDecorated(true);
-
         gameFrame = new JFrame("Minesweeper");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.setResizable(false);
         gameFrame.setLayout(new BorderLayout());
 
+        // Creates and adds menuPanel to Jframe
         menuPanel = new JPanel(){
+            /**
+             *  This method will display the timer on menuPanel so the user knows how lon
+             *  the game is taking them.
+             *  
+             *  @param g The Graphics component which will do the painting
+             */
             @Override
             public void paintComponent(Graphics g)
             {
@@ -101,6 +110,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         menuPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, MENU_HEIGHT));
         gameFrame.add(menuPanel, BorderLayout.NORTH);
 
+        //Creates and adds buttons and labels to the menuPanel
         bombLabel = new JLabel();
         menuPanel.add(bombLabel);
 
@@ -111,9 +121,16 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         timerLabel = new JLabel("Time: ");
         menuPanel.add(timerLabel);
 
-
+        //Starts a new gaem with the proper awwayWidth/arrayHeight that was chosen by
+        //the user
         newGame();     
         mineField = new JPanel(new GridLayout(arrayWidth, arrayHeight)) {
+            /**
+             *  This method will redraw the proper size of the gamboard and display 
+             *  it in the window.
+             *  
+             *  @param g The Graphics component which will do the painting
+             */
             @Override
             public void paintComponent(Graphics g)
             {
@@ -170,7 +187,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             arrayHeight = EXPERT_HEIGHT;
             bombCount = EXPERT_BOMBS;
         }
-        
+
         totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
         flagCount = bombCount;
