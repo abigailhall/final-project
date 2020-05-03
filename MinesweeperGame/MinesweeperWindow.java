@@ -79,6 +79,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     private Tile currentTile;
     private boolean gameOver;
     private boolean gameStarted;
+    private boolean fakePress;
+    private Point fakePressPos;
 
     public void run()
     {
@@ -113,7 +115,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         menuPanel.add(timerLabel);
 
         //Create the panel
-        mineField = new JPanel() {
+        mineField = new JPanel() { 
             @Override
             public void paintComponent(Graphics g)
             {
@@ -138,6 +140,12 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                 }
                 else
                 {
+                    if (fakePress)
+                    {
+                        g.setColor(Color.GRAY);
+                        g.fillRect((fakePressPos.x / TILE_SIZE) * TILE_SIZE, (fakePressPos.y / TILE_SIZE) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                        g.setColor(Color.BLACK);
+                    }
                     for (int row = 0; row < arrayWidth; row++)
                     {
                         for (int col = 0; col < arrayHeight; col++)
@@ -145,27 +153,33 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                             g.drawRect(row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE);
                         }
                     }
+
                 }
             }
         };
         mineField.addMouseListener(this);
         gameFrame.add(mineField); 
-        newGame();
-        //preGameSetup();
+        //newGame();
+        preGameSetup();
 
         gameFrame.setPreferredSize(new Dimension(arrayWidth * TILE_SIZE + 20, MENU_HEIGHT + arrayHeight * TILE_SIZE + 40));
         gameFrame.pack();
         gameFrame.setVisible(true);
     }
-    
+
     /**
      * Will draw a dummy board beforehand so that the players first move can consistently be blank
      */
     private void preGameSetup()
     {
         chooseDifficulty();
+        gameOver = false;
+        gameStarted = false;
+        tilesExposed = 0;
+        timer = new TimerClass(menuPanel);
+        faceButton.setIcon(faceSmile);
     }
-    
+
     /**
      * Choose the difficulty fot the game
      */
@@ -193,21 +207,16 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         }
         totalTiles = arrayWidth * arrayHeight;
         tileArray = new Tile[arrayWidth][arrayHeight];
+        flagCount = bombCount;
+        bombLabel.setText("Flags: " + flagCount);
     }
-    
 
     /**
      * Starts a new game
      */
     public void newGame()
     {
-
-        gameOver = false;
-        flagCount = bombCount;
-        bombLabel.setText("Flags: " + flagCount);
-
-        Random rand = new Random();
-
+        //chooseDifficulty();
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
@@ -220,7 +229,11 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
             upperLeftX += TILE_SIZE;
         }
+        
+        
+        Tile startTile = tileArray[fakePressPos.x / TILE_SIZE][fakePressPos.y / TILE_SIZE];
 
+        Random rand = new Random();
         int i = 0;
         while (i < bombCount)
         {
@@ -229,19 +242,15 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
             Tile tile = tileArray[row][col];
 
-            if (!tile.isBomb())
+            if (!tile.isBomb() && !tile.isAdjacentTo(startTile))
             {
                 tile.setNumber(-1);
                 incrementAdjacent(row, col);
                 i++;
             }
         }
-
-        timer = new TimerClass(menuPanel);
         timer.start();
-        tilesExposed = 0;
-
-        faceButton.setIcon(faceSmile);
+        startTile.showTile();
     }
 
     private void incrementAdjacent(int row, int col)
@@ -272,7 +281,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         if (e.getSource() == faceButton)
         {
             faceButton.setIcon(facePress);
-            newGame();
+            preGameSetup();
             mineField.repaint();
         }
     }
@@ -287,24 +296,35 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         if(!gameOver)
         {
-            Point mousePos = e.getPoint(); 
-            int tileRow = mousePos.x / TILE_SIZE;
-            int tileCol = mousePos.y / TILE_SIZE;
-
-            faceButton.setIcon(faceShock);
-
-            try
+            if(gameStarted)
             {
-                currentTile = tileArray[tileRow][tileCol];
-                currentTile.press(true);
+                Point mousePos = e.getPoint(); 
+                int tileRow = mousePos.x / TILE_SIZE;
+                int tileCol = mousePos.y / TILE_SIZE;
+
+                faceButton.setIcon(faceShock);
+
+                try
+                {
+                    currentTile = tileArray[tileRow][tileCol];
+                    currentTile.press(true);
+                }
+                catch (ArrayIndexOutOfBoundsException k)
+                {
+
+                }
+
+                mineField.repaint();
             }
-            catch (ArrayIndexOutOfBoundsException k)
+            else
             {
-
+                Point mousePos = e.getPoint();
+                fakePress = true;
+                fakePressPos = mousePos;
+                mineField.repaint();
             }
-
-            mineField.repaint();
         }
+
     }
 
     /**
@@ -316,42 +336,50 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     {
         try
         {
-            currentTile.press(false);
-
-            faceButton.setIcon(faceSmile);
-
-            if (SwingUtilities.isRightMouseButton(e))
+            if (gameStarted)
             {
-                if (currentTile.isFlagged())
+                currentTile.press(false);
+
+                faceButton.setIcon(faceSmile);
+
+                if (SwingUtilities.isRightMouseButton(e))
                 {
-                    currentTile.removeFlag();
-                    flagCount++;
+                    if (currentTile.isFlagged())
+                    {
+                        currentTile.removeFlag();
+                        flagCount++;
+                    }
+                    else
+                    {
+                        currentTile.plantFlag();
+                        flagCount--;
+                    }
+                    bombLabel.setText("Flags: " + flagCount);
                 }
                 else
                 {
-                    currentTile.plantFlag();
-                    flagCount--;
+                    currentTile.showTile();
+                    if(currentTile.isBomb() && !currentTile.isFlagged())
+                    {
+                        lose();
+                    }
                 }
-                bombLabel.setText("Flags: " + flagCount);
+
+                if (tilesExposed + bombCount == totalTiles)
+                {
+                    win();
+                }
             }
             else
             {
-                currentTile.showTile();
-                if(currentTile.isBomb() && !currentTile.isFlagged())
-                {
-                    lose();
-                }
+                fakePress = false;
+                gameStarted = true;
+                newGame();
             }
-
-            if (tilesExposed + bombCount == totalTiles)
-            {
-                win();
-            }
-
         }
         catch (NullPointerException k)
         {
-
+            
         }
 
         mineField.repaint();
