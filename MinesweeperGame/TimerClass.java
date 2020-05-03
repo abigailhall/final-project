@@ -1,11 +1,9 @@
-import java.util.Timer;
-import java.util.TimerTask;
 import javax.swing.JComponent;
 /**
  * Write a description of class TimerClass here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Kate Frisch, Van Griffith, Abby Hall
+ * @version 5/2/2020
  */
 public class TimerClass extends Thread
 {
