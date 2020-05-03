@@ -139,6 +139,7 @@ public abstract class Fruit extends Thread
         {
             isSliced = true;
             ySpeed = 10;
+            Audio.playSound("squish.wav");
             return pointValue;
         }
 
