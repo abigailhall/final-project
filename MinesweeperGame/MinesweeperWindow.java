@@ -369,6 +369,27 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameOver = true;
         System.out.println("You won");
         timer.stopTimer();
+
+        //Will display a pop up message
+        Object[] options = { "OK"};
+
+        Object selectedValue2 = JOptionPane.showOptionDialog(null, "Click 'Ok' to play again!", "You won!",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+
+        String chosenDiff = (String) selectedValue2;
+        try
+        {
+            switch(chosenDiff)
+            {
+                case "OK":  newGame();
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
+        }
     }
 
     /**
@@ -381,6 +402,29 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameOver = true;
         System.out.println("You lost");
         timer.stopTimer();
+
+        //Will display a pop up message
+        Object[] options = { "OK" };
+
+        Object selectedValue2 = JOptionPane.showOptionDialog(null, "Click 'Ok' to play again!", "You lost!",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                null, options, options[0]);
+
+        String chosenDiff = (String) selectedValue2;
+
+        try
+        {
+            switch(chosenDiff)
+            {
+                case "OK":  newGame();
+                break;
+            }
+        }
+        catch(NullPointerException e)
+        {
+            System.exit(1);
+        }
+
     }
 
     /**
