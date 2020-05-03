@@ -10,16 +10,11 @@ import javax.sound.sampled.Clip;
 public class Audio
 {
     /**
-     * 
-     */
-    public
-    
-    /**
      * Plays a sound from a given file. The file must be in the same folder as this class
      * 
      * @param fileName the name of the file
      */
-    public void playSound (String fileName)
+    public static void playSound (String fileName)
     {
         File file = new File(fileName);
         
@@ -28,7 +23,6 @@ public class Audio
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(file));
             clip.start();
-            Thread.sleep(clip.getMicrosecondLength() / 1000);
         }
         catch (Exception e)
         {
