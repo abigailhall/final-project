@@ -404,7 +404,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
                     }
                 }
 
-                if (tilesExposed + bombCount == totalTiles)
+                if (tilesExposed + bombCount == totalTiles && !gameOver)
                 {
                     win();
                 }
