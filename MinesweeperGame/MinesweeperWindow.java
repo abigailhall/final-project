@@ -169,7 +169,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
 
                 }
 
-
     
             }
         };
@@ -180,7 +179,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
         gameOverLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gameOverLabel.setVisible(false);
         menuPanel.add(gameOverLabel);
-        
+
         //Created and edit a game over label so it appears in the correct part of the panel
         winLabel = new JLabel("YOU WON! PRESS THE SMILEY FACE TO PLAY AGAIN!");
         winLabel.setForeground(Color.RED);
@@ -248,8 +247,6 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
      */
     public void newGame()
     {
-        gameOverLabel.setVisible(false);
-        winLabel.setVisible(false);
         int upperLeftX = 0;
         int upperLeftY = MENU_HEIGHT;
         for (int row = 0; row < arrayWidth; row++)
@@ -321,6 +318,8 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             faceButton.setIcon(facePress);
             preGameSetup();
             mineField.repaint();
+            gameOverLabel.setVisible(false);
+            winLabel.setVisible(false);
         }
     }
 
