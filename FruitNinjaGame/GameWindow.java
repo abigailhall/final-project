@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
-import java.awt.Image;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -16,7 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Graphics;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 
 /**
@@ -424,13 +422,4 @@ public class GameWindow extends MouseAdapter implements Runnable, ActionListener
         javax.swing.SwingUtilities.invokeLater(new GameWindow());
     }
 
-    /**
-     * Set the Image to be used by the X, to be called by the main method before 
-     * the GUI gets set up.
-     */
-    public static void loadFruitPic() {
-        //images are from the public domain website: https://www.clipartmax.com/
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        strikes = toolkit.getImage("Images/X.png");
-    }
 }
