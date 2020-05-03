@@ -1,10 +1,7 @@
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**

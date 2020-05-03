@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -15,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Graphics;
-import java.awt.Component;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -31,9 +28,7 @@ import java.util.Random;
  */
 public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionListener
 {
-    private final int WINDOW_HEIGHT = 600;
     private final int WINDOW_WIDTH = 500;
-    private final int GAME_HEIGHT = 500;
     private final int MENU_HEIGHT = 100;
     private int TILE_SIZE = Tile.SIZE;
 
