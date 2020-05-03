@@ -5,7 +5,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
- * Write a description of class Tile here.
+ * This class represents one tile object on the game window.
  *
  * @author Kate Frisch, Van Griffith, Abby Hall
  * @version 5/2/2020
