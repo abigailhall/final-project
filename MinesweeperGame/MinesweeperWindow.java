@@ -461,6 +461,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
             }
         }
         timer.stopTimer();
+        Audio.playSound("bombSound.wav");
 
     }
 
