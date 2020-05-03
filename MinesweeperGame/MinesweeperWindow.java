@@ -284,7 +284,7 @@ public class MinesweeperWindow extends MouseAdapter implements Runnable, ActionL
     }
 
     /**
-     * This method increments the adjacent tiles of a bomb. EDIT?
+     * This method increments the number of the tiles adjacent to the bomb.
      * 
      * @param int row the given row
      *        int col the given coloumn
